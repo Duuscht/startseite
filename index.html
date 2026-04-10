@@ -77,12 +77,12 @@ main {
 .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
 .card-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
 .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text); }
-.c-gold  .card-icon { background: rgba(200,169,110,0.15); }
-.c-teal  .card-icon { background: rgba(126,184,164,0.15); }
-.c-red   .card-icon { background: rgba(224,112,112,0.15); }
-.c-blue  .card-icon { background: rgba(110,160,210,0.15); }
+.c-gold   .card-icon { background: rgba(200,169,110,0.15); }
+.c-teal   .card-icon { background: rgba(126,184,164,0.15); }
+.c-red    .card-icon { background: rgba(224,112,112,0.15); }
+.c-blue   .card-icon { background: rgba(110,160,210,0.15); }
 .c-purple .card-icon { background: rgba(170,130,210,0.15); }
-.c-green .card-icon { background: rgba(130,200,140,0.15); }
+.c-green  .card-icon { background: rgba(130,200,140,0.15); }
 ul { list-style: none; }
 ul li { margin-bottom: 0.3rem; }
 ul li.hidden { display: none; }
@@ -95,13 +95,23 @@ ul li a {
 ul li a:hover { background: rgba(255,255,255,0.06); color: var(--accent); }
 ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-radius: 2px; padding: 0 1px; }
 .favicon { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: contain; }
+
+/* ── Info-Boxen am Seitenende (beide im gleichen Stil) ── */
 .info-box {
   max-width: 900px; margin: 2.5rem auto 0;
   background: rgba(126,184,164,0.07); border: 1px solid rgba(126,184,164,0.2);
   border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;
 }
 .info-box strong { color: var(--accent2); }
-.edit-note { max-width: 900px; margin: 1.2rem auto 0; font-size: 0.72rem; color: var(--muted); text-align: right; }
+
+/* ── Versionshinweis – gleicher Stil wie info-box, aber blau ── */
+.edit-note {
+  max-width: 900px; margin: 1rem auto 0;
+  background: rgba(110,160,210,0.07); border: 1px solid rgba(110,160,210,0.2);
+  border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: #7a9ab8; line-height: 1.6;
+}
+.edit-note strong { color: #9dbfda; }
+
 .version-bar { max-width: 900px; margin: 1.5rem auto 0; text-align: center; font-size: 0.75rem; color: #4a4858; border-top: 1px solid #2a2a38; padding-top: 1rem; }
 ```
 
@@ -191,6 +201,8 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=linkedin.com" alt="">LinkedIn</a></li>
       <li><a href="https://signal.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=signal.org" alt="">Signal</a></li>
       <li><a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=web.whatsapp.com" alt="">WhatsApp Web</a></li>
+      <!-- Xing neu -->
+      <li><a href="https://www.xing.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=xing.com" alt="">Xing</a></li>
       <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=youtube.com" alt="">YouTube</a></li>
     </ul>
   </div>
@@ -208,7 +220,8 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=tagesschau.de" alt="">Tagesschau</a></li>
       <li><a href="https://www.wetter.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wetter.com" alt="">Wetter.com</a></li>
       <li><a href="https://www.wochenspiegelonline.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wochenspiegelonline.de" alt="">Wochenspiegel Saarland</a></li>
-      <li><a href="https://www.zeit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=zeit.de" alt="">Die Zeit</a></li>
+      <!-- Zeit: favicon explizit auf www.zeit.de gesetzt -->
+      <li><a href="https://www.zeit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=www.zeit.de&sz=32" alt="">Die Zeit</a></li>
     </ul>
   </div>
 
@@ -217,28 +230,24 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
   <div class="card c-teal">
     <div class="card-header"><div class="card-icon">🏛</div><span class="card-title">Behörden</span></div>
     <ul>
-      <!-- AG Altenhilfe: hat keine eigene Website, Link auf Familienportal des Landkreises -->
-      <li><a href="https://www.merzig-wadern.de/Familienportal/Leben-im-Alter/Beratung-Unterst%C3%BCtzung/AG-Altenhilfe-Merzig-e-V-/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">AG Altenhilfe Merzig e.V.</a></li>
+      <!-- AG Altenhilfe: eigene Website des Seniorenbüros -->
+      <li><a href="https://www.seniorenbuero-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=seniorenbuero-merzig.de" alt="">AG Altenhilfe / Seniorenbüro Merzig</a></li>
       <li><a href="https://www.arbeitsagentur.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arbeitsagentur.de" alt="">Bundesagentur für Arbeit</a></li>
       <li><a href="https://www.bundesregierung.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bundesregierung.de" alt="">Bundesregierung</a></li>
       <li><a href="https://www.elster.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=elster.de" alt="">ELSTER (Steuer)</a></li>
-      <!-- Einwohnermeldeamt: korrekter Link zum Bürgerbüro/Bürgerservice merzig.de -->
       <li><a href="https://www.merzig.de/rathaus-buergerservice/dienststellen/sicherheit-und-buergerservice/buergerservice/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig.de" alt="">Einwohnermeldeamt / Bürgerbüro Merzig</a></li>
-      <!-- Finanzamt: offizielle URL auf saarland.de -->
       <li><a href="https://www.saarland.de/mfw/DE/portale/steuernundfinanzaemter/finanzaemter/finanzamt-merzig" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Finanzamt Merzig</a></li>
       <li><a href="https://www.merzig-wadern.de/Zulassung-Verkehr/Fahrerlaubnisrecht/F%C3%BChrerschein/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">Führerscheinstelle</a></li>
       <li><a href="https://www.jobcenter-merzig-wadern.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=jobcenter-merzig-wadern.de" alt="">Jobcenter Merzig-Wadern</a></li>
-      <!-- Jugendamt: korrekter Link auf Familienportal des Landkreises -->
       <li><a href="https://www.merzig-wadern.de/Familienportal/Jugendamt/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">Jugendamt Merzig-Wadern</a></li>
-      <!-- Katasteramt: zuständig ist das Landesamt für Vermessung, Geoinformation und Landentwicklung Saarland -->
-      <li><a href="https://www.saarland.de/lvgl/DE/Home/home_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Katasteramt / Vermessung Saarland (LVGL)</a></li>
+      <!-- Katasteramt: direkt zur Kataster-Seite des LVGL Saarland -->
+      <li><a href="https://www.saarland.de/lvgl/DE/themen-aufgaben/themen/kataster/kataster_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Katasteramt / LVGL Saarland</a></li>
       <li><a href="https://www.merzig-wadern.de/Zulassung-Verkehr/Zulassungstelle/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">KFZ-Zulassungsstelle</a></li>
       <li><a href="https://www.merzig-wadern.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">Landratsamt Merzig-Wadern</a></li>
       <li><a href="https://www.deutsche-rentenversicherung.de/Saarland/DE/Home/home_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=deutsche-rentenversicherung.de" alt="">Rentenversicherung Saarland (DRV)</a></li>
       <li><a href="https://www.saarland.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Saarland.de (Landesportal)</a></li>
       <li><a href="https://www.stadtwerke-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=stadtwerke-merzig.de" alt="">Stadtwerke Merzig</a></li>
       <li><a href="https://www.verbraucherzentrale-saarland.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=verbraucherzentrale-saarland.de" alt="">Verbraucherzentrale Saarland</a></li>
-      <!-- VHS: korrekter Link vhs-merzig-wadern.de -->
       <li><a href="https://www.vhs-merzig-wadern.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=vhs-merzig-wadern.de" alt="">Volkshochschule Merzig-Wadern</a></li>
     </ul>
   </div>
@@ -252,14 +261,11 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.aok.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aok.de" alt="">AOK</a></li>
       <li><a href="https://sehen-saar.de/praxis-merzig/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=sehen-saar.de" alt="">Augenarzt Merzig (Sehen Saar)</a></li>
       <li><a href="https://www.barmer.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=barmer.de" alt="">Barmer Krankenkasse</a></li>
-      <!-- Caritas: korrekte URL caritas-saar-hochwald.de -->
       <li><a href="https://www.caritas-saar-hochwald.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=caritas-saar-hochwald.de" alt="">Caritas Saar-Hochwald</a></li>
       <li><a href="https://www.doctolib.de/allgemeinmedizin/merzig" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=doctolib.de" alt="">DocToLib Merzig (Termine)</a></li>
       <li><a href="https://gesundheitscampus-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=gesundheitscampus-merzig.de" alt="">Gesundheitscampus Merzig</a></li>
       <li><a href="https://www.hautmedizin-saar.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=hautmedizin-saar.de" alt="">Hautmedizin Saar (Gesundheitscampus)</a></li>
-      <!-- HNO: korrekter Link auf hno-kulas.de (Dr. Philipp Kulas) -->
       <li><a href="https://hno-kulas.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=hno-kulas.de" alt="">HNO-Praxis Dr. Kulas Merzig</a></li>
-      <!-- HNO Rübsteck & Firsov bleibt als zweite Praxis erhalten -->
       <li><a href="https://hno-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=hno-merzig.de" alt="">HNO-Praxis Rübsteck & Firsov Merzig</a></li>
       <li><a href="https://www.praxis-kessler.info" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=praxis-kessler.info" alt="">MVZ Hautarzt Dr. Kessler</a></li>
       <li><a href="https://ihr-hausarzt-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ihr-hausarzt-merzig.de" alt="">MVZ Hausarzt Merzig</a></li>
@@ -305,9 +311,7 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     <ul>
       <li><a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=chat.openai.com" alt="">ChatGPT</a></li>
       <li><a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=claude.ai" alt="">Claude</a></li>
-      <!-- Le Chat (Mistral AI) neu -->
       <li><a href="https://chat.mistral.ai" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mistral.ai" alt="">Le Chat (Mistral AI)</a></li>
-      <!-- LM Arena – KI-Vergleich neu -->
       <li><a href="https://lmarena.ai" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lmarena.ai" alt="">LM Arena (KI-Modelle vergleichen)</a></li>
       <li><a href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=perplexity.ai" alt="">Perplexity</a></li>
     </ul>
@@ -320,13 +324,14 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     <ul>
       <li><a href="https://www.ratsstube-blasius.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ratsstube-blasius.de" alt="">Blasius (Ratsstube)</a></li>
       <li><a href="https://www.merzigerbrauhaus.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzigerbrauhaus.de" alt="">Brauhaus Merzig</a></li>
-      <!-- Da Roberto "Zum Skipper" neu -->
       <li><a href="https://daroberto-ristorante.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=daroberto-ristorante.de" alt="">Da Roberto – Zum Skipper (Yachthafen)</a></li>
       <li><a href="https://www.ellerhof.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ellerhof.de" alt="">Ellerhof Merzig</a></li>
       <li><a href="https://maps.google.com/?q=Griechisches+Restaurant+Zur+Stadthalle+Merzig" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=maps.google.com" alt="">Grieche an der Stadthalle</a></li>
       <li><a href="https://www.kolpinghausmerzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kolpinghausmerzig.de" alt="">Kolpinghaus Merzig</a></li>
       <li><a href="https://www.restaurant-kolorit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=restaurant-kolorit.de" alt="">Kolorit Merzig</a></li>
       <li><a href="https://roemer-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=roemer-merzig.de" alt="">Römer Merzig</a></li>
+      <!-- Sant'Angelo neu -->
+      <li><a href="https://sant-angelo.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=sant-angelo.de" alt="">Sant'Angelo (Ristorante & Pizzeria)</a></li>
     </ul>
   </div>
 
@@ -353,9 +358,7 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     <div class="card-header"><div class="card-icon">🇱🇺</div><span class="card-title">Behörden Luxemburg</span></div>
     <ul>
       <li><a href="https://www.adem.public.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=adem.public.lu" alt="">ADEM (Arbeitsverwaltung)</a></li>
-      <!-- CCSS neu: Zentralstelle der Sozialversicherungen -->
       <li><a href="https://www.ccss.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ccss.lu" alt="">CCSS (Zentralstelle Sozialversicherung)</a></li>
-      <!-- CNS: korrigiert von css.lu auf cns.public.lu -->
       <li><a href="https://cns.public.lu/de.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cns.public.lu" alt="">CNS (Nationale Gesundheitskasse)</a></li>
       <li><a href="https://guichet.public.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=guichet.public.lu" alt="">Guichet.lu (Bürgerportal)</a></li>
       <li><a href="https://impotsdirects.public.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=impotsdirects.public.lu" alt="">Impôts (Steuer Luxemburg)</a></li>
@@ -371,6 +374,10 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.duckduckgo.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duckduckgo.com" alt="">DuckDuckGo</a></li>
       <li><a href="https://www.google.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=google.de" alt="">Google</a></li>
       <li><a href="https://translate.google.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=translate.google.com" alt="">Google Übersetzer</a></li>
+      <!-- Vorschläge (passend zum Kontext dieser Seite) -->
+      <li><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com" alt="">Have I Been Pwned? (Datenleck-Check)</a></li>
+      <li><a href="https://www.metager.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=metager.de" alt="">MetaGer (deutsche Datenschutz-Suche)</a></li>
+      <li><a href="https://www.onlinebanking-sicherheit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=onlinebanking-sicherheit.de" alt="">Online-Banking Sicherheit (BdB)</a></li>
       <li><a href="https://www.wikipedia.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wikipedia.org" alt="">Wikipedia</a></li>
     </ul>
   </div>
@@ -381,7 +388,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     <div class="card-header"><div class="card-icon">📺</div><span class="card-title">Streaming & Mediathek</span></div>
     <ul>
       <li><a href="https://www.ardmediathek.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ardmediathek.de" alt="">ARD Mediathek</a></li>
-      <!-- ARD Audiothek neu -->
       <li><a href="https://www.ardaudiothek.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ardaudiothek.de" alt="">ARD Audiothek</a></li>
       <li><a href="https://www.netflix.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=netflix.com" alt="">Netflix</a></li>
       <li><a href="https://www.sr-mediathek.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=sr-mediathek.de" alt="">SR Mediathek (Saarland)</a></li>
@@ -399,6 +405,8 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Online-Wache (Anzeige erstatten)</a></li>
       <li><a href="https://www.saarland.de/polizei/DE/home/home_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Polizei Saarland</a></li>
       <li><a href="https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">ZAC – Cybercrime Saarland</a></li>
+      <!-- Browser-Diagnose-Tool neu -->
+      <li><a href="https://duuscht.github.io/wizard" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duuscht.github.io" alt="">Browser-Diagnose (Wizard)</a></li>
     </ul>
   </div>
 
@@ -425,10 +433,14 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
   für sensible Seiten, sondern komm immer hierher zurück.
 </div>
 
-<p class="edit-note">💡 Tipp: Diese Datei im Texteditor öffnen → Links anpassen → in Google Drive hochladen</p>
+<div class="edit-note">
+  <strong>💡 Hinweis:</strong> Diese Datei im Texteditor öffnen → Links anpassen → in Google Drive hochladen.
+  Jeder Link wurde manuell geprüft. Neue Links immer zuerst selbst aufrufen und verifizieren,
+  bevor du sie hier einträgst.
+</div>
 
 <div class="version-bar">
-  Version 1.2 &nbsp;·&nbsp; Stand: 8. April 2026 &nbsp;·&nbsp; Link-Korrekturen und Ergänzungen
+  Version 1.3 &nbsp;·&nbsp; Stand: 10. April 2026 &nbsp;·&nbsp; Korrekturen & Ergänzungen
 </div>
 
 <script>
