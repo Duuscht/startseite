@@ -32,10 +32,7 @@
 
 ```
 /* ── Suchfeld ── */
-.search-wrap {
-  max-width: 900px; margin: 0 auto 2rem;
-  position: relative;
-}
+.search-wrap { max-width: 900px; margin: 0 auto 2rem; position: relative; }
 .search-wrap input {
   width: 100%; padding: 0.75rem 1rem 0.75rem 2.8rem;
   background: var(--surface); border: 1px solid var(--border);
@@ -44,36 +41,19 @@
 }
 .search-wrap input:focus { border-color: var(--accent); }
 .search-wrap input::placeholder { color: var(--muted); }
-.search-icon {
-  position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%);
-  font-size: 1rem; pointer-events: none;
-}
-.search-count {
-  position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%);
-  font-size: 0.72rem; color: var(--muted);
-}
-.no-results {
-  max-width: 900px; margin: 0 auto;
-  text-align: center; color: var(--muted); font-size: 0.9rem;
-  padding: 2rem; display: none;
-}
+.search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+.search-count { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: var(--muted); }
+.no-results { max-width: 900px; margin: 0 auto; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 2rem; display: none; }
 
-main {
-  max-width: 900px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
-}
+main { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
 .card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem;
-  transition: border-color 0.2s, transform 0.2s;
-  animation: fadeUp 0.4s ease both;
+  transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.4s ease both;
 }
 .card:hover { border-color: var(--accent); transform: translateY(-2px); }
 .card.hidden { display: none; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
 .card-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
 .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text); }
@@ -96,7 +76,15 @@ ul li a:hover { background: rgba(255,255,255,0.06); color: var(--accent); }
 ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-radius: 2px; padding: 0 1px; }
 .favicon { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: contain; }
 
-/* ── Info-Boxen am Seitenende (beide im gleichen Stil) ── */
+/* ── Trennlinie innerhalb einer Karte ── */
+.list-divider {
+  font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); opacity: 0.6;
+  border-top: 1px solid var(--border);
+  padding-top: 0.55rem; margin-top: 0.4rem; margin-bottom: 0.15rem;
+}
+
+/* ── Info-Boxen ── */
 .info-box {
   max-width: 900px; margin: 2.5rem auto 0;
   background: rgba(126,184,164,0.07); border: 1px solid rgba(126,184,164,0.2);
@@ -104,7 +92,7 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 }
 .info-box strong { color: var(--accent2); }
 
-/* ── Versionshinweis – gleicher Stil wie info-box, aber blau ── */
+/* ── Versionshinweis (blau) ── */
 .edit-note {
   max-width: 900px; margin: 1rem auto 0;
   background: rgba(110,160,210,0.07); border: 1px solid rgba(110,160,210,0.2);
@@ -134,12 +122,11 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 
 <main id="main">
 
-  <!-- BANK & FINANZEN -->
+  <!-- BANK & FINANZEN (ohne BCEE, die ist jetzt unter Luxemburg) -->
 
   <div class="card c-gold">
     <div class="card-header"><div class="card-icon">🏦</div><span class="card-title">Bank & Finanzen</span></div>
     <ul>
-      <li><a href="https://www.bcee.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bcee.lu" alt="">BCEE / Spuerkeess Luxemburg</a></li>
       <li><a href="https://www.bhw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bhw.de" alt="">BHW Bausparkasse</a></li>
       <li><a href="https://www.dkb.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dkb.de" alt="">DKB Online-Banking</a></li>
       <li><a href="https://www.klarna.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=klarna.com" alt="">Klarna</a></li>
@@ -169,24 +156,30 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     </ul>
   </div>
 
-  <!-- EINKAUFEN -->
+  <!-- EINKAUFEN – mit Trennung Prospekt / Online -->
 
   <div class="card c-red">
     <div class="card-header"><div class="card-icon">🛒</div><span class="card-title">Einkaufen</span></div>
     <ul>
-      <li><a href="https://www.aldi-sued.de/de/filialen-angebote/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aldi-sued.de" alt="">Aldi – Angebote & Öffnungszeiten</a></li>
+      <!-- Märkte in Merzig/Region mit Wochenprospekt -->
+      <div class="list-divider">📰 Wochenprospekt (Merzig & Region)</div>
+      <li><a href="https://www.aldi-sued.de/de/angebote/prospekte.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aldi-sued.de" alt="">Aldi Süd – Prospekt der Woche</a></li>
+      <li><a href="https://www.edeka.de/angebote/prospekte/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=edeka.de" alt="">EDEKA – Prospekt der Woche</a></li>
+      <li><a href="https://www.globus.de/maerkte/losheim-am-see/angebote/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=globus.de" alt="">Globus Losheim – Angebote</a></li>
+      <li><a href="https://www.kaufland.de/angebote/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kaufland.de" alt="">Kaufland – Prospekt der Woche</a></li>
+      <li><a href="https://www.lidl.de/de/angebote" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lidl.de" alt="">Lidl – Angebote der Woche</a></li>
+      <li><a href="https://www.netto-online.de/angebote/prospekte/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=netto-online.de" alt="">Netto – Prospekt der Woche</a></li>
+      <li><a href="https://www.penny.de/angebote/prospekte" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=penny.de" alt="">Penny – Prospekt der Woche</a></li>
+      <li><a href="https://www.rewe.de/angebote/prospekte/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rewe.de" alt="">REWE – Prospekt der Woche</a></li>
+      <li><a href="https://www.rossmann.de/de/angebote.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rossmann.de" alt="">Rossmann – Angebote der Woche</a></li>
+      <!-- Online-Shops ohne eigene Filiale -->
+      <div class="list-divider">🌐 Online-Shops</div>
       <li><a href="https://www.amazon.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=amazon.de" alt="">Amazon</a></li>
       <li><a href="https://www.dm.de/filialen/saarland/merzig/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dm.de" alt="">dm Merzig</a></li>
       <li><a href="https://www.ebay.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ebay.de" alt="">eBay</a></li>
       <li><a href="https://www.kleinanzeigen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kleinanzeigen.de" alt="">eBay Kleinanzeigen</a></li>
-      <li><a href="https://www.edeka.de/service/filialen/index.jsp?searchTerm=Merzig" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=edeka.de" alt="">EDEKA Merzig</a></li>
-      <li><a href="https://www.kaufland.de/service/filialen/detail/merzig/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kaufland.de" alt="">Kaufland Merzig</a></li>
-      <li><a href="https://www.netto-online.de/service/filialen/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=netto-online.de" alt="">Netto – Filialen & Angebote</a></li>
-      <li><a href="https://www.rewe.de/service/finden/?q=Merzig" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rewe.de" alt="">REWE Merzig</a></li>
       <li><a href="https://www.shop-apotheke.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=shop-apotheke.com" alt="">Shop Apotheke</a></li>
       <li><a href="https://www.wasgau.de/maerkte/wasgau-frischemarkt-merzig-ballern/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wasgau.de" alt="">WASGAU Merzig-Ballern</a></li>
-      <li><a href="https://www.zalando.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=zalando.de" alt="">Zalando</a></li>
-      <li><a href="https://www.lidl.de/de/angebote" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lidl.de" alt="">Lidl – Angebote & Filialen</a></li>
     </ul>
   </div>
 
@@ -201,7 +194,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=linkedin.com" alt="">LinkedIn</a></li>
       <li><a href="https://signal.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=signal.org" alt="">Signal</a></li>
       <li><a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=web.whatsapp.com" alt="">WhatsApp Web</a></li>
-      <!-- Xing neu -->
       <li><a href="https://www.xing.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=xing.com" alt="">Xing</a></li>
       <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=youtube.com" alt="">YouTube</a></li>
     </ul>
@@ -220,7 +212,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=tagesschau.de" alt="">Tagesschau</a></li>
       <li><a href="https://www.wetter.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wetter.com" alt="">Wetter.com</a></li>
       <li><a href="https://www.wochenspiegelonline.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wochenspiegelonline.de" alt="">Wochenspiegel Saarland</a></li>
-      <!-- Zeit: favicon explizit auf www.zeit.de gesetzt -->
       <li><a href="https://www.zeit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=www.zeit.de&sz=32" alt="">Die Zeit</a></li>
     </ul>
   </div>
@@ -230,7 +221,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
   <div class="card c-teal">
     <div class="card-header"><div class="card-icon">🏛</div><span class="card-title">Behörden</span></div>
     <ul>
-      <!-- AG Altenhilfe: eigene Website des Seniorenbüros -->
       <li><a href="https://www.seniorenbuero-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=seniorenbuero-merzig.de" alt="">AG Altenhilfe / Seniorenbüro Merzig</a></li>
       <li><a href="https://www.arbeitsagentur.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arbeitsagentur.de" alt="">Bundesagentur für Arbeit</a></li>
       <li><a href="https://www.bundesregierung.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bundesregierung.de" alt="">Bundesregierung</a></li>
@@ -240,7 +230,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.merzig-wadern.de/Zulassung-Verkehr/Fahrerlaubnisrecht/F%C3%BChrerschein/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">Führerscheinstelle</a></li>
       <li><a href="https://www.jobcenter-merzig-wadern.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=jobcenter-merzig-wadern.de" alt="">Jobcenter Merzig-Wadern</a></li>
       <li><a href="https://www.merzig-wadern.de/Familienportal/Jugendamt/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">Jugendamt Merzig-Wadern</a></li>
-      <!-- Katasteramt: direkt zur Kataster-Seite des LVGL Saarland -->
       <li><a href="https://www.saarland.de/lvgl/DE/themen-aufgaben/themen/kataster/kataster_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Katasteramt / LVGL Saarland</a></li>
       <li><a href="https://www.merzig-wadern.de/Zulassung-Verkehr/Zulassungstelle/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">KFZ-Zulassungsstelle</a></li>
       <li><a href="https://www.merzig-wadern.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=merzig-wadern.de" alt="">Landratsamt Merzig-Wadern</a></li>
@@ -330,7 +319,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.kolpinghausmerzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kolpinghausmerzig.de" alt="">Kolpinghaus Merzig</a></li>
       <li><a href="https://www.restaurant-kolorit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=restaurant-kolorit.de" alt="">Kolorit Merzig</a></li>
       <li><a href="https://roemer-merzig.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=roemer-merzig.de" alt="">Römer Merzig</a></li>
-      <!-- Sant'Angelo neu -->
       <li><a href="https://sant-angelo.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=sant-angelo.de" alt="">Sant'Angelo (Ristorante & Pizzeria)</a></li>
     </ul>
   </div>
@@ -352,11 +340,21 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     </ul>
   </div>
 
-  <!-- BEHÖRDEN LUXEMBURG -->
+  <!-- LUXEMBURG (umbenannt, erweitert) -->
 
   <div class="card c-gold">
-    <div class="card-header"><div class="card-icon">🇱🇺</div><span class="card-title">Behörden Luxemburg</span></div>
+    <div class="card-header"><div class="card-icon">🇱🇺</div><span class="card-title">Luxemburg</span></div>
     <ul>
+      <!-- Banken -->
+      <div class="list-divider">🏦 Banken</div>
+      <li><a href="https://www.bcee.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bcee.lu" alt="">BCEE / Spuerkeess</a></li>
+      <li><a href="https://webbanking.bgl.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bgl.lu" alt="">BGL BNP Paribas (Web Banking)</a></li>
+      <li><a href="https://www.post.lu/de/particuliers/finance/eboo" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=post.lu" alt="">POST Finance / eboo (Postbank)</a></li>
+      <!-- Sprit -->
+      <div class="list-divider">⛽ Tanken</div>
+      <li><a href="https://www.spritpreise.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=spritpreise.lu" alt="">Spritpreise.lu – aktuelle Benzinpreise</a></li>
+      <!-- Behörden -->
+      <div class="list-divider">🏛 Behörden</div>
       <li><a href="https://www.adem.public.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=adem.public.lu" alt="">ADEM (Arbeitsverwaltung)</a></li>
       <li><a href="https://www.ccss.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ccss.lu" alt="">CCSS (Zentralstelle Sozialversicherung)</a></li>
       <li><a href="https://cns.public.lu/de.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cns.public.lu" alt="">CNS (Nationale Gesundheitskasse)</a></li>
@@ -374,7 +372,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.duckduckgo.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duckduckgo.com" alt="">DuckDuckGo</a></li>
       <li><a href="https://www.google.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=google.de" alt="">Google</a></li>
       <li><a href="https://translate.google.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=translate.google.com" alt="">Google Übersetzer</a></li>
-      <!-- Vorschläge (passend zum Kontext dieser Seite) -->
       <li><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com" alt="">Have I Been Pwned? (Datenleck-Check)</a></li>
       <li><a href="https://www.metager.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=metager.de" alt="">MetaGer (deutsche Datenschutz-Suche)</a></li>
       <li><a href="https://www.onlinebanking-sicherheit.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=onlinebanking-sicherheit.de" alt="">Online-Banking Sicherheit (BdB)</a></li>
@@ -405,7 +402,6 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
       <li><a href="https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Online-Wache (Anzeige erstatten)</a></li>
       <li><a href="https://www.saarland.de/polizei/DE/home/home_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Polizei Saarland</a></li>
       <li><a href="https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">ZAC – Cybercrime Saarland</a></li>
-      <!-- Browser-Diagnose-Tool neu -->
       <li><a href="https://duuscht.github.io/wizard" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duuscht.github.io" alt="">Browser-Diagnose (Wizard)</a></li>
     </ul>
   </div>
@@ -440,7 +436,7 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 </div>
 
 <div class="version-bar">
-  Version 1.3 &nbsp;·&nbsp; Stand: 10. April 2026 &nbsp;·&nbsp; Korrekturen & Ergänzungen
+  Version 1.4 &nbsp;·&nbsp; Stand: 13. April 2026 &nbsp;·&nbsp; Luxemburg-Sektion erweitert · Einkaufen neu strukturiert
 </div>
 
 <script>
