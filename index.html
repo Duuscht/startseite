@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="de">
 <head>
@@ -11,7 +11,7 @@
     :root {
       --bg: #0f0f13; --surface: #18181f; --border: #2a2a38;
       --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
-      --muted: #7a7880; --danger: #e07070;
+      --muted: #7a7880;
     }
     body {
       font-family: 'DM Sans', sans-serif;
@@ -31,7 +31,7 @@
     .shield { display: inline-block; margin-right: 0.4rem; font-size: 1.1rem; }
 
 ```
-/* ── Suchfeld ── */
+/* Suchfeld */
 .search-wrap { max-width: 900px; margin: 0 auto 2rem; position: relative; }
 .search-wrap input {
   width: 100%; padding: 0.75rem 1rem 0.75rem 2.8rem;
@@ -76,15 +76,18 @@ ul li a:hover { background: rgba(255,255,255,0.06); color: var(--accent); }
 ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-radius: 2px; padding: 0 1px; }
 .favicon { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: contain; }
 
-/* ── Trennlinie innerhalb einer Karte ── */
+/* Trennlinie innerhalb einer Karte – dunkelblaue Pille */
 .list-divider {
-  font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--muted); opacity: 0.6;
-  border-top: 1px solid var(--border);
-  padding-top: 0.55rem; margin-top: 0.4rem; margin-bottom: 0.15rem;
+  display: block;
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;
+  color: #b8d4f0;
+  background: rgba(60,100,160,0.35);
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin: 0.55rem 0 0.25rem;
 }
 
-/* ── Info-Boxen ── */
+/* Info-Boxen */
 .info-box {
   max-width: 900px; margin: 2.5rem auto 0;
   background: rgba(126,184,164,0.07); border: 1px solid rgba(126,184,164,0.2);
@@ -92,7 +95,7 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 }
 .info-box strong { color: var(--accent2); }
 
-/* ── Versionshinweis (blau) ── */
+/* Versionshinweis (blau) */
 .edit-note {
   max-width: 900px; margin: 1rem auto 0;
   background: rgba(110,160,210,0.07); border: 1px solid rgba(110,160,210,0.2);
@@ -100,7 +103,13 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 }
 .edit-note strong { color: #9dbfda; }
 
-.version-bar { max-width: 900px; margin: 1.5rem auto 0; text-align: center; font-size: 0.75rem; color: #4a4858; border-top: 1px solid #2a2a38; padding-top: 1rem; }
+/* Versionszeile – Versionsnummer grün und fett */
+.version-bar {
+  max-width: 900px; margin: 1.5rem auto 0;
+  text-align: center; font-size: 0.75rem; color: #4a4858;
+  border-top: 1px solid #2a2a38; padding-top: 1rem;
+}
+.version-bar .v-num { color: #39c96e; font-weight: 700; font-size: 0.8rem; }
 ```
 
   </style>
@@ -122,7 +131,7 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 
 <main id="main">
 
-  <!-- BANK & FINANZEN (ohne BCEE, die ist jetzt unter Luxemburg) -->
+  <!-- BANK & FINANZEN (BCEE jetzt unter Luxemburg) -->
 
   <div class="card c-gold">
     <div class="card-header"><div class="card-icon">🏦</div><span class="card-title">Bank & Finanzen</span></div>
@@ -156,31 +165,47 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     </ul>
   </div>
 
-  <!-- EINKAUFEN – mit Trennung Prospekt / Online -->
+  <!-- EINKAUFEN -->
+
+  <!-- Alle Prospekt-Links öffnen direkt kaufDA für die jeweilige Filiale/Region
+       kaufDA erkennt die Filiale und zeigt sofort den aktuellen Wochenpospekt. -->
 
   <div class="card c-red">
     <div class="card-header"><div class="card-icon">🛒</div><span class="card-title">Einkaufen</span></div>
     <ul>
-      <!-- Märkte in Merzig/Region mit Wochenprospekt -->
-      <div class="list-divider">📰 Wochenprospekt (Merzig & Region)</div>
-      <li><a href="https://www.aldi-sued.de/de/angebote/prospekte.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aldi-sued.de" alt="">Aldi Süd – Prospekt der Woche</a></li>
-      <li><a href="https://www.edeka.de/angebote/prospekte/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=edeka.de" alt="">EDEKA – Prospekt der Woche</a></li>
-      <li><a href="https://www.globus.de/maerkte/losheim-am-see/angebote/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=globus.de" alt="">Globus Losheim – Angebote</a></li>
-      <li><a href="https://www.kaufland.de/angebote/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kaufland.de" alt="">Kaufland – Prospekt der Woche</a></li>
-      <li><a href="https://www.lidl.de/de/angebote" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lidl.de" alt="">Lidl – Angebote der Woche</a></li>
-      <li><a href="https://www.netto-online.de/angebote/prospekte/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=netto-online.de" alt="">Netto – Prospekt der Woche</a></li>
-      <li><a href="https://www.penny.de/angebote/prospekte" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=penny.de" alt="">Penny – Prospekt der Woche</a></li>
-      <li><a href="https://www.rewe.de/angebote/prospekte/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rewe.de" alt="">REWE – Prospekt der Woche</a></li>
-      <li><a href="https://www.rossmann.de/de/angebote.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rossmann.de" alt="">Rossmann – Angebote der Woche</a></li>
-      <!-- Online-Shops ohne eigene Filiale -->
-      <div class="list-divider">🌐 Online-Shops</div>
-      <li><a href="https://www.amazon.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=amazon.de" alt="">Amazon</a></li>
-      <li><a href="https://www.dm.de/filialen/saarland/merzig/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dm.de" alt="">dm Merzig</a></li>
-      <li><a href="https://www.ebay.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ebay.de" alt="">eBay</a></li>
-      <li><a href="https://www.kleinanzeigen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kleinanzeigen.de" alt="">eBay Kleinanzeigen</a></li>
-      <li><a href="https://www.shop-apotheke.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=shop-apotheke.com" alt="">Shop Apotheke</a></li>
-      <li><a href="https://www.wasgau.de/maerkte/wasgau-frischemarkt-merzig-ballern/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wasgau.de" alt="">WASGAU Merzig-Ballern</a></li>
-    </ul>
+      <span class="list-divider">📰 Wochenpospekt – Merzig &amp; Region</span>
+      <!-- Filiale Merzig: Rieffstr. 9 / Im Kieselgarten 2 -->
+      <li><a href="https://www.kaufda.de/Filialen/Merzig/ALDI-SUeD-Im-Kieselgarten/v-f36451" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aldi-sued.de" alt="">Aldi Süd Merzig – Prospekt</a></li>
+      <!-- dm Merzig: Brauerstraße -->
+      <li><a href="https://www.kaufda.de/Merzig/dm-drogerie-markt/p-r104" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dm.de" alt="">dm Merzig – Prospekt</a></li>
+      <!-- EDEKA E aktiv markt, Hochwaldstraße 62, Merzig -->
+      <li><a href="https://www.kaufda.de/Filialen/Merzig/Neu-Handels-KG-Hochwaldstrasse-E-aktiv-markt/v-f4857457" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=edeka.de" alt="">EDEKA Merzig – Prospekt</a></li>
+      <!-- Globus Losheim: direkte offizielle Prospektseite der Filiale -->
+      <li><a href="https://www.globus.de/losheim/aktuelles-prospekt.php" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=globus.de" alt="">Globus Losheim – Prospekt</a></li>
+      <!-- Kaufland Merzig: offizielle Filialseite (zeigt aktuelle Angebote) -->
+      <li><a href="https://www.kaufland.de/service/filiale/merzig-1880.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kaufland.de" alt="">Kaufland Merzig – Angebote</a></li>
+      <!-- Lidl Merzig: Rieffstr. 7a -->
+      <li><a href="https://www.kaufda.de/Filialen/Merzig/Lidl-Rieffstrasse/v-f34755" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lidl.de" alt="">Lidl Merzig – Prospekt</a></li>
+      <!-- Netto Merzig: Torstraße -->
+      <li><a href="https://www.kaufda.de/Merzig/Netto-Marken-Discount/p-r9" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=netto-online.de" alt="">Netto Merzig – Prospekt</a></li>
+      <!-- Penny: kein Markt in Merzig → nächste Region via kaufDA -->
+      <li><a href="https://www.kaufda.de/Merzig/Penny/p-r75" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=penny.de" alt="">Penny Region Merzig – Prospekt</a></li>
+      <!-- REWE Merzig: Bahnhofstr. 9 -->
+      <li><a href="https://www.kaufda.de/Filialen/Merzig/REWE-Merzig-Bahnhofstr-REWE/v-f406218727" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rewe.de" alt="">REWE Merzig – Prospekt</a></li>
+      <!-- Rossmann Region Merzig -->
+      <li><a href="https://www.kaufda.de/Merzig/Rossmann/p-r98" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=rossmann.de" alt="">Rossmann Region Merzig – Prospekt</a></li>
+      <!-- WASGAU: eigene Filialseite -->
+      <li><a href="https://www.wasgau.de/maerkte/wasgau-frischemarkt-merzig-ballern/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wasgau.de" alt="">WASGAU Merzig-Ballern – Angebote</a></li>
+
+```
+  <span class="list-divider">🌐 Online-Shops</span>
+  <li><a href="https://www.amazon.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=amazon.de" alt="">Amazon</a></li>
+  <li><a href="https://www.ebay.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ebay.de" alt="">eBay</a></li>
+  <li><a href="https://www.kleinanzeigen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kleinanzeigen.de" alt="">eBay Kleinanzeigen</a></li>
+  <li><a href="https://www.shop-apotheke.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=shop-apotheke.com" alt="">Shop Apotheke</a></li>
+</ul>
+```
+
   </div>
 
   <!-- SOZIALES & KOMMUNIKATION -->
@@ -340,21 +365,20 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
     </ul>
   </div>
 
-  <!-- LUXEMBURG (umbenannt, erweitert) -->
+  <!-- LUXEMBURG -->
 
   <div class="card c-gold">
     <div class="card-header"><div class="card-icon">🇱🇺</div><span class="card-title">Luxemburg</span></div>
     <ul>
-      <!-- Banken -->
-      <div class="list-divider">🏦 Banken</div>
+      <span class="list-divider">🏦 Banken</span>
       <li><a href="https://www.bcee.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bcee.lu" alt="">BCEE / Spuerkeess</a></li>
+      <li><a href="https://www.bil.com/de/individuals/products-and-services/managing-day-to-day-finances/online-bank-BILnet/Pages/Index.aspx" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bil.com" alt="">BIL (BILnet Online Banking)</a></li>
       <li><a href="https://webbanking.bgl.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bgl.lu" alt="">BGL BNP Paribas (Web Banking)</a></li>
+      <li><a href="https://www.ing.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ing.lu" alt="">ING Luxembourg</a></li>
       <li><a href="https://www.post.lu/de/particuliers/finance/eboo" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=post.lu" alt="">POST Finance / eboo (Postbank)</a></li>
-      <!-- Sprit -->
-      <div class="list-divider">⛽ Tanken</div>
+      <span class="list-divider">⛽ Tanken</span>
       <li><a href="https://www.spritpreise.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=spritpreise.lu" alt="">Spritpreise.lu – aktuelle Benzinpreise</a></li>
-      <!-- Behörden -->
-      <div class="list-divider">🏛 Behörden</div>
+      <span class="list-divider">🏛 Behörden</span>
       <li><a href="https://www.adem.public.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=adem.public.lu" alt="">ADEM (Arbeitsverwaltung)</a></li>
       <li><a href="https://www.ccss.lu" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ccss.lu" alt="">CCSS (Zentralstelle Sozialversicherung)</a></li>
       <li><a href="https://cns.public.lu/de.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cns.public.lu" alt="">CNS (Nationale Gesundheitskasse)</a></li>
@@ -436,7 +460,8 @@ ul li a mark { background: rgba(200,169,110,0.3); color: var(--accent); border-r
 </div>
 
 <div class="version-bar">
-  Version 1.4 &nbsp;·&nbsp; Stand: 13. April 2026 &nbsp;·&nbsp; Luxemburg-Sektion erweitert · Einkaufen neu strukturiert
+  <span class="v-num">Version 1.5</span> &nbsp;·&nbsp; Stand: 14. April 2026
+  &nbsp;·&nbsp; Prospekt-Links auf kaufDA umgestellt · Luxemburg-Banken erweitert
 </div>
 
 <script>
