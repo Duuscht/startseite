@@ -110,37 +110,6 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
   border-top: 1px solid #2a2a38; padding-top: 1rem;
 }
 .version-bar .v-num { color: #39c96e; font-weight: 700; font-size: 0.8rem; }
-
-/* ── Witz-Banner ── */
-.joke-banner {
-  max-width: 900px; margin: 0 auto 2rem;
-  background: linear-gradient(135deg, rgba(200,169,110,0.08) 0%, rgba(126,184,164,0.08) 100%);
-  border: 1px solid rgba(200,169,110,0.25);
-  border-left: 4px solid var(--accent);
-  border-radius: 10px; padding: 1rem 1.4rem;
-  display: flex; align-items: flex-start; gap: 0.8rem;
-  animation: fadeUp 0.6s ease both;
-}
-.joke-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.05rem; }
-.joke-content { flex: 1; }
-.joke-label {
-  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--accent); opacity: 0.7; margin-bottom: 0.35rem;
-}
-.joke-text {
-  font-size: 0.9rem; color: var(--text); line-height: 1.5;
-}
-.joke-punchline {
-  font-size: 0.9rem; color: var(--accent2);
-  font-style: italic; margin-top: 0.25rem; line-height: 1.5;
-}
-.joke-refresh {
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); font-size: 0.78rem; padding: 0.2rem 0.5rem;
-  border-radius: 4px; transition: color 0.2s; flex-shrink: 0; margin-top: 0.1rem;
-  font-family: var(--font, sans-serif);
-}
-.joke-refresh:hover { color: var(--accent); }
 ```
 
   </style>
@@ -156,16 +125,6 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
   <span class="search-icon">🔍</span>
   <input type="text" id="search" placeholder="Link suchen… z.B. „Saarland Versicherung"" autocomplete="off">
   <span class="search-count" id="searchCount"></span>
-</div>
-
-<div class="joke-banner" id="jokeBanner">
-  <div class="joke-icon">😄</div>
-  <div class="joke-content">
-    <div class="joke-label">// Witz des Tages</div>
-    <div class="joke-text" id="jokeSetup"></div>
-    <div class="joke-punchline" id="jokePunchline"></div>
-  </div>
-  <button class="joke-refresh" onclick="showJoke()" title="Neuer Witz">↻ neu</button>
 </div>
 
 <div class="no-results" id="noResults">Kein Link gefunden — vielleicht noch hinzufügen? 🤔</div>
@@ -583,7 +542,7 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 </div>
 
 <div class="version-bar">
-  <span class="v-num">Version 4.0</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:23:34</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
+  <span class="v-num">Version 3.9</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:18:09</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
 </div>
 
 <script>
@@ -635,56 +594,6 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
       noResults.style.display = 'none';
     }
   });
-// ════════════════════════════════════════════════════════════
-// WITZ DES TAGES
-// ════════════════════════════════════════════════════════════
-const jokes = [
-  { s: "Warum können Geister so schlecht lügen?",             p: "Weil man durch sie hindurchsieht." },
-  { s: "Was macht ein Elektriker in seiner Freizeit?",        p: "Er hängt einfach rum." },
-  { s: "Wie nennt man einen Bumerang, der nicht zurückkommt?", p: "Holz." },
-  { s: "Warum hat der Mathematiker Angst vor negativen Zahlen?", p: "Er schreckt vor nichts zurück." },
-  { s: "Was sagt eine Null zur Acht?",                        p: "Schöner Gürtel!" },
-  { s: "Treffen sich zwei Magnete.",                          p: "War wohl Anziehungssache." },
-  { s: "Warum hat der Fahrradfahrer keinen Antrag gestellt?", p: "Er wollte nicht in die Kette genommen werden." },
-  { s: "Was ist grün und klingelt an der Tür?",              p: "Ein Klingelbeutel." },
-  { s: "Warum nehmen Bienen nie den Bus?",                   p: "Sie fliegen lieber auf eigene Faust." },
-  { s: "Was hat vier Buchstaben, manchmal neun, aber nie fünf?", p: "'Was' hat vier, 'manchmal' hat neun und 'nie' hat vier. Aber 'fünf' hat immer fünf — ach so, nie hat drei!" },
-  { s: "Wie heißt ein Krokodil, das Gemüse bewacht?",        p: "Lachgardine. Nein: Gurkodil." },
-  { s: "Warum lacht der Schornstein?",                       p: "Weil ihm der Kamin zum Kichern kitzelt." },
-  { s: "Kommt ein Informatiker in die Küche — öffnet den Kühlschrank, sieht die Butter, legt sie rein und macht die Tür zu.",  p: "Problem war bekannt, Lösung lag auf der Hand." },
-  { s: "Was sagt ein Tal zum anderen?",                      p: "Zwischen uns liegt eine Berg-Differenz." },
-  { s: "Klingelt ein Mann an der Tür. Öffnet niemand.",      p: "War wohl kein Klingelton-Abonnent." },
-  { s: "Was ist orange und läuft durch den Wald?",           p: "Ein Jogger mit Möhre." },
-  { s: "Warum hat der Geisterjäger gekündigt?",              p: "Die Stelle war leider unbesetzt." },
-  { s: "Treffen sich zwei Antennen. Heiraten.",              p: "Die Hochzeit war mittelmäßig — aber der Empfang war fantastisch!" },
-  { s: "Wie nennt man eine Schlange in einer Weste?",        p: "Eine Schlangenweste. Na gut — eine Kobra." },
-  { s: "Warum hat der Kalender so viele Freunde?",           p: "Er hat immer freie Tage." },
-  { s: "Fragt der Arzt: Rauchen Sie?",                       p: "Patient: Nur wenn ich brenne." },
-  { s: "Warum können Piraten nie das Alphabet lernen?",      p: "Sie bleiben immer beim 'R' hängen." },
-  { s: "Was ist gelb und kann nicht schwimmen?",             p: "Ein Bagger. Zwei Bagger." },
-  { s: "Warum hat der Verbrecher den Kalender gestohlen?",   p: "Er wollte ein paar Tage gut haben." },
-  { s: "Was ist braun und klebt im Baum?",                   p: "Ein Schokotier." },
-  { s: "Wie nennt man einen schlaflosen Türken?",            p: "Döner Schläfer." },
-  { s: "Gehen zwei Jäger in den Wald. Kommen drei raus.",    p: "War wohl ein Bär dabei." },
-  { s: "Was macht ein Tauber, wenn er husten muss?",         p: "Er dreht sich um." },
-  { s: "Warum hat die Spieglein-Wimper Angst?",              p: "Sie sieht den Wimpernzug." },
-  { s: "Was sagt ein Drucker zum anderen?",                  p: "Hast du auch diesen Papierstau im Bauch?" },
-];
-
-let lastJokeIdx = -1;
-
-function showJoke() {
-  let idx;
-  do { idx = Math.floor(Math.random() * jokes.length); }
-  while (idx === lastJokeIdx && jokes.length > 1);
-  lastJokeIdx = idx;
-  const j = jokes[idx];
-  document.getElementById('jokeSetup').textContent = j.s;
-  document.getElementById('jokePunchline').textContent = '→ ' + j.p;
-}
-
-showJoke();
-
 </script>
 
 </body>
