@@ -111,60 +111,36 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 }
 .version-bar .v-num { color: #39c96e; font-weight: 700; font-size: 0.8rem; }
 
-/* ── Zitat-Banner ── */
-.quote-banner {
+/* ── Witz-Banner ── */
+.joke-banner {
   max-width: 900px; margin: 0 auto 2rem;
-  background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(126,184,164,0.06) 100%);
-  border: 1px solid rgba(200,169,110,0.2);
-  border-left: 3px solid var(--accent);
-  border-radius: 10px; padding: 1.2rem 1.6rem;
-  position: relative; overflow: hidden;
-  animation: fadeUp 0.7s ease both;
+  background: linear-gradient(135deg, rgba(200,169,110,0.08) 0%, rgba(126,184,164,0.08) 100%);
+  border: 1px solid rgba(200,169,110,0.25);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px; padding: 1rem 1.4rem;
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  animation: fadeUp 0.6s ease both;
 }
-.quote-banner::before {
-  content: '\201C';
-  position: absolute; top: -0.2rem; left: 0.8rem;
-  font-size: 4rem; color: rgba(200,169,110,0.12);
-  font-family: 'DM Serif Display', serif; line-height: 1;
-  pointer-events: none;
+.joke-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.05rem; }
+.joke-content { flex: 1; }
+.joke-label {
+  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); opacity: 0.7; margin-bottom: 0.35rem;
 }
-.quote-label {
-  font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
+.joke-text {
+  font-size: 0.9rem; color: var(--text); line-height: 1.5;
 }
-.quote-text {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-  color: var(--text); line-height: 1.65;
-  font-style: italic; padding-left: 0.5rem;
-  min-height: 2.5rem;
+.joke-punchline {
+  font-size: 0.9rem; color: var(--accent2);
+  font-style: italic; margin-top: 0.25rem; line-height: 1.5;
 }
-.quote-text.loading {
-  color: var(--muted);
-  animation: pulse 1.5s ease-in-out infinite;
+.joke-refresh {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 0.78rem; padding: 0.2rem 0.5rem;
+  border-radius: 4px; transition: color 0.2s; flex-shrink: 0; margin-top: 0.1rem;
+  font-family: var(--font, sans-serif);
 }
-.quote-author {
-  font-size: 0.78rem; color: var(--accent2);
-  margin-top: 0.6rem; padding-left: 0.5rem;
-  letter-spacing: 0.5px;
-}
-.quote-footer {
-  display: flex; align-items: center;
-  justify-content: space-between; margin-top: 0.5rem;
-}
-.quote-source {
-  font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
-}
-.quote-refresh {
-  background: none; border: 1px solid rgba(200,169,110,0.2);
-  cursor: pointer; color: var(--muted); font-size: 0.72rem;
-  padding: 0.2rem 0.6rem; border-radius: 4px;
-  transition: color 0.2s, border-color 0.2s;
-  font-family: 'DM Sans', sans-serif;
-}
-.quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
-.quote-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
-@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
+.joke-refresh:hover { color: var(--accent); }
 ```
 
   </style>
@@ -182,19 +158,16 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
   <span class="search-count" id="searchCount"></span>
 </div>
 
-<div class="quote-banner" id="quoteBanner">
-  <div class="quote-label">// Gedanke des Tages</div>
-  <div class="quote-text loading" id="quoteText">Lade philosophisches Zitat…</div>
-  <div class="quote-author" id="quoteAuthor"></div>
-  <div class="quote-footer">
-    <span class="quote-source" id="quoteSource"></span>
-    <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">↻ neues Zitat</button>
-  </div>
-</div>
+<div class="joke-banner" id="jokeBanner">
+  <div class="joke-icon">😄</div>
   <div class="joke-content">
     <div class="joke-label">// Witz des Tages</div>
     <div class="joke-text" id="jokeSetup"></div>
     <div class="joke-punchline" id="jokePunchline"></div>
+  </div>
+  <button class="joke-refresh" onclick="showJoke()" title="Neuer Witz">↻ neu</button>
+</div>
+
 <div class="no-results" id="noResults">Kein Link gefunden — vielleicht noch hinzufügen? 🤔</div>
 
 <main id="main">
@@ -610,7 +583,7 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 </div>
 
 <div class="version-bar">
-  <span class="v-num">Version 4.1</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:27:31</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
+  <span class="v-num">Version 4.0</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:23:34</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
 </div>
 
 <script>
@@ -663,62 +636,54 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
     }
   });
 // ════════════════════════════════════════════════════════════
-// PHILOSOPHISCHES ZITAT (via Anthropic API)
+// WITZ DES TAGES
 // ════════════════════════════════════════════════════════════
-async function loadQuote() {
-  const textEl   = document.getElementById('quoteText');
-  const authorEl = document.getElementById('quoteAuthor');
-  const sourceEl = document.getElementById('quoteSource');
-  const btn      = document.getElementById('quoteBtn');
+const jokes = [
+  { s: "Warum können Geister so schlecht lügen?",             p: "Weil man durch sie hindurchsieht." },
+  { s: "Was macht ein Elektriker in seiner Freizeit?",        p: "Er hängt einfach rum." },
+  { s: "Wie nennt man einen Bumerang, der nicht zurückkommt?", p: "Holz." },
+  { s: "Warum hat der Mathematiker Angst vor negativen Zahlen?", p: "Er schreckt vor nichts zurück." },
+  { s: "Was sagt eine Null zur Acht?",                        p: "Schöner Gürtel!" },
+  { s: "Treffen sich zwei Magnete.",                          p: "War wohl Anziehungssache." },
+  { s: "Warum hat der Fahrradfahrer keinen Antrag gestellt?", p: "Er wollte nicht in die Kette genommen werden." },
+  { s: "Was ist grün und klingelt an der Tür?",              p: "Ein Klingelbeutel." },
+  { s: "Warum nehmen Bienen nie den Bus?",                   p: "Sie fliegen lieber auf eigene Faust." },
+  { s: "Was hat vier Buchstaben, manchmal neun, aber nie fünf?", p: "'Was' hat vier, 'manchmal' hat neun und 'nie' hat vier. Aber 'fünf' hat immer fünf — ach so, nie hat drei!" },
+  { s: "Wie heißt ein Krokodil, das Gemüse bewacht?",        p: "Lachgardine. Nein: Gurkodil." },
+  { s: "Warum lacht der Schornstein?",                       p: "Weil ihm der Kamin zum Kichern kitzelt." },
+  { s: "Kommt ein Informatiker in die Küche — öffnet den Kühlschrank, sieht die Butter, legt sie rein und macht die Tür zu.",  p: "Problem war bekannt, Lösung lag auf der Hand." },
+  { s: "Was sagt ein Tal zum anderen?",                      p: "Zwischen uns liegt eine Berg-Differenz." },
+  { s: "Klingelt ein Mann an der Tür. Öffnet niemand.",      p: "War wohl kein Klingelton-Abonnent." },
+  { s: "Was ist orange und läuft durch den Wald?",           p: "Ein Jogger mit Möhre." },
+  { s: "Warum hat der Geisterjäger gekündigt?",              p: "Die Stelle war leider unbesetzt." },
+  { s: "Treffen sich zwei Antennen. Heiraten.",              p: "Die Hochzeit war mittelmäßig — aber der Empfang war fantastisch!" },
+  { s: "Wie nennt man eine Schlange in einer Weste?",        p: "Eine Schlangenweste. Na gut — eine Kobra." },
+  { s: "Warum hat der Kalender so viele Freunde?",           p: "Er hat immer freie Tage." },
+  { s: "Fragt der Arzt: Rauchen Sie?",                       p: "Patient: Nur wenn ich brenne." },
+  { s: "Warum können Piraten nie das Alphabet lernen?",      p: "Sie bleiben immer beim 'R' hängen." },
+  { s: "Was ist gelb und kann nicht schwimmen?",             p: "Ein Bagger. Zwei Bagger." },
+  { s: "Warum hat der Verbrecher den Kalender gestohlen?",   p: "Er wollte ein paar Tage gut haben." },
+  { s: "Was ist braun und klebt im Baum?",                   p: "Ein Schokotier." },
+  { s: "Wie nennt man einen schlaflosen Türken?",            p: "Döner Schläfer." },
+  { s: "Gehen zwei Jäger in den Wald. Kommen drei raus.",    p: "War wohl ein Bär dabei." },
+  { s: "Was macht ein Tauber, wenn er husten muss?",         p: "Er dreht sich um." },
+  { s: "Warum hat die Spieglein-Wimper Angst?",              p: "Sie sieht den Wimpernzug." },
+  { s: "Was sagt ein Drucker zum anderen?",                  p: "Hast du auch diesen Papierstau im Bauch?" },
+];
 
-  textEl.textContent = 'Einen Moment…';
-  textEl.classList.add('loading');
-  authorEl.textContent = '';
-  sourceEl.textContent = '';
-  btn.disabled = true;
+let lastJokeIdx = -1;
 
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 200,
-        system: 'Du bist ein Assistent, der kurze philosophische Zitate auf Deutsch liefert. Antworte AUSSCHLIESSLICH mit einem JSON-Objekt ohne Markdown, ohne Backticks, ohne Erklärungen. Format: {"zitat":"...","autor":"...","quelle":"..."}. Das Zitat soll echt, prägnant (max. 2 Sätze), nachdenklich und inspirierend sein. Vary the philosopher: sometimes ancient (Seneca, Aristoteles, Epiktet), sometimes modern (Nietzsche, Wittgenstein, Arendt), sometimes Eastern (Konfuzius, Lao-Tse). Never repeat the same quote.',
-        messages: [{ role: 'user', content: 'Liefere ein zufälliges philosophisches Zitat.' }]
-      })
-    });
-
-    const data = await resp.json();
-    const raw  = data?.content?.[0]?.text?.trim() || '';
-
-    let parsed;
-    try {
-      parsed = JSON.parse(raw);
-    } catch {
-      const m = raw.match(/"zitat"\s*:\s*"([^"]+)"/);
-      parsed = m ? { zitat: m[1], autor: '', quelle: '' } : null;
-    }
-
-    if (parsed?.zitat) {
-      textEl.classList.remove('loading');
-      textEl.textContent = parsed.zitat;
-      authorEl.textContent = parsed.autor  ? '— ' + parsed.autor  : '';
-      sourceEl.textContent = parsed.quelle ? parsed.quelle         : '';
-    } else {
-      throw new Error('Kein Zitat im Response');
-    }
-  } catch (err) {
-    textEl.classList.remove('loading');
-    textEl.textContent = 'Das Geheimnis des Lebens ist nicht, zu finden, was man sucht — sondern zu verstehen, was man findet.';
-    authorEl.textContent = '';
-    sourceEl.textContent = '(Offline-Fallback)';
-    console.warn('Zitat-API Fehler:', err);
-  }
-  btn.disabled = false;
+function showJoke() {
+  let idx;
+  do { idx = Math.floor(Math.random() * jokes.length); }
+  while (idx === lastJokeIdx && jokes.length > 1);
+  lastJokeIdx = idx;
+  const j = jokes[idx];
+  document.getElementById('jokeSetup').textContent = j.s;
+  document.getElementById('jokePunchline').textContent = '→ ' + j.p;
 }
 
-loadQuote();
+showJoke();
 
 </script>
 
