@@ -110,6 +110,61 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
   border-top: 1px solid #2a2a38; padding-top: 1rem;
 }
 .version-bar .v-num { color: #39c96e; font-weight: 700; font-size: 0.8rem; }
+
+/* ── Zitat-Banner ── */
+.quote-banner {
+  max-width: 900px; margin: 0 auto 2rem;
+  background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(126,184,164,0.06) 100%);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px; padding: 1.2rem 1.6rem;
+  position: relative; overflow: hidden;
+  animation: fadeUp 0.7s ease both;
+}
+.quote-banner::before {
+  content: '\201C';
+  position: absolute; top: -0.2rem; left: 0.8rem;
+  font-size: 4rem; color: rgba(200,169,110,0.12);
+  font-family: 'DM Serif Display', serif; line-height: 1;
+  pointer-events: none;
+}
+.quote-label {
+  font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
+}
+.quote-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  color: var(--text); line-height: 1.65;
+  font-style: italic; padding-left: 0.5rem;
+  min-height: 2.5rem;
+}
+.quote-text.loading {
+  color: var(--muted);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.quote-author {
+  font-size: 0.78rem; color: var(--accent2);
+  margin-top: 0.6rem; padding-left: 0.5rem;
+  letter-spacing: 0.5px;
+}
+.quote-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-top: 0.5rem;
+}
+.quote-source {
+  font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
+}
+.quote-refresh {
+  background: none; border: 1px solid rgba(200,169,110,0.2);
+  cursor: pointer; color: var(--muted); font-size: 0.72rem;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
+.quote-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
+@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
 ```
 
   </style>
@@ -127,6 +182,19 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
   <span class="search-count" id="searchCount"></span>
 </div>
 
+<div class="quote-banner" id="quoteBanner">
+  <div class="quote-label">// Gedanke des Tages</div>
+  <div class="quote-text loading" id="quoteText">Lade philosophisches Zitat…</div>
+  <div class="quote-author" id="quoteAuthor"></div>
+  <div class="quote-footer">
+    <span class="quote-source" id="quoteSource"></span>
+    <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">↻ neues Zitat</button>
+  </div>
+</div>
+  <div class="joke-content">
+    <div class="joke-label">// Witz des Tages</div>
+    <div class="joke-text" id="jokeSetup"></div>
+    <div class="joke-punchline" id="jokePunchline"></div>
 <div class="no-results" id="noResults">Kein Link gefunden — vielleicht noch hinzufügen? 🤔</div>
 
 <main id="main">
@@ -542,7 +610,7 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 </div>
 
 <div class="version-bar">
-  <span class="v-num">Version 3.9</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:18:09</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
+  <span class="v-num">Version 4.1</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:27:31</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
 </div>
 
 <script>
@@ -594,6 +662,64 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
       noResults.style.display = 'none';
     }
   });
+// ════════════════════════════════════════════════════════════
+// PHILOSOPHISCHES ZITAT (via Anthropic API)
+// ════════════════════════════════════════════════════════════
+async function loadQuote() {
+  const textEl   = document.getElementById('quoteText');
+  const authorEl = document.getElementById('quoteAuthor');
+  const sourceEl = document.getElementById('quoteSource');
+  const btn      = document.getElementById('quoteBtn');
+
+  textEl.textContent = 'Einen Moment…';
+  textEl.classList.add('loading');
+  authorEl.textContent = '';
+  sourceEl.textContent = '';
+  btn.disabled = true;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 200,
+        system: 'Du bist ein Assistent, der kurze philosophische Zitate auf Deutsch liefert. Antworte AUSSCHLIESSLICH mit einem JSON-Objekt ohne Markdown, ohne Backticks, ohne Erklärungen. Format: {"zitat":"...","autor":"...","quelle":"..."}. Das Zitat soll echt, prägnant (max. 2 Sätze), nachdenklich und inspirierend sein. Vary the philosopher: sometimes ancient (Seneca, Aristoteles, Epiktet), sometimes modern (Nietzsche, Wittgenstein, Arendt), sometimes Eastern (Konfuzius, Lao-Tse). Never repeat the same quote.',
+        messages: [{ role: 'user', content: 'Liefere ein zufälliges philosophisches Zitat.' }]
+      })
+    });
+
+    const data = await resp.json();
+    const raw  = data?.content?.[0]?.text?.trim() || '';
+
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      const m = raw.match(/"zitat"\s*:\s*"([^"]+)"/);
+      parsed = m ? { zitat: m[1], autor: '', quelle: '' } : null;
+    }
+
+    if (parsed?.zitat) {
+      textEl.classList.remove('loading');
+      textEl.textContent = parsed.zitat;
+      authorEl.textContent = parsed.autor  ? '— ' + parsed.autor  : '';
+      sourceEl.textContent = parsed.quelle ? parsed.quelle         : '';
+    } else {
+      throw new Error('Kein Zitat im Response');
+    }
+  } catch (err) {
+    textEl.classList.remove('loading');
+    textEl.textContent = 'Das Geheimnis des Lebens ist nicht, zu finden, was man sucht — sondern zu verstehen, was man findet.';
+    authorEl.textContent = '';
+    sourceEl.textContent = '(Offline-Fallback)';
+    console.warn('Zitat-API Fehler:', err);
+  }
+  btn.disabled = false;
+}
+
+loadQuote();
+
 </script>
 
 </body>
