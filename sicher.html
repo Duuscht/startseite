@@ -7,30 +7,31 @@
   <title>Meine sichere Startseite</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0f0f13; --surface: #18181f; --border: #2a2a38;
-      --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
-      --muted: #7a7880;
-    }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg); color: var(--text);
-      min-height: 100vh; padding: 2rem 1.5rem 4rem;
-      background-image:
-        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(200,169,110,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(126,184,164,0.06) 0%, transparent 60%);
-    }
-    header {
-      max-width: 900px; margin: 0 auto 1.5rem;
-      display: flex; align-items: baseline; justify-content: space-between;
-      border-bottom: 1px solid var(--border); padding-bottom: 1.2rem;
-    }
-    header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; }
-    header p { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
-    .shield { display: inline-block; margin-right: 0.4rem; font-size: 1.1rem; }
 
 ```
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f0f13; --surface: #18181f; --border: #2a2a38;
+  --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
+  --muted: #7a7880;
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; padding: 2rem 1.5rem 4rem;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(200,169,110,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 80%, rgba(126,184,164,0.06) 0%, transparent 60%);
+}
+header {
+  max-width: 900px; margin: 0 auto 1.5rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 1px solid var(--border); padding-bottom: 1.2rem;
+}
+header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; }
+header p { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+.shield { display: inline-block; margin-right: 0.4rem; font-size: 1.1rem; }
+
 /* Suchfeld */
 .search-wrap { max-width: 900px; margin: 0 auto 2rem; position: relative; }
 .search-wrap input {
@@ -166,23 +167,23 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 .quote-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
 @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
 
-.nav-btn-wrap { max-width: 900px; margin: 2rem auto 0; text-align: center; }
-.nav-btn {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.35);
-  color: var(--accent); font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem; font-weight: 500; padding: 0.7rem 1.6rem;
-  border-radius: 8px; text-decoration: none; transition: background 0.2s, border-color 0.2s;
-}
-.nav-btn:hover { background: rgba(200,169,110,0.18); border-color: var(--accent); }  </style>
+
+.nav-btn-wrap { max-width:900px; margin:2rem auto 0; text-align:center; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.nav-btn { display:inline-flex; align-items:center; gap:0.6rem; background:rgba(200,169,110,0.1); border:1px solid rgba(200,169,110,0.35); color:var(--accent); font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500; padding:0.7rem 1.6rem; border-radius:8px; text-decoration:none; transition:background 0.2s,border-color 0.2s; }
+.nav-btn:hover { background:rgba(200,169,110,0.18); border-color:var(--accent); }
+.nav-btn.secondary { border-color:rgba(126,184,164,0.35); color:var(--accent2); background:rgba(126,184,164,0.07); }
+.nav-btn.secondary:hover { background:rgba(126,184,164,0.15); border-color:var(--accent2); }
 ```
 
+  </style>
 </head>
 <body>
+
 <header>
   <h1><span class="shield">🛡</span> Meine sichere Startseite</h1>
   <p>Nur verifizierte Links — kein Phishing-Risiko</p>
 </header>
+
 <div class="info-box">
   <strong>🛡 Sicherheits-Prinzip:</strong> Öffne Bank, E-Mail und Online-Shops
   <em>immer nur über diese Seite</em> — dann kann dich keine Phishing-Mail täuschen.
@@ -191,10 +192,11 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 
 <div class="search-wrap">
   <span class="search-icon">🔍</span>
-  <input type="text" id="search" placeholder="Link suchen… z.B. „Bank" oder „Notruf"" autocomplete="off">
+  <input type="text" id="search" placeholder="Link suchen…" autocomplete="off">
   <span class="search-count" id="searchCount"></span>
 </div>
 <div class="no-results" id="noResults">Kein Link gefunden 🤔</div>
+
 <main id="main">
   <!-- BANK & FINANZEN -->
   <div class="card c-gold">
@@ -306,51 +308,67 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 
   </div>
 </main>
-<div class="nav-btn-wrap" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-  <a href="index.html" class="nav-btn" style="border-color:rgba(126,184,164,0.35);color:var(--accent2)">⌂ Zur Übersicht</a>
-  <a href="links.html" class="nav-btn">🔗 Weitere nützliche Links →</a>
+
+<div class="nav-btn-wrap">
+  <a href="index.html" class="nav-btn secondary">⌂ Zur Übersicht</a>
+  <a href="links.html" class="nav-btn">🔗 Nützliche Links →</a>
 </div>
+
 <div class="version-bar">
-  <span class="v-num">Version 1.0</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-06@13:23:14</span>
+  <span class="v-num">Version 1.0</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-06@14:13:04</span>
 </div>
+
 <script>
   const searchInput = document.getElementById('search');
   const searchCount = document.getElementById('searchCount');
   const noResults   = document.getElementById('noResults');
 
-searchInput.addEventListener(‘input’, () => {
-const q = searchInput.value.trim().toLowerCase();
-let totalVisible = 0;
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let totalVisible = 0;
 
-```
-document.querySelectorAll('.card').forEach(card => {
-  let cardHasMatch = false;
-  card.querySelectorAll('li').forEach(li => {
-    const a = li.querySelector('a');
-    if (!a) return;
-    const text = a.textContent.trim();
+    document.querySelectorAll('.card').forEach(card => {
+      let cardHasMatch = false;
+      card.querySelectorAll('li').forEach(li => {
+        const a = li.querySelector('a');
+        if (!a) return;
+        const text = a.textContent.trim();
+        if (!q) {
+          li.classList.remove('hidden');
+          const img = a.querySelector('img');
+          a.innerHTML = '';
+          if (img) a.appendChild(img);
+          a.appendChild(document.createTextNode(text));
+          cardHasMatch = true;
+        } else if (text.toLowerCase().includes(q)) {
+          li.classList.remove('hidden');
+          cardHasMatch = true;
+          totalVisible++;
+          const img = a.querySelector('img');
+          const highlighted = text.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark>$1</mark>');
+          a.innerHTML = '';
+          if (img) a.appendChild(img);
+          a.insertAdjacentHTML('beforeend', highlighted);
+        } else {
+          li.classList.add('hidden');
+        }
+      });
+      card.classList.toggle('hidden', q !== '' && !cardHasMatch);
+    });
+
     if (!q) {
-      li.classList.remove('hidden');
-      const img = a.querySelector('img');
-      a.innerHTML = '';
-      if (img) a.appendChild(img);
-      a.appendChild(document.createTextNode(text));
-      cardHasMatch = true;
-    } else if (text.toLowerCase().includes(q)) {
-      li.classList.remove('hidden');
-      cardHasMatch = true;
-      totalVisible++;
-      const img = a.querySelector('img');
-      const highlighted = text.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark>$1</mark>');
-      a.innerHTML = '';
-      if (img) a.appendChild(img);
-      a.insertAdjacentHTML('beforeend', highlighted);
+      searchCount.textContent = '';
+      noResults.style.display = 'none';
+    } else if (totalVisible === 0) {
+      searchCount.textContent = 'Kein Treffer';
+      noResults.style.display = 'block';
     } else {
-      li.classList.add('hidden');
+      searchCount.textContent = totalVisible + (totalVisible === 1 ? ' Treffer' : ' Treffer');
+      noResults.style.display = 'none';
     }
   });
-```
 
 </script>
+
 </body>
 </html>
