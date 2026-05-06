@@ -191,10 +191,6 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
     <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">↻ neues Zitat</button>
   </div>
 </div>
-  <div class="joke-content">
-    <div class="joke-label">// Witz des Tages</div>
-    <div class="joke-text" id="jokeSetup"></div>
-    <div class="joke-punchline" id="jokePunchline"></div>
 <div class="no-results" id="noResults">Kein Link gefunden — vielleicht noch hinzufügen? 🤔</div>
 
 <main id="main">
@@ -332,7 +328,7 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
       <li><a href="https://maps.google.com/?q=Orthopäde+Torstraße+28+Merzig" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=maps.google.com" alt="">Orthopäde Merzig (Torstr. 28)</a></li>
       <span class="list-divider">🏥 Kliniken</span>
       <li><a href="https://www.caritasklinikum.de/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=caritasklinikum.de" alt="">CaritasKlinikum Saarbrücken (St. Theresia)</a></li>
-      <li><a href="https://www.drk-kliniken-saar.de/sr/saarlouis/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=drk-kliniken-saar.de" alt="">DRK Krankenhaus Saarlouis</a></li>
+      <li><a href="https://www.drk-krankenhausgesellschaft.saarland/Krankenhaus-Saarlouis-vom-DRK" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=drk-krankenhausgesellschaft.saarland" alt="">DRK Krankenhaus Saarlouis</a></li>
       <li><a href="https://www.klinikum-saarbruecken.de/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=klinikum-saarbruecken.de" alt="">Klinikum Saarbrücken (Winterberg)</a></li>
       <li><a href="https://www.marienhaus-neunkirchen.de/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=marienhaus-neunkirchen.de" alt="">Marienhaus Klinikum Neunkirchen</a></li>
       <li><a href="https://www.marienhaus-klinikum-saar.de/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=marienhaus-klinikum-saar.de" alt="">Marienhaus Klinikum Saarlouis</a></li>
@@ -524,7 +520,7 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 ```
   <span class="list-divider">📱 Telecom</span>
   <li><a href="https://www.internet.lu/de/index.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=internet.lu" alt="">Luxembourg Online / LOL (Telecom)</a></li>
-  <li><a href="https://www.orange.lu/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=orange.lu" alt="">Orange Luxembourg</a></li>
+  <li><a href="https://www.orange.lu/fr" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=orange.lu" alt="">Orange Luxembourg</a></li>
   <li><a href="https://www.post.lu/de/particuliers/mobile" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=post.lu" alt="">POST / POP Mobile (ehem. LuxGSM)</a></li>
   <li><a href="https://www.tango.lu/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=tango.lu" alt="">Tango Luxembourg</a></li>
 ```
@@ -610,7 +606,7 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
 </div>
 
 <div class="version-bar">
-  <span class="v-num">Version 4.1</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-05@20:27:31</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
+  <span class="v-num">Version 4.2</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-06@06:53:45</span>&nbsp;·&nbsp; TVKlack · LOL.lu · POST korrigiert · Nützliches sortiert
 </div>
 
 <script>
@@ -663,59 +659,63 @@ ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 70
     }
   });
 // ════════════════════════════════════════════════════════════
-// PHILOSOPHISCHES ZITAT (via Anthropic API)
+// PHILOSOPHISCHES ZITAT DES TAGES (kuratierte echte Zitate)
 // ════════════════════════════════════════════════════════════
-async function loadQuote() {
+const quotes = [
+  { z: "Der Mensch ist das Maß aller Dinge.",                                    a: "Protagoras",       q: "ca. 450 v. Chr." },
+  { z: "Ich weiß, dass ich nichts weiß.",                                        a: "Sokrates",         q: "nach Platon, Apologie" },
+  { z: "Das untersuchte Leben ist nicht lebenswert.",                             a: "Sokrates",         q: "Platon, Apologie 38a" },
+  { z: "Wir sind, was wir wiederholt tun. Vortrefflichkeit ist also keine Handlung, sondern eine Gewohnheit.", a: "Aristoteles", q: "Nikomachische Ethik" },
+  { z: "Glück ist das Gedeihen eines tätigen Lebens gemäß der Tugend.",          a: "Aristoteles",      q: "Nikomachische Ethik I" },
+  { z: "Carpe diem — Nutze den Tag.",                                             a: "Horaz",            q: "Oden I, 11 (23 v. Chr.)" },
+  { z: "Non scholae sed vitae discimus — Nicht für die Schule, sondern für das Leben lernen wir.", a: "Seneca", q: "Epistulae morales 106" },
+  { z: "Es ist nicht zu wenig Zeit, die wir haben, sondern zu viel Zeit, die wir nicht nutzen.", a: "Seneca", q: "De brevitate vitae" },
+  { z: "Behandle andere so, wie du von ihnen behandelt werden möchtest.",         a: "Konfuzius",        q: "Analekten 15:24, ca. 500 v. Chr." },
+  { z: "Der Weg entsteht beim Gehen.",                                            a: "Laozi",            q: "Tao Te Ching, ca. 6. Jh. v. Chr." },
+  { z: "Das Wasser ist das Weichste und Nachgiebigste der Dinge — und doch überwindet es das Harte.", a: "Laozi", q: "Tao Te Ching, Kap. 78" },
+  { z: "Zwei Dinge erfüllen das Gemüt mit immer neuer Bewunderung: der bestirnte Himmel über mir und das moralische Gesetz in mir.", a: "Immanuel Kant", q: "Kritik der praktischen Vernunft, 1788" },
+  { z: "Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.", a: "Immanuel Kant", q: "Grundlegung zur Metaphysik der Sitten, 1785" },
+  { z: "Gott ist tot. Gott bleibt tot. Und wir haben ihn getötet.",              a: "Friedrich Nietzsche", q: "Die fröhliche Wissenschaft, §125 (1882)" },
+  { z: "Was mich nicht umbringt, macht mich stärker.",                           a: "Friedrich Nietzsche", q: "Götzen-Dämmerung, 1888" },
+  { z: "Die Freiheit des Menschen liegt nicht darin, tun zu können, was er will, sondern darin, nicht tun zu müssen, was er nicht will.", a: "Jean-Jacques Rousseau", q: "Bekenntnisse, 1782" },
+  { z: "Das Dasein geht dem Wesen voraus.",                                       a: "Jean-Paul Sartre",  q: "L'existentialisme est un humanisme, 1945" },
+  { z: "Die Hölle, das sind die anderen.",                                        a: "Jean-Paul Sartre",  q: "Huis clos (Geschlossene Gesellschaft), 1944" },
+  { z: "Man wird nicht als Frau geboren, man wird es.",                           a: "Simone de Beauvoir", q: "Das andere Geschlecht, 1949" },
+  { z: "Der Mensch ist zur Freiheit verurteilt.",                                 a: "Jean-Paul Sartre",  q: "Das Sein und das Nichts, 1943" },
+  { z: "Alles Verstehen beginnt damit, dass ich etwas nicht verstehe.",           a: "Hans-Georg Gadamer", q: "Wahrheit und Methode, 1960" },
+  { z: "Die Sprache ist das Haus des Seins.",                                     a: "Martin Heidegger", q: "Brief über den Humanismus, 1946" },
+  { z: "Wer ein Warum zum Leben hat, erträgt fast jedes Wie.",                   a: "Friedrich Nietzsche", q: "Götzen-Dämmerung, 1888" },
+  { z: "Der Mensch ist ein Seil, geknüpft zwischen Tier und Übermensch — ein Seil über einem Abgrunde.", a: "Friedrich Nietzsche", q: "Also sprach Zarathustra, 1883" },
+  { z: "Wenn du einen Menschen glücklich machen willst, füge nichts seinem Reichtum hinzu, sondern nimm ihm einige seiner Wünsche.",  a: "Epikur", q: "nach Seneca, Epistulae morales" },
+  { z: "Es gibt nur ein wirklich ernstes philosophisches Problem: den Selbstmord.",  a: "Albert Camus",  q: "Der Mythos des Sisyphos, 1942" },
+  { z: "Man muss sich Sisyphus als glücklichen Menschen vorstellen.",             a: "Albert Camus",     q: "Der Mythos des Sisyphos, 1942" },
+  { z: "Denken ist schwer, darum urteilen die meisten.",                          a: "Carl Gustav Jung", q: "Über die Psychologie des Unbewussten" },
+  { z: "Die Dummheit des Menschen ist darin erkennbar, dass er stets dasselbe tut und ein anderes Ergebnis erwartet.", a: "Albert Einstein", q: "zugeschrieben" },
+  { z: "Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.",          a: "Albert Einstein",  q: "What Life Means to Einstein, 1929" },
+  { z: "Eine Gesellschaft zeigt ihren Charakter am besten darin, wie sie mit ihren Schwächsten umgeht.", a: "Hubert Humphrey", q: "Rede 1977, US-Senat" },
+  { z: "In der Beschränkung zeigt sich erst der Meister.",                        a: "Johann Wolfgang von Goethe", q: "Natur und Kunst, 1800" },
+  { z: "Wer kämpft, kann verlieren. Wer nicht kämpft, hat schon verloren.",      a: "Bertolt Brecht",   q: "Die Mutter, 1930/32" },
+  { z: "Erst wenn der letzte Baum gerodet, der letzte Fluss vergiftet, der letzte Fisch gefangen ist, werdet ihr merken, dass man Geld nicht essen kann.", a: "Cree-Sprichwort", q: "nordamerikanische Überlieferung" },
+  { z: "Das Ganze ist mehr als die Summe seiner Teile.",                          a: "Aristoteles",      q: "Metaphysik, ca. 350 v. Chr." },
+];
+
+let lastIdx = -1;
+
+function loadQuote() {
+  let idx;
+  do { idx = Math.floor(Math.random() * quotes.length); }
+  while (idx === lastIdx && quotes.length > 1);
+  lastIdx = idx;
+
+  const q = quotes[idx];
   const textEl   = document.getElementById('quoteText');
   const authorEl = document.getElementById('quoteAuthor');
   const sourceEl = document.getElementById('quoteSource');
-  const btn      = document.getElementById('quoteBtn');
 
-  textEl.textContent = 'Einen Moment…';
-  textEl.classList.add('loading');
-  authorEl.textContent = '';
-  sourceEl.textContent = '';
-  btn.disabled = true;
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 200,
-        system: 'Du bist ein Assistent, der kurze philosophische Zitate auf Deutsch liefert. Antworte AUSSCHLIESSLICH mit einem JSON-Objekt ohne Markdown, ohne Backticks, ohne Erklärungen. Format: {"zitat":"...","autor":"...","quelle":"..."}. Das Zitat soll echt, prägnant (max. 2 Sätze), nachdenklich und inspirierend sein. Vary the philosopher: sometimes ancient (Seneca, Aristoteles, Epiktet), sometimes modern (Nietzsche, Wittgenstein, Arendt), sometimes Eastern (Konfuzius, Lao-Tse). Never repeat the same quote.',
-        messages: [{ role: 'user', content: 'Liefere ein zufälliges philosophisches Zitat.' }]
-      })
-    });
-
-    const data = await resp.json();
-    const raw  = data?.content?.[0]?.text?.trim() || '';
-
-    let parsed;
-    try {
-      parsed = JSON.parse(raw);
-    } catch {
-      const m = raw.match(/"zitat"\s*:\s*"([^"]+)"/);
-      parsed = m ? { zitat: m[1], autor: '', quelle: '' } : null;
-    }
-
-    if (parsed?.zitat) {
-      textEl.classList.remove('loading');
-      textEl.textContent = parsed.zitat;
-      authorEl.textContent = parsed.autor  ? '— ' + parsed.autor  : '';
-      sourceEl.textContent = parsed.quelle ? parsed.quelle         : '';
-    } else {
-      throw new Error('Kein Zitat im Response');
-    }
-  } catch (err) {
-    textEl.classList.remove('loading');
-    textEl.textContent = 'Das Geheimnis des Lebens ist nicht, zu finden, was man sucht — sondern zu verstehen, was man findet.';
-    authorEl.textContent = '';
-    sourceEl.textContent = '(Offline-Fallback)';
-    console.warn('Zitat-API Fehler:', err);
-  }
-  btn.disabled = false;
+  textEl.classList.remove('loading');
+  textEl.textContent   = '\u201E' + q.z + '\u201C';
+  authorEl.textContent = '\u2014 ' + q.a;
+  sourceEl.textContent = q.q;
 }
 
 loadQuote();
