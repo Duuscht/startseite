@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meine sichere Startseite</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f13; --surface: #18181f; --border: #2a2a38;
+      --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
+      --muted: #7a7880;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; padding: 2rem 1.5rem 4rem;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(200,169,110,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(126,184,164,0.06) 0%, transparent 60%);
+    }
+    header {
+      max-width: 900px; margin: 0 auto 1.5rem;
+      display: flex; align-items: baseline; justify-content: space-between;
+      border-bottom: 1px solid var(--border); padding-bottom: 1.2rem;
+    }
+    header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; }
+    header p { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+    .shield { display: inline-block; margin-right: 0.4rem; font-size: 1.1rem; }
+
+```
+/* Suchfeld */
+.search-wrap { max-width: 900px; margin: 0 auto 2rem; position: relative; }
+.search-wrap input {
+  width: 100%; padding: 0.75rem 1rem 0.75rem 2.8rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+}
+.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap input::placeholder { color: var(--muted); }
+.search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+.search-count { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: var(--muted); }
+.no-results { max-width: 900px; margin: 0 auto; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 2rem; display: none; }
+
+main { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem;
+  transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.4s ease both;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card.hidden { display: none; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+.card-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
+.card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text); }
+.c-gold   .card-icon { background: rgba(200,169,110,0.15); }
+.c-teal   .card-icon { background: rgba(126,184,164,0.15); }
+.c-red    .card-icon { background: rgba(224,112,112,0.15); }
+.c-blue   .card-icon { background: rgba(110,160,210,0.15); }
+.c-purple .card-icon { background: rgba(170,130,210,0.15); }
+.c-green  .card-icon { background: rgba(130,200,140,0.15); }
+ul { list-style: none; }
+ul li { margin-bottom: 0.3rem; }
+ul li.hidden { display: none; }
+ul li a {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.45rem 0.6rem; border-radius: 7px; text-decoration: none;
+  font-size: 0.875rem; color: var(--text); font-weight: 400;
+  transition: background 0.15s, color 0.15s; word-break: break-all;
+}
+ul li a:hover { background: rgba(255,255,255,0.06); color: var(--accent); }
+ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 700; border-radius: 2px; padding: 0 1px; }
+.favicon { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: contain; }
+
+/* Trennlinie innerhalb einer Karte – dunkelblaue Pille */
+.list-divider {
+  display: block;
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;
+  color: #b8d4f0;
+  background: rgba(60,100,160,0.35);
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin: 0.55rem 0 0.25rem;
+}
+
+/* Info-Boxen */
+.info-box {
+  max-width: 900px; margin: 2.5rem auto 0;
+  background: rgba(126,184,164,0.07); border: 1px solid rgba(126,184,164,0.2);
+  border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+}
+.info-box strong { color: var(--accent2); }
+
+/* Versionshinweis (blau) */
+.edit-note {
+  max-width: 900px; margin: 1rem auto 0;
+  background: rgba(110,160,210,0.07); border: 1px solid rgba(110,160,210,0.2);
+  border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: #7a9ab8; line-height: 1.6;
+}
+.edit-note strong { color: #9dbfda; }
+
+/* Versionszeile – Versionsnummer grün und fett */
+.version-bar {
+  max-width: 900px; margin: 1.5rem auto 0;
+  text-align: center; font-size: 0.75rem; color: #4a4858;
+  border-top: 1px solid #2a2a38; padding-top: 1rem;
+}
+.version-bar .v-num { color: #39c96e; font-weight: 700; font-size: 0.8rem; }
+
+/* ── Zitat-Banner ── */
+.quote-banner {
+  max-width: 900px; margin: 0 auto 2rem;
+  background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(126,184,164,0.06) 100%);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px; padding: 1.2rem 1.6rem;
+  position: relative; overflow: hidden;
+  animation: fadeUp 0.7s ease both;
+}
+.quote-banner::before {
+  content: '\201C';
+  position: absolute; top: -0.2rem; left: 0.8rem;
+  font-size: 4rem; color: rgba(200,169,110,0.12);
+  font-family: 'DM Serif Display', serif; line-height: 1;
+  pointer-events: none;
+}
+.quote-label {
+  font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
+}
+.quote-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  color: var(--text); line-height: 1.65;
+  font-style: italic; padding-left: 0.5rem;
+  min-height: 2.5rem;
+}
+.quote-text.loading {
+  color: var(--muted);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.quote-author {
+  font-size: 0.78rem; color: var(--accent2);
+  margin-top: 0.6rem; padding-left: 0.5rem;
+  letter-spacing: 0.5px;
+}
+.quote-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-top: 0.5rem;
+}
+.quote-source {
+  font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
+}
+.quote-refresh {
+  background: none; border: 1px solid rgba(200,169,110,0.2);
+  cursor: pointer; color: var(--muted); font-size: 0.72rem;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
+.quote-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
+@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
+
+.nav-btn-wrap { max-width: 900px; margin: 2rem auto 0; text-align: center; }
+.nav-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.35);
+  color: var(--accent); font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 500; padding: 0.7rem 1.6rem;
+  border-radius: 8px; text-decoration: none; transition: background 0.2s, border-color 0.2s;
+}
+.nav-btn:hover { background: rgba(200,169,110,0.18); border-color: var(--accent); }  </style>
+```
+
+</head>
+<body>
+<header>
+  <h1><span class="shield">🛡</span> Meine sichere Startseite</h1>
+  <p>Nur verifizierte Links — kein Phishing-Risiko</p>
+</header>
+<div class="info-box">
+  <strong>🛡 Sicherheits-Prinzip:</strong> Öffne Bank, E-Mail und Online-Shops
+  <em>immer nur über diese Seite</em> — dann kann dich keine Phishing-Mail täuschen.
+  Klicke <strong>niemals</strong> auf Links in E-Mails für sensible Seiten.
+</div>
+
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="search" placeholder="Link suchen…" autocomplete="off">
+  <span class="search-count" id="searchCount"></span>
+</div>
+<div class="no-results" id="noResults">Kein Link gefunden 🤔</div>
+<main id="main">
+  <!-- BANK & FINANZEN -->
+  <div class="card c-gold">
+    <div class="card-header"><div class="card-icon">🏦</div><span class="card-title">Bank & Finanzen</span></div>
+    <ul>
+      <li><a href="https://www.bhw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bhw.de" alt="">BHW Bausparkasse</a></li>
+      <li><a href="https://www.bank1saar.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bank1saar.de" alt="">Bank 1 Saar (Volksbank Saarland)</a></li>
+      <li><a href="https://www.dkb.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dkb.de" alt="">DKB Online-Banking</a></li>
+      <li><a href="https://www.klarna.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=klarna.com" alt="">Klarna</a></li>
+      <li><a href="https://www.lbs.de/standorte/merzig-saar_mzg" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lbs.de" alt="">LBS Merzig (Bausparkasse)</a></li>
+      <li><a href="https://www.vb-rb.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=vb-rb.de" alt="">VB Volksbank Raiffeisenbank</a></li>
+      <li><a href="https://www.paypal.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=paypal.com" alt="">PayPal</a></li>
+      <li><a href="https://www.saarland-versicherungen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland-versicherungen.de" alt="">SAARLAND Versicherungen</a></li>
+      <li><a href="https://www.sparda-sw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=sparda-sw.de" alt="">Sparda-Bank Südwest</a></li>
+      <li><a href="https://www.spkmw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=spkmw.de" alt="">Sparkasse Merzig-Wadern</a></li>
+    </ul>
+  </div>
+
+  <!-- E-MAIL -->
+
+  <div class="card c-teal">
+    <div class="card-header"><div class="card-icon">✉️</div><span class="card-title">E-Mail</span></div>
+    <ul>
+      <li><a href="https://www.gmx.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=gmx.de" alt="">GMX</a></li>
+      <li><a href="https://mail.google.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mail.google.com" alt="">Gmail</a></li>
+      <li><a href="https://outlook.live.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=outlook.live.com" alt="">Outlook / Hotmail</a></li>
+      <li><a href="https://posteo.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=posteo.de" alt="">Posteo</a></li>
+      <li><a href="https://mail.proton.me" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=proton.me" alt="">Proton Mail</a></li>
+      <li><a href="https://email.t-online.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=t-online.de" alt="">T-Online Mail</a></li>
+      <li><a href="https://app.tuta.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=tuta.com" alt="">Tuta Mail</a></li>
+      <li><a href="https://web.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=web.de" alt="">Web.de</a></li>
+      <li><a href="https://mail.yahoo.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mail.yahoo.com" alt="">Yahoo Mail</a></li>
+    </ul>
+  </div>
+
+  <!-- EINKAUFEN (SICHER) -->
+
+  <div class="card c-red">
+    <div class="card-header"><div class="card-icon">🛒</div><span class="card-title">Einkaufen</span></div>
+    <ul>
+      <li><a href="https://www.amazon.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=amazon.de" alt="">Amazon</a></li>
+      <li><a href="https://www.ebay.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ebay.de" alt="">eBay</a></li>
+      <li><a href="https://www.kleinanzeigen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kleinanzeigen.de" alt="">eBay Kleinanzeigen</a></li>
+      <li><a href="https://www.klarna.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=klarna.com" alt="">Klarna</a></li>
+      <li><a href="https://www.paypal.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=paypal.com" alt="">PayPal</a></li>
+      <li><a href="https://www.shop-apotheke.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=shop-apotheke.com" alt="">Shop Apotheke</a></li>
+    </ul>
+  </div>
+
+  <!-- CLOUD -->
+
+  <div class="card c-blue">
+    <div class="card-header"><div class="card-icon">☁️</div><span class="card-title">Cloud</span></div>
+    <ul>
+      <li><a href="https://www.dropbox.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dropbox.com" alt="">Dropbox</a></li>
+      <li><a href="https://www.icloud.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=icloud.com" alt="">iCloud</a></li>
+      <li><a href="https://nextcloud.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=nextcloud.com" alt="">Nextcloud</a></li>
+      <li><a href="https://www.pcloud.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=pcloud.com" alt="">pCloud</a></li>
+    </ul>
+  </div>
+
+  <!-- LUXEMBURG BANKEN -->
+
+  <div class="card c-gold">
+    <div class="card-header"><div class="card-icon">🇱🇺</div><span class="card-title">Luxemburg – Banken</span></div>
+    <ul>
+      <li><a href="https://www.advanzia.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=advanzia.com" alt="">Advanzia Bank</a></li>
+      <li><a href="https://www.bcee.lu/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bcee.lu" alt="">BCEE / Spuerkeess</a></li>
+      <li><a href="https://www.bil.com/de/individuals.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bil.com" alt="">BIL Banque Internationale Luxembourg</a></li>
+      <li><a href="https://www.bgl.lu/de/individuals.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bgl.lu" alt="">BGL BNP Paribas</a></li>
+      <li><a href="https://www.ing.lu/content/siteing/de/Individuals.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ing.lu" alt="">ING Luxembourg</a></li>
+      <li><a href="https://www.post.lu/de/particuliers/les-packs-eboo" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=post.lu" alt="">POST Luxembourg Finance / eboo</a></li>
+      <li><a href="https://www.wero-wallet.eu/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wero-wallet.eu" alt="">Wero (Bezahlsystem)</a></li>
+    </ul>
+  </div>
+
+  <!-- SOZIALES & KOMMUNIKATION -->
+
+  <div class="card c-blue">
+    <div class="card-header"><div class="card-icon">💬</div><span class="card-title">Soziales & Kommunikation</span></div>
+    <ul>
+      <li><a href="https://app.element.io" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=element.io" alt="">Element</a></li>
+      <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=facebook.com" alt="">Facebook</a></li>
+      <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=instagram.com" alt="">Instagram</a></li>
+      <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=linkedin.com" alt="">LinkedIn</a></li>
+      <li><a href="https://signal.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=signal.org" alt="">Signal</a></li>
+      <li><a href="https://getsession.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=getsession.org" alt="">Session (dezentraler Messenger)</a></li>
+      <li><a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=web.whatsapp.com" alt="">WhatsApp Web</a></li>
+      <li><a href="https://www.xing.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=xing.com" alt="">Xing</a></li>
+      <li><a href="https://x.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=x.com" alt="">X / Twitter</a></li>
+      <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=youtube.com" alt="">YouTube</a></li>
+    </ul>
+  </div>
+
+  <!-- SICHERHEIT -->
+
+  <div class="card c-red">
+    <div class="card-header"><div class="card-icon">🚨</div><span class="card-title">Sicherheit</span></div>
+    <ul>
+      <li><a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bsi.bund.de" alt="">BSI – Bundesamt für IT-Sicherheit</a></li>
+      <li><a href="https://cybr360.saarland/erste-hilfe" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cybr360.saarland" alt="">Cybr360 – Erste Hilfe bei Cyberangriff</a></li>
+      <li><a href="https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Online-Wache (Anzeige erstatten)</a></li>
+      <li><a href="https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">ZAC – Cybercrime Saarland</a></li>
+      <li><a href="https://duuscht.github.io/wizard" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duuscht.github.io" alt="">Browser-Diagnose (Wizard)</a></li>
+      <li><a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=coveryourtracks.eff.org" alt="">Cover Your Tracks (EFF – Browser-Fingerprint)</a></li>
+      <li><a href="https://controld.com/tools/dns-leak-test" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=controld.com" alt="">ControlD DNS-Leak-Test</a></li>
+
+```
+  <li><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com" alt="">Have I Been Pwned? (Datenleck-Check)</a></li>
+  <li><a href="https://bankenverband.de/verbraucher/fuenf-tipps-fuer-sicheres-onlinebanking" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bankenverband.de" alt="">Online-Banking Sicherheit</a></li>
+</ul>
+```
+
+  </div>
+</main>
+<div class="nav-btn-wrap" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+  <a href="index.html" class="nav-btn" style="border-color:rgba(126,184,164,0.35);color:var(--accent2)">⌂ Zur Übersicht</a>
+  <a href="links.html" class="nav-btn">🔗 Weitere nützliche Links →</a>
+</div>
+<div class="version-bar">
+  <span class="v-num">Version 1.0</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-06@13:23:14</span>
+</div>
+<script>
+  const searchInput = document.getElementById('search');
+  const searchCount = document.getElementById('searchCount');
+  const noResults   = document.getElementById('noResults');
+
+searchInput.addEventListener(‘input’, () => {
+const q = searchInput.value.trim().toLowerCase();
+let totalVisible = 0;
+
+```
+document.querySelectorAll('.card').forEach(card => {
+  let cardHasMatch = false;
+  card.querySelectorAll('li').forEach(li => {
+    const a = li.querySelector('a');
+    if (!a) return;
+    const text = a.textContent.trim();
+    if (!q) {
+      li.classList.remove('hidden');
+      const img = a.querySelector('img');
+      a.innerHTML = '';
+      if (img) a.appendChild(img);
+      a.appendChild(document.createTextNode(text));
+      cardHasMatch = true;
+    } else if (text.toLowerCase().includes(q)) {
+      li.classList.remove('hidden');
+      cardHasMatch = true;
+      totalVisible++;
+      const img = a.querySelector('img');
+      const highlighted = text.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark>$1</mark>');
+      a.innerHTML = '';
+      if (img) a.appendChild(img);
+      a.insertAdjacentHTML('beforeend', highlighted);
+    } else {
+      li.classList.add('hidden');
+    }
+  });
+```
+
+</script>
+</body>
+</html>
