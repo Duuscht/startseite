@@ -91,6 +91,58 @@
       margin-top: 1.2rem; font-size: 0.68rem; color: #3a3848;
     }
     .v-num { color: #39c96e; font-weight: 700; }
+    /* ── Zitat-Banner ── */
+    .quote-banner {
+      max-width: 900px; margin: 0 auto 2rem;
+      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(126,184,164,0.06) 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px; padding: 1.2rem 1.6rem;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.7s ease both;
+    }
+    .quote-banner::before {
+      content: '\201C';
+      position: absolute; top: -0.2rem; left: 0.8rem;
+      font-size: 4rem; color: rgba(200,169,110,0.12);
+      font-family: 'DM Serif Display', serif; line-height: 1;
+      pointer-events: none;
+    }
+    .quote-label {
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
+    }
+    .quote-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      color: var(--text); line-height: 1.65;
+      font-style: italic; padding-left: 0.5rem;
+      min-height: 2.5rem;
+    }
+    .quote-text.loading {
+      color: var(--muted);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .quote-author {
+      font-size: 0.78rem; color: var(--accent2);
+      margin-top: 0.6rem; padding-left: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .quote-footer {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-top: 0.5rem;
+    }
+    .quote-source {
+      font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
+    }
+    .quote-refresh {
+      background: none; border: 1px solid rgba(200,169,110,0.2);
+      cursor: pointer; color: var(--muted); font-size: 0.72rem;
+      padding: 0.2rem 0.6rem; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
   </style>
 </head>
 <body>
@@ -101,6 +153,16 @@
     Verifizierte Links als Schutz vor Phishing — öffne sensible Seiten
     wie Banken und E-Mail immer nur von hier aus.
   </p>
+
+<div class="quote-banner" id="quoteBanner" style="max-width:560px;margin:0 auto 2rem">
+  <div class="quote-label">// Gedanke des Tages</div>
+  <div class="quote-text loading" id="quoteText">Lade Zitat…</div>
+  <div class="quote-author" id="quoteAuthor"></div>
+  <div class="quote-footer">
+    <span class="quote-source" id="quoteSource"></span>
+    <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">&#8635; neues Zitat</button>
+  </div>
+</div>
 
   <div class="btn-group">
 
@@ -135,8 +197,72 @@
   </div>
 
   <div class="version">
-    <span class="v-num">Version 1.0</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-06@14:13:04</span>
+    <span class="v-num">Version 1.1</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-06@14:27:31</span>
   </div>
 </div>
+<script>
+  // ════════════════════════════════════════════════════════════
+// PHILOSOPHISCHES ZITAT DES TAGES (kuratierte echte Zitate)
+// ════════════════════════════════════════════════════════════
+const quotes = [
+  { z: "Der Mensch ist das Maß aller Dinge.",                                    a: "Protagoras",       q: "ca. 450 v. Chr." },
+  { z: "Ich weiß, dass ich nichts weiß.",                                        a: "Sokrates",         q: "nach Platon, Apologie" },
+  { z: "Das untersuchte Leben ist nicht lebenswert.",                             a: "Sokrates",         q: "Platon, Apologie 38a" },
+  { z: "Wir sind, was wir wiederholt tun. Vortrefflichkeit ist also keine Handlung, sondern eine Gewohnheit.", a: "Aristoteles", q: "Nikomachische Ethik" },
+  { z: "Glück ist das Gedeihen eines tätigen Lebens gemäß der Tugend.",          a: "Aristoteles",      q: "Nikomachische Ethik I" },
+  { z: "Carpe diem — Nutze den Tag.",                                             a: "Horaz",            q: "Oden I, 11 (23 v. Chr.)" },
+  { z: "Non scholae sed vitae discimus — Nicht für die Schule, sondern für das Leben lernen wir.", a: "Seneca", q: "Epistulae morales 106" },
+  { z: "Es ist nicht zu wenig Zeit, die wir haben, sondern zu viel Zeit, die wir nicht nutzen.", a: "Seneca", q: "De brevitate vitae" },
+  { z: "Behandle andere so, wie du von ihnen behandelt werden möchtest.",         a: "Konfuzius",        q: "Analekten 15:24, ca. 500 v. Chr." },
+  { z: "Der Weg entsteht beim Gehen.",                                            a: "Laozi",            q: "Tao Te Ching, ca. 6. Jh. v. Chr." },
+  { z: "Das Wasser ist das Weichste und Nachgiebigste der Dinge — und doch überwindet es das Harte.", a: "Laozi", q: "Tao Te Ching, Kap. 78" },
+  { z: "Zwei Dinge erfüllen das Gemüt mit immer neuer Bewunderung: der bestirnte Himmel über mir und das moralische Gesetz in mir.", a: "Immanuel Kant", q: "Kritik der praktischen Vernunft, 1788" },
+  { z: "Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.", a: "Immanuel Kant", q: "Grundlegung zur Metaphysik der Sitten, 1785" },
+  { z: "Gott ist tot. Gott bleibt tot. Und wir haben ihn getötet.",              a: "Friedrich Nietzsche", q: "Die fröhliche Wissenschaft, §125 (1882)" },
+  { z: "Was mich nicht umbringt, macht mich stärker.",                           a: "Friedrich Nietzsche", q: "Götzen-Dämmerung, 1888" },
+  { z: "Die Freiheit des Menschen liegt nicht darin, tun zu können, was er will, sondern darin, nicht tun zu müssen, was er nicht will.", a: "Jean-Jacques Rousseau", q: "Bekenntnisse, 1782" },
+  { z: "Das Dasein geht dem Wesen voraus.",                                       a: "Jean-Paul Sartre",  q: "L'existentialisme est un humanisme, 1945" },
+  { z: "Die Hölle, das sind die anderen.",                                        a: "Jean-Paul Sartre",  q: "Huis clos (Geschlossene Gesellschaft), 1944" },
+  { z: "Man wird nicht als Frau geboren, man wird es.",                           a: "Simone de Beauvoir", q: "Das andere Geschlecht, 1949" },
+  { z: "Der Mensch ist zur Freiheit verurteilt.",                                 a: "Jean-Paul Sartre",  q: "Das Sein und das Nichts, 1943" },
+  { z: "Alles Verstehen beginnt damit, dass ich etwas nicht verstehe.",           a: "Hans-Georg Gadamer", q: "Wahrheit und Methode, 1960" },
+  { z: "Die Sprache ist das Haus des Seins.",                                     a: "Martin Heidegger", q: "Brief über den Humanismus, 1946" },
+  { z: "Wer ein Warum zum Leben hat, erträgt fast jedes Wie.",                   a: "Friedrich Nietzsche", q: "Götzen-Dämmerung, 1888" },
+  { z: "Der Mensch ist ein Seil, geknüpft zwischen Tier und Übermensch — ein Seil über einem Abgrunde.", a: "Friedrich Nietzsche", q: "Also sprach Zarathustra, 1883" },
+  { z: "Wenn du einen Menschen glücklich machen willst, füge nichts seinem Reichtum hinzu, sondern nimm ihm einige seiner Wünsche.",  a: "Epikur", q: "nach Seneca, Epistulae morales" },
+  { z: "Es gibt nur ein wirklich ernstes philosophisches Problem: den Selbstmord.",  a: "Albert Camus",  q: "Der Mythos des Sisyphos, 1942" },
+  { z: "Man muss sich Sisyphus als glücklichen Menschen vorstellen.",             a: "Albert Camus",     q: "Der Mythos des Sisyphos, 1942" },
+  { z: "Denken ist schwer, darum urteilen die meisten.",                          a: "Carl Gustav Jung", q: "Über die Psychologie des Unbewussten" },
+  { z: "Die Dummheit des Menschen ist darin erkennbar, dass er stets dasselbe tut und ein anderes Ergebnis erwartet.", a: "Albert Einstein", q: "zugeschrieben" },
+  { z: "Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.",          a: "Albert Einstein",  q: "What Life Means to Einstein, 1929" },
+  { z: "Eine Gesellschaft zeigt ihren Charakter am besten darin, wie sie mit ihren Schwächsten umgeht.", a: "Hubert Humphrey", q: "Rede 1977, US-Senat" },
+  { z: "In der Beschränkung zeigt sich erst der Meister.",                        a: "Johann Wolfgang von Goethe", q: "Natur und Kunst, 1800" },
+  { z: "Wer kämpft, kann verlieren. Wer nicht kämpft, hat schon verloren.",      a: "Bertolt Brecht",   q: "Die Mutter, 1930/32" },
+  { z: "Erst wenn der letzte Baum gerodet, der letzte Fluss vergiftet, der letzte Fisch gefangen ist, werdet ihr merken, dass man Geld nicht essen kann.", a: "Cree-Sprichwort", q: "nordamerikanische Überlieferung" },
+  { z: "Das Ganze ist mehr als die Summe seiner Teile.",                          a: "Aristoteles",      q: "Metaphysik, ca. 350 v. Chr." },
+];
+
+let lastIdx = -1;
+
+function loadQuote() {
+let idx;
+do { idx = Math.floor(Math.random() * quotes.length); }
+while (idx === lastIdx && quotes.length > 1);
+lastIdx = idx;
+
+const q = quotes[idx];
+const textEl   = document.getElementById(‘quoteText’);
+const authorEl = document.getElementById(‘quoteAuthor’);
+const sourceEl = document.getElementById(‘quoteSource’);
+
+textEl.classList.remove(‘loading’);
+textEl.textContent   = ‘\u201E’ + q.z + ‘\u201C’;
+authorEl.textContent = ’\u2014 ’ + q.a;
+sourceEl.textContent = q.q;
+}
+
+loadQuote();
+</script>
+
 </body>
 </html>
