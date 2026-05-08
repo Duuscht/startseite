@@ -7,36 +7,35 @@
   <title>Meine Startseite</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    :root { --bg:#0f0f13; --surface:#18181f; --border:#2a2a38; --accent:#c8a96e; --accent2:#7eb8a4; --text:#e8e4dc; --muted:#7a7880; }
-    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 1.5rem;
-      background-image: radial-gradient(ellipse 60% 40% at 80% 10%, rgba(200,169,110,0.07) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 10% 80%, rgba(126,184,164,0.06) 0%, transparent 60%); }
-    .wrap { max-width:560px; width:100%; animation:fadeUp 0.6s ease both; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-    .logo { font-size:3rem; margin-bottom:1rem; text-align:center; }
-    h1 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,5vw,2.4rem); color:var(--accent); letter-spacing:-0.02em; margin-bottom:0.6rem; text-align:center; }
-    .subtitle { font-size:0.9rem; color:var(--muted); line-height:1.6; margin-bottom:1.5rem; text-align:center; }
-    .btn-group { display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem; }
-    .btn { display:flex; align-items:center; gap:1rem; padding:1.2rem 1.6rem; border-radius:12px; text-decoration:none; transition:transform 0.2s,border-color 0.2s,background 0.2s; border:1px solid var(--border); background:var(--surface); }
-    .btn:hover { transform:translateY(-2px); }
-    .btn-icon { font-size:1.8rem; width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:10px; flex-shrink:0; }
-    .btn-sicher .btn-icon { background:rgba(200,169,110,0.12); }
-    .btn-links  .btn-icon { background:rgba(126,184,164,0.12); }
-    .btn-sicher:hover { border-color:var(--accent);  background:rgba(200,169,110,0.06); }
-    .btn-links:hover  { border-color:var(--accent2); background:rgba(126,184,164,0.06); }
-    .btn-text { flex:1; }
-    .btn-title { font-family:'DM Serif Display',serif; font-size:1.05rem; margin-bottom:0.2rem; }
-    .btn-sicher .btn-title { color:var(--accent); }
-    .btn-links  .btn-title { color:var(--accent2); }
-    .btn-desc { font-size:0.75rem; color:var(--muted); line-height:1.4; }
-    .btn-arrow { font-size:1.1rem; color:var(--muted); transition:color 0.2s,transform 0.2s; }
-    .btn:hover .btn-arrow { transform:translateX(4px); }
-    .btn-sicher:hover .btn-arrow { color:var(--accent); }
-    .btn-links:hover  .btn-arrow { color:var(--accent2); }
-    .info { font-size:0.75rem; color:var(--muted); border-top:1px solid var(--border); padding-top:1.2rem; line-height:1.6; }
-    .info strong { color:var(--accent2); }
-    .version { margin-top:1.2rem; font-size:0.68rem; color:#3a3848; text-align:center; }
-    .v-num { color:#39c96e; font-weight:700; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0f0f13;--surface:#18181f;--border:#2a2a38;--accent:#c8a96e;--accent2:#7eb8a4;--text:#e8e4dc;--muted:#7a7880}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background-image:radial-gradient(ellipse 60% 40% at 80% 10%,rgba(200,169,110,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 10% 80%,rgba(126,184,164,.06) 0%,transparent 60%)}
+    .wrap{max-width:560px;width:100%;animation:fadeUp .6s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    h1{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,5vw,2.4rem);color:var(--accent);letter-spacing:-.02em;margin-bottom:.6rem;text-align:center}
+    .logo{font-size:3rem;text-align:center;margin-bottom:1rem}
+    .subtitle{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;text-align:center}
+    .btn-group{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+    .btn{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.6rem;border-radius:12px;text-decoration:none;border:1px solid var(--border);background:var(--surface);transition:transform .2s,border-color .2s,background .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-icon{font-size:1.8rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:10px;flex-shrink:0}
+    .btn-sicher .btn-icon{background:rgba(200,169,110,.12)}
+    .btn-links  .btn-icon{background:rgba(126,184,164,.12)}
+    .btn-sicher:hover{border-color:var(--accent);background:rgba(200,169,110,.06)}
+    .btn-links:hover{border-color:var(--accent2);background:rgba(126,184,164,.06)}
+    .btn-text{flex:1}
+    .btn-title{font-family:'DM Serif Display',serif;font-size:1.05rem;margin-bottom:.2rem}
+    .btn-sicher .btn-title{color:var(--accent)}
+    .btn-links  .btn-title{color:var(--accent2)}
+    .btn-desc{font-size:.75rem;color:var(--muted);line-height:1.4}
+    .btn-arrow{font-size:1.1rem;color:var(--muted);transition:color .2s,transform .2s}
+    .btn:hover .btn-arrow{transform:translateX(4px)}
+    .btn-sicher:hover .btn-arrow{color:var(--accent)}
+    .btn-links:hover  .btn-arrow{color:var(--accent2)}
+    .info{font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);padding-top:1.2rem;line-height:1.6}
+    .info strong{color:var(--accent2)}
+    .version{margin-top:1.2rem;font-size:.68rem;color:#3a3848;text-align:center}
+    .v-num{color:#39c96e;font-weight:700}
     /* ── Zitat-Banner ── */
     .quote-banner {
       max-width: 900px; margin: 0 auto 2rem;
@@ -89,7 +88,7 @@
       font-family: 'DM Sans', sans-serif;
     }
     .quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
-    .quote-banner { margin-bottom:1.5rem; }
+    .quote-banner{margin-bottom:1.5rem}
   </style>
 </head>
 <body>
@@ -104,7 +103,7 @@
     <div class="quote-author" id="quoteAuthor"></div>
     <div class="quote-footer">
       <span class="quote-source" id="quoteSource"></span>
-      <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">↻ neues Zitat</button>
+      <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">&#8635; neues Zitat</button>
     </div>
   </div>
 
@@ -121,7 +120,7 @@
       <div class="btn-icon">🔗</div>
       <div class="btn-text">
         <div class="btn-title">Nützliche Links</div>
-        <div class="btn-desc">Nachrichten · Gesundheit · Behörden · KI<br>Luxemburg · Notfall · Restaurants & mehr</div>
+        <div class="btn-desc">Nachrichten · Gesundheit · Behörden · KI<br>Luxemburg · Notfall · Kurioses & mehr</div>
       </div>
       <div class="btn-arrow">→</div>
     </a>
@@ -136,72 +135,27 @@
   </div>
 
   <div class="version">
-    <span class="v-num">Version 1.2</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-07@08:10:41</span>
+    <span class="v-num">Version 1.5</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-05-07@08:56:28</span>
   </div>
 </div>
 <script>
-  // ════════════════════════════════════════════════════════════
-// PHILOSOPHISCHES ZITAT DES TAGES (kuratierte echte Zitate)
-// ════════════════════════════════════════════════════════════
-const quotes = [
-  { z: "Der Mensch ist das Maß aller Dinge.",                                    a: "Protagoras",       q: "ca. 450 v. Chr." },
-  { z: "Ich weiß, dass ich nichts weiß.",                                        a: "Sokrates",         q: "nach Platon, Apologie" },
-  { z: "Das untersuchte Leben ist nicht lebenswert.",                             a: "Sokrates",         q: "Platon, Apologie 38a" },
-  { z: "Wir sind, was wir wiederholt tun. Vortrefflichkeit ist also keine Handlung, sondern eine Gewohnheit.", a: "Aristoteles", q: "Nikomachische Ethik" },
-  { z: "Glück ist das Gedeihen eines tätigen Lebens gemäß der Tugend.",          a: "Aristoteles",      q: "Nikomachische Ethik I" },
-  { z: "Carpe diem — Nutze den Tag.",                                             a: "Horaz",            q: "Oden I, 11 (23 v. Chr.)" },
-  { z: "Non scholae sed vitae discimus — Nicht für die Schule, sondern für das Leben lernen wir.", a: "Seneca", q: "Epistulae morales 106" },
-  { z: "Es ist nicht zu wenig Zeit, die wir haben, sondern zu viel Zeit, die wir nicht nutzen.", a: "Seneca", q: "De brevitate vitae" },
-  { z: "Behandle andere so, wie du von ihnen behandelt werden möchtest.",         a: "Konfuzius",        q: "Analekten 15:24, ca. 500 v. Chr." },
-  { z: "Der Weg entsteht beim Gehen.",                                            a: "Laozi",            q: "Tao Te Ching, ca. 6. Jh. v. Chr." },
-  { z: "Das Wasser ist das Weichste und Nachgiebigste der Dinge — und doch überwindet es das Harte.", a: "Laozi", q: "Tao Te Ching, Kap. 78" },
-  { z: "Zwei Dinge erfüllen das Gemüt mit immer neuer Bewunderung: der bestirnte Himmel über mir und das moralische Gesetz in mir.", a: "Immanuel Kant", q: "Kritik der praktischen Vernunft, 1788" },
-  { z: "Handle nur nach derjenigen Maxime, durch die du zugleich wollen kannst, dass sie ein allgemeines Gesetz werde.", a: "Immanuel Kant", q: "Grundlegung zur Metaphysik der Sitten, 1785" },
-  { z: "Gott ist tot. Gott bleibt tot. Und wir haben ihn getötet.",              a: "Friedrich Nietzsche", q: "Die fröhliche Wissenschaft, §125 (1882)" },
-  { z: "Was mich nicht umbringt, macht mich stärker.",                           a: "Friedrich Nietzsche", q: "Götzen-Dämmerung, 1888" },
-  { z: "Die Freiheit des Menschen liegt nicht darin, tun zu können, was er will, sondern darin, nicht tun zu müssen, was er nicht will.", a: "Jean-Jacques Rousseau", q: "Bekenntnisse, 1782" },
-  { z: "Das Dasein geht dem Wesen voraus.",                                       a: "Jean-Paul Sartre",  q: "L'existentialisme est un humanisme, 1945" },
-  { z: "Die Hölle, das sind die anderen.",                                        a: "Jean-Paul Sartre",  q: "Huis clos (Geschlossene Gesellschaft), 1944" },
-  { z: "Man wird nicht als Frau geboren, man wird es.",                           a: "Simone de Beauvoir", q: "Das andere Geschlecht, 1949" },
-  { z: "Der Mensch ist zur Freiheit verurteilt.",                                 a: "Jean-Paul Sartre",  q: "Das Sein und das Nichts, 1943" },
-  { z: "Alles Verstehen beginnt damit, dass ich etwas nicht verstehe.",           a: "Hans-Georg Gadamer", q: "Wahrheit und Methode, 1960" },
-  { z: "Die Sprache ist das Haus des Seins.",                                     a: "Martin Heidegger", q: "Brief über den Humanismus, 1946" },
-  { z: "Wer ein Warum zum Leben hat, erträgt fast jedes Wie.",                   a: "Friedrich Nietzsche", q: "Götzen-Dämmerung, 1888" },
-  { z: "Der Mensch ist ein Seil, geknüpft zwischen Tier und Übermensch — ein Seil über einem Abgrunde.", a: "Friedrich Nietzsche", q: "Also sprach Zarathustra, 1883" },
-  { z: "Wenn du einen Menschen glücklich machen willst, füge nichts seinem Reichtum hinzu, sondern nimm ihm einige seiner Wünsche.",  a: "Epikur", q: "nach Seneca, Epistulae morales" },
-  { z: "Es gibt nur ein wirklich ernstes philosophisches Problem: den Selbstmord.",  a: "Albert Camus",  q: "Der Mythos des Sisyphos, 1942" },
-  { z: "Man muss sich Sisyphus als glücklichen Menschen vorstellen.",             a: "Albert Camus",     q: "Der Mythos des Sisyphos, 1942" },
-  { z: "Denken ist schwer, darum urteilen die meisten.",                          a: "Carl Gustav Jung", q: "Über die Psychologie des Unbewussten" },
-  { z: "Die Dummheit des Menschen ist darin erkennbar, dass er stets dasselbe tut und ein anderes Ergebnis erwartet.", a: "Albert Einstein", q: "zugeschrieben" },
-  { z: "Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.",          a: "Albert Einstein",  q: "What Life Means to Einstein, 1929" },
-  { z: "Eine Gesellschaft zeigt ihren Charakter am besten darin, wie sie mit ihren Schwächsten umgeht.", a: "Hubert Humphrey", q: "Rede 1977, US-Senat" },
-  { z: "In der Beschränkung zeigt sich erst der Meister.",                        a: "Johann Wolfgang von Goethe", q: "Natur und Kunst, 1800" },
-  { z: "Wer kämpft, kann verlieren. Wer nicht kämpft, hat schon verloren.",      a: "Bertolt Brecht",   q: "Die Mutter, 1930/32" },
-  { z: "Erst wenn der letzte Baum gerodet, der letzte Fluss vergiftet, der letzte Fisch gefangen ist, werdet ihr merken, dass man Geld nicht essen kann.", a: "Cree-Sprichwort", q: "nordamerikanische Überlieferung" },
-  { z: "Das Ganze ist mehr als die Summe seiner Teile.",                          a: "Aristoteles",      q: "Metaphysik, ca. 350 v. Chr." },
-];
-
-let lastIdx = -1;
-
+const quotes = [{"z": "Der Mensch ist das Mass aller Dinge.", "a": "Protagoras", "q": "ca. 450 v. Chr."}, {"z": "Ich weiss, dass ich nichts weiss.", "a": "Sokrates", "q": "nach Platon, Apologie"}, {"z": "Das untersuchte Leben ist nicht lebenswert.", "a": "Sokrates", "q": "Platon, Apologie 38a"}, {"z": "Wir sind, was wir wiederholt tun. Vortrefflichkeit ist keine Handlung, sondern eine Gewohnheit.", "a": "Aristoteles", "q": "Nikomachische Ethik"}, {"z": "Glueck ist das Gedeihen eines taetigen Lebens gemaess der Tugend.", "a": "Aristoteles", "q": "Nikomachische Ethik I"}, {"z": "Carpe diem — Nutze den Tag.", "a": "Horaz", "q": "Oden I, 11 (23 v. Chr.)"}, {"z": "Es ist nicht zu wenig Zeit, die wir haben, sondern zu viel Zeit, die wir nicht nutzen.", "a": "Seneca", "q": "De brevitate vitae"}, {"z": "Nicht fuer die Schule, sondern fuer das Leben lernen wir.", "a": "Seneca", "q": "Epistulae morales 106"}, {"z": "Behandle andere so, wie du von ihnen behandelt werden moechtest.", "a": "Konfuzius", "q": "Analekten 15:24, ca. 500 v. Chr."}, {"z": "Der Weg entsteht beim Gehen.", "a": "Laozi", "q": "Tao Te Ching, ca. 6. Jh. v. Chr."}, {"z": "Das Wasser ist das Weichste der Dinge — und doch ueberwindet es das Harte.", "a": "Laozi", "q": "Tao Te Ching, Kap. 78"}, {"z": "Zwei Dinge erfuellen das Gemuet mit Bewunderung: der bestirnte Himmel ueber mir und das moralische Gesetz in mir.", "a": "Immanuel Kant", "q": "Kritik der praktischen Vernunft, 1788"}, {"z": "Was mich nicht umbringt, macht mich staerker.", "a": "Friedrich Nietzsche", "q": "Goetzen-Daemmerung, 1888"}, {"z": "Wer ein Warum zum Leben hat, ertraegt fast jedes Wie.", "a": "Friedrich Nietzsche", "q": "Goetzen-Daemmerung, 1888"}, {"z": "Das Dasein geht dem Wesen voraus.", "a": "Jean-Paul Sartre", "q": "L'existentialisme est un humanisme, 1945"}, {"z": "Die Hoelle, das sind die anderen.", "a": "Jean-Paul Sartre", "q": "Huis clos, 1944"}, {"z": "Man wird nicht als Frau geboren, man wird es.", "a": "Simone de Beauvoir", "q": "Das andere Geschlecht, 1949"}, {"z": "Die Sprache ist das Haus des Seins.", "a": "Martin Heidegger", "q": "Brief ueber den Humanismus, 1946"}, {"z": "Man muss sich Sisyphus als gluecklichen Menschen vorstellen.", "a": "Albert Camus", "q": "Der Mythos des Sisyphos, 1942"}, {"z": "Wenn du einen Menschen gluecklich machen willst, fuege nichts seinem Reichtum hinzu, nimm ihm einige seiner Wuensche.", "a": "Epikur", "q": "nach Seneca, Epistulae morales"}, {"z": "Denken ist schwer, darum urteilen die meisten.", "a": "Carl Gustav Jung", "q": "Ueber die Psychologie des Unbewussten"}, {"z": "Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.", "a": "Albert Einstein", "q": "What Life Means to Einstein, 1929"}, {"z": "In der Beschraenkung zeigt sich erst der Meister.", "a": "Johann Wolfgang von Goethe", "q": "Natur und Kunst, 1800"}, {"z": "Wer kaempft, kann verlieren. Wer nicht kaempft, hat schon verloren.", "a": "Bertolt Brecht", "q": "Die Mutter, 1930/32"}, {"z": "Das Ganze ist mehr als die Summe seiner Teile.", "a": "Aristoteles", "q": "Metaphysik, ca. 350 v. Chr."}, {"z": "Erst wenn der letzte Baum gerodet ist, werdet ihr merken, dass man Geld nicht essen kann.", "a": "Cree-Sprichwort", "q": "nordamerikanische Ueberlieferung"}];
+var lastIdx = -1;
 function loadQuote() {
-let idx;
-do { idx = Math.floor(Math.random() * quotes.length); }
-while (idx === lastIdx && quotes.length > 1);
-lastIdx = idx;
-
-const q = quotes[idx];
-const textEl   = document.getElementById(‘quoteText’);
-const authorEl = document.getElementById(‘quoteAuthor’);
-const sourceEl = document.getElementById(‘quoteSource’);
-
-textEl.classList.remove(‘loading’);
-textEl.textContent   = ‘\u201E’ + q.z + ‘\u201C’;
-authorEl.textContent = ’\u2014 ’ + q.a;
-sourceEl.textContent = q.q;
+  var idx;
+  do { idx = Math.floor(Math.random() * quotes.length); }
+  while (idx === lastIdx && quotes.length > 1);
+  lastIdx = idx;
+  var q = quotes[idx];
+  var textEl   = document.getElementById('quoteText');
+  var authorEl = document.getElementById('quoteAuthor');
+  var sourceEl = document.getElementById('quoteSource');
+  textEl.classList.remove('loading');
+  textEl.textContent   = '„' + q.z + '“';
+  authorEl.textContent = '— ' + q.a;
+  sourceEl.textContent = q.q;
 }
-
 loadQuote();
 </script>
-
 </body>
 </html>
