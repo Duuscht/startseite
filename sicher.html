@@ -3,588 +3,292 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meine sichere Startseite</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>🔒 Sichere Links</title>
   <style>
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0f0f13; --surface: #18181f; --border: #2a2a38;
-      --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
-      --muted: #7a7880;
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg); color: var(--text);
-      min-height: 100vh; padding: 2rem 1.5rem 4rem;
-      background-image:
-        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(200,169,110,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(126,184,164,0.06) 0%, transparent 60%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     header {
-      max-width: 900px; margin: 0 auto 1.5rem;
-      display: flex; align-items: baseline; justify-content: space-between;
-      border-bottom: 1px solid var(--border); padding-bottom: 1.2rem;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
     }
-    header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; }
-    header p { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
-    .shield { display: inline-block; margin-right: 0.4rem; font-size: 1.1rem; }
+    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    header p { color: var(--muted); }
+    header .version { color: var(--accent); font-size: 0.8rem; margin-top: 0.5rem; }
 
-    /* Suchfeld */
-    .search-wrap { max-width: 900px; margin: 0 auto 2rem; position: relative; }
-    .search-wrap input {
-      width: 100%; padding: 0.75rem 1rem 0.75rem 2.8rem;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem; outline: none; transition: border-color 0.2s;
-    }
-    .search-wrap input:focus { border-color: var(--accent); }
-    .search-wrap input::placeholder { color: var(--muted); }
-    .search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
-    .search-count { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: var(--muted); }
-    .no-results { max-width: 900px; margin: 0 auto; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 2rem; display: none; }
+    main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%; }
 
-    main { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem;
-      transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.4s ease both;
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, border-color 0.2s;
+      margin-bottom: 2rem;
     }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card.hidden { display: none; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
-    .card-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
-    .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text); }
-    .c-gold   .card-icon { background: rgba(200,169,110,0.15); }
-    .c-teal   .card-icon { background: rgba(126,184,164,0.15); }
-    .c-red    .card-icon { background: rgba(224,112,112,0.15); }
-    .c-blue   .card-icon { background: rgba(110,160,210,0.15); }
-    .c-purple .card-icon { background: rgba(170,130,210,0.15); }
-    .c-green  .card-icon { background: rgba(130,200,140,0.15); }
-    ul { list-style: none; }
-    ul li { margin-bottom: 0.3rem; }
-    ul li.hidden { display: none; }
-    ul li a {
-      display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.45rem 0.6rem; border-radius: 7px; text-decoration: none;
-      font-size: 0.875rem; color: var(--text); font-weight: 400;
-      transition: background 0.15s, color 0.15s; word-break: break-all;
-    }
-    ul li a:hover { background: rgba(255,255,255,0.06); color: var(--accent); }
-    ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 700; border-radius: 2px; padding: 0 1px; }
-    .favicon { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: contain; vertical-align: middle; }
+    .nav-btn:hover { background: #21262d; border-color: var(--accent); }
 
-    /* Trennlinie innerhalb einer Karte – dunkelblaue Pille */
-    .list-divider {
+    .search-box {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .search-box input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .search-box label {
       display: block;
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;
-      color: #b8d4f0;
-      background: rgba(60,100,160,0.35);
-      border-radius: 4px;
-      padding: 3px 8px;
-      margin: 0.55rem 0 0.25rem;
-    }
-
-    /* Info-Boxen */
-    .info-box {
-      max-width: 900px; margin: 2.5rem auto 0;
-      background: rgba(126,184,164,0.07); border: 1px solid rgba(126,184,164,0.2);
-      border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;
-    }
-    .info-box strong { color: var(--accent2); }
-
-    /* Versionshinweis (blau) */
-    .edit-note {
-      max-width: 900px; margin: 1rem auto 0;
-      background: rgba(110,160,210,0.07); border: 1px solid rgba(110,160,210,0.2);
-      border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: #7a9ab8; line-height: 1.6;
-    }
-    .edit-note strong { color: #9dbfda; }
-
-    /* Versionszeile – Versionsnummer grün und fett */
-    .version-bar {
-      max-width: 900px; margin: 1.5rem auto 0;
-      text-align: center; font-size: 0.75rem; color: #4a4858;
-      border-top: 1px solid #2a2a38; padding-top: 1rem;
-    }
-    .version-bar .v-num { color: #39c96e; font-weight: 700; font-size: 0.8rem; }
-
-    /* ── Zitat-Banner ── */
-    .quote-banner {
-      max-width: 900px; margin: 0 auto 2rem;
-      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(126,184,164,0.06) 100%);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-left: 3px solid var(--accent);
-      border-radius: 10px; padding: 1.2rem 1.6rem;
-      position: relative; overflow: hidden;
-      animation: fadeUp 0.7s ease both;
-    }
-    .quote-banner::before {
-      content: '\201C';
-      position: absolute; top: -0.2rem; left: 0.8rem;
-      font-size: 4rem; color: rgba(200,169,110,0.12);
-      font-family: 'DM Serif Display', serif; line-height: 1;
-      pointer-events: none;
-    }
-    .quote-label {
-      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
-    }
-    .quote-text {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-      color: var(--text); line-height: 1.65;
-      font-style: italic; padding-left: 0.5rem;
-      min-height: 2.5rem;
-    }
-    .quote-text.loading {
       color: var(--muted);
-      animation: pulse 1.5s ease-in-out infinite;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
     }
-    .quote-author {
-      font-size: 0.78rem; color: var(--accent2);
-      margin-top: 0.6rem; padding-left: 0.5rem;
-      letter-spacing: 0.5px;
-    }
-    .quote-footer {
-      display: flex; align-items: center;
-      justify-content: space-between; margin-top: 0.5rem;
-    }
-    .quote-source {
-      font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
-    }
-    .quote-refresh {
-      background: none; border: 1px solid rgba(200,169,110,0.2);
-      cursor: pointer; color: var(--muted); font-size: 0.72rem;
-      padding: 0.2rem 0.6rem; border-radius: 4px;
-      transition: color 0.2s, border-color 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
-    .quote-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
-    @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
-  
 
-    .nav-btn-wrap { max-width:900px; margin:2rem auto 0; text-align:center; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-    .nav-btn { display:inline-flex; align-items:center; gap:0.6rem; background:rgba(200,169,110,0.1); border:1px solid rgba(200,169,110,0.35); color:var(--accent); font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500; padding:0.7rem 1.6rem; border-radius:8px; text-decoration:none; transition:background 0.2s,border-color 0.2s; }
-    .nav-btn:hover { background:rgba(200,169,110,0.18); border-color:var(--accent); }
-    .nav-btn.secondary { border-color:rgba(126,184,164,0.35); color:var(--accent2); background:rgba(126,184,164,0.07); }
-    .nav-btn.secondary:hover { background:rgba(126,184,164,0.15); border-color:var(--accent2); }
-    .cross-results { max-width:900px; margin:0 auto 1.5rem; background:rgba(126,184,164,0.06); border:1px solid rgba(126,184,164,0.2); border-radius:10px; padding:0.8rem 1rem; display:none; }
-    .cross-header { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); margin-bottom:0.6rem; opacity:0.8; }
-    .cross-item { display:flex; align-items:center; gap:0.5rem; padding:0.4rem 0.5rem; border-radius:6px; text-decoration:none; transition:background 0.15s; margin-bottom:0.2rem; overflow:hidden; }
-    .cross-item:hover { background:rgba(255,255,255,0.05); }
-    .cross-badge { font-size:0.65rem; background:rgba(126,184,164,0.15); color:var(--accent2); border-radius:3px; padding:1px 5px; white-space:nowrap; flex-shrink:0; }
-    .cross-label { font-size:0.875rem; color:var(--text); flex:1; word-break:break-word; }
-    .cross-label mark { background:rgba(200,169,110,0.3); color:var(--accent); font-weight:700; border-radius:2px; }
-    .cross-rubrik { font-size:0.68rem; color:var(--muted); opacity:0.7; flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:120px; }
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .section.hidden { display: none; }
+    .section h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+    .section .empty-msg { color: var(--muted); font-style: italic; display: none; }
+    .section.empty .empty-msg { display: block; }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .link-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .link-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .link-card.hidden { display: none; }
+    .link-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .link-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+    .link-card .tag {
+      display: inline-block;
+      background: rgba(63, 185, 80, 0.15);
+      color: var(--accent2);
+      border-radius: 20px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.25rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
-<header>
-  <h1><span class="shield">🛡</span> Meine sichere Startseite</h1>
-  <p>Nur verifizierte Links — kein Phishing-Risiko</p>
-</header>
-<div class="info-box">
-  <strong>🛡 Sicherheits-Prinzip:</strong> Öffne Bank, E-Mail und Online-Shops
-  <em>immer nur über diese Seite</em> — dann kann dich keine Phishing-Mail täuschen.
-  Klicke <strong>niemals</strong> auf Links in E-Mails für sensible Seiten.
-</div>
+  <header>
+    <h1>🔒 Sichere Links</h1>
+    <p>Geprüfte und datenschutzfreundliche Dienste</p>
+    <div class="version">Version 3.5 · Stand: 17.06.2026</div>
+  </header>
 
-<div class="search-wrap">
-  <span class="search-icon">🔍</span>
-  <input type="text" id="search" placeholder="Link suchen…" autocomplete="off">
-  <span class="search-count" id="searchCount"></span>
-</div>
-<div class="no-results" id="noResults">Kein Link gefunden 🤔</div>
-<div class="cross-results" id="crossResults"></div>
-<main id="main">
-  <!-- BANK & FINANZEN -->
-  <div class="card c-gold">
-    <div class="card-header"><div class="card-icon">🏦</div><span class="card-title">Banken</span></div>
-    <ul>
-      <li><a href="https://www.bhw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bhw.de" alt="">BHW Bausparkasse</a></li>
-      <li><a href="https://www.bank1saar.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bank1saar.de" alt="">Bank 1 Saar (Volksbank Saarland)</a></li>
-      <li><a href="https://www.dkb.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dkb.de" alt="">DKB Online-Banking</a></li>
-      <li><a href="https://www.lbs.de/standorte/merzig-saar_mzg" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=lbs.de" alt="">LBS Merzig (Bausparkasse)</a></li>
-      <li><a href="https://www.vb-rb.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=vb-rb.de" alt="">VB Volksbank Raiffeisenbank</a></li>
-      <li><a href="https://www.saarland-versicherungen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland-versicherungen.de" alt="">SAARLAND Versicherungen</a></li>
-      <li><a href="https://www.sparda-sw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=sparda-sw.de" alt="">Sparda-Bank Südwest</a></li>
-      <li><a href="https://www.spkmw.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=spkmw.de" alt="">Sparkasse Merzig-Wadern</a></li>
-    </ul>
-  </div>
+  <main>
+    <a href="index.html" class="nav-btn">🏠 Zurück zur Startseite</a>
 
-  <!-- E-MAIL -->
-  <div class="card c-teal">
-    <div class="card-header"><div class="card-icon">✉️</div><span class="card-title">E-Mail</span></div>
-    <ul>
-      <li><a href="https://www.gmx.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=gmx.de" alt="">GMX</a></li>
-      <li><a href="https://mail.google.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mail.google.com" alt="">Gmail</a></li>
-      <li><a href="https://outlook.live.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=outlook.live.com" alt="">Outlook / Hotmail</a></li>
-      <li><a href="https://posteo.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=posteo.de" alt="">Posteo</a></li>
-      <li><a href="https://mail.proton.me" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=proton.me" alt="">Proton Mail</a></li>
-      <li><a href="https://email.t-online.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=t-online.de" alt="">T-Online Mail</a></li>
-      <li><a href="https://app.tuta.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=tuta.com" alt="">Tuta Mail</a></li>
-      <li><a href="https://web.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=web.de" alt="">Web.de</a></li>
-      <li><a href="https://mail.yahoo.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mail.yahoo.com" alt="">Yahoo Mail</a></li>
-    </ul>
-  </div>
+    <div class="search-box">
+      <label for="search">🔍 Suchen…</label>
+      <input type="text" id="search" placeholder="z. B. Mail, Verschlüsselung, Messenger…" oninput="filterAll()">
+    </div>
 
-  <!-- EINKAUFEN (SICHER) -->
-  <div class="card c-red">
-    <div class="card-header"><div class="card-icon">🛒</div><span class="card-title">Einkaufen</span></div>
-    <ul>
-      <li><a href="https://www.amazon.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=amazon.de" alt="">Amazon</a></li>
-      <li><a href="https://www.ebay.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ebay.de" alt="">eBay</a></li>
-      <li><a href="https://www.kleinanzeigen.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kleinanzeigen.de" alt="">eBay Kleinanzeigen</a></li>
-      <li><a href="https://www.klarna.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=klarna.com" alt="">Klarna</a></li>
-      <li><a href="https://www.paypal.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=paypal.com" alt="">PayPal</a></li>
-      <li><a href="https://www.wero-wallet.eu/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wero-wallet.eu" alt="">Wero (Bezahlsystem)</a></li>
-      <li><a href="https://www.shop-apotheke.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=shop-apotheke.com" alt="">Shop Apotheke</a></li>
-    </ul>
-  </div>
+    <div class="section" data-section="email">
+      <h2>📧 E-Mail</h2>
+      <div class="links-grid">
+        <a href="https://proton.me" target="_blank" rel="noopener noreferrer" class="link-card" data-name="ProtonMail" data-desc="Verschlüsselte E-Mail-Dienste. Schweizer Unternehmen mit Sitz in der Schweiz. Ende-zu-Ende-Verschlüsselung. Kostenlose Basisversion verfügbar.">
+          <h3>ProtonMail</h3>
+          <p>Verschlüsselte E-Mails. Schweiz, keine Werbung, Open Source.</p>
+          <span class="tag">✓ Empfohlen</span>
+        </a>
+        <a href="https://tutanota.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Tutanota" data-desc="Datenschutzfreundlicher E-Mail-Dienst aus Deutschland. Kostenlose Version verfügbar. Vollständig quelloffen.">
+          <h3>Tutanota</h3>
+          <p>Datenschutzfreundlicher E-Mail-Dienst aus Deutschland.</p>
+          <span class="tag">🇩🇪 Deutsch</span>
+        </a>
+        <a href="https://posteo.de" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Posteo" data-desc="Ökologischer E-Mail-Anbieter aus Deutschland. 100% erneuerbare Energien. Anonyme Bezahlung möglich.">
+          <h3>Posteo</h3>
+          <p>Nachhaltiger und sicherer E-Mail-Dienst aus Deutschland.</p>
+          <span class="tag">🌱 Nachhaltig</span>
+        </a>
+      </div>
+      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+    </div>
 
-  <!-- CLOUD -->
-  <div class="card c-blue">
-    <div class="card-header"><div class="card-icon">☁️</div><span class="card-title">Cloud</span></div>
-    <ul>
-      <li><a href="https://www.dropbox.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dropbox.com" alt="">Dropbox</a></li>
-      <li><a href="https://www.icloud.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=icloud.com" alt="">iCloud</a></li>
-      <li><a href="https://nextcloud.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=nextcloud.com" alt="">Nextcloud</a></li>
-      <li><a href="https://www.pcloud.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=pcloud.com" alt="">pCloud</a></li>
-    </ul>
-  </div>
+    <div class="section" data-section="messenger">
+      <h2>💬 Messenger</h2>
+      <div class="links-grid">
+        <a href="https://signal.org" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Signal" data-desc="Sicherer Messenger mit Ende-zu-Ende-Verschlüsselung. Open Source. Non-Profit-Organisation. Keine Werbung, kein Tracking.">
+          <h3>Signal</h3>
+          <p>Sicherer Messenger mit Verschlüsselung. Open Source.</p>
+          <span class="tag">✓ Empfohlen</span>
+        </a>
+        <a href="https://threema.ch" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Threema" data-desc="Schweizer Messenger mit Fokus auf Datenschutz. Kein Tracking, keine Telefonnummer nötig.">
+          <h3>Threema</h3>
+          <p>Schweizer Messenger mit maximalem Datenschutz.</p>
+          <span class="tag">🇨🇭 Schweiz</span>
+        </a>
+        <a href="https://element.io" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Element Matrix" data-desc="Dezentraler Messenger auf Basis des Matrix-Protokolls. Eigene Server möglich. Ende-zu-Ende-Verschlüsselung.">
+          <h3>Element</h3>
+          <p>Dezentraler Messenger. Eigene Server möglich.</p>
+          <span class="tag">🔓 Dezentral</span>
+        </a>
+      </div>
+      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+    </div>
 
-  <!-- LUXEMBURG BANKEN -->
-  <div class="card c-gold">
-    <div class="card-header"><div class="card-icon">🇱🇺</div><span class="card-title">Luxemburg – Banken</span></div>
-    <ul>
-      <li><a href="https://www.advanzia.com/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=advanzia.com&sz=64" style="background:#fff;border-radius:2px;padding:1px" alt="">Advanzia Bank</a></li>
-      <li><a href="https://www.bcee.lu/de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bcee.lu" alt="">BCEE / Spuerkeess</a></li>
-      <li><a href="https://www.bil.com/de/individuals.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bil.com&sz=64" style="background:#fff;border-radius:2px;padding:1px" alt="">BIL Banque Internationale Luxembourg</a></li>
-      <li><a href="https://www.bgl.lu/de/individuals.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bgl.lu" alt="">BGL BNP Paribas</a></li>
-      <li><a href="https://www.ing.lu/content/siteing/de/Individuals.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ing.lu" alt="">ING Luxembourg</a></li>
-      <li><a href="https://www.post.lu/de/particuliers/les-packs-eboo" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=post.lu" alt="">POST Luxembourg Finance / eboo</a></li>
+    <div class="section" data-section="browser">
+      <h2>🌐 Browser & Suche</h2>
+      <div class="links-grid">
+        <a href="https://www.mozilla.org/firefox" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Firefox" data-desc="Browser mit starkem Datenschutz. Open Source. Von der gemeinnützigen Mozilla Foundation.">
+          <h3>Firefox</h3>
+          <p>Open-Source-Browser mit Datenschutzfunktionen.</p>
+          <span class="tag">🔓 Open Source</span>
+        </a>
+        <a href="https://brave.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Brave" data-desc="Datenschutzfreundlicher Browser mit eingebautem Werbeblocker. Automatische HTTPS-Upgrades.">
+          <h3>Brave</h3>
+          <p>Browser mit eingebautem Werbeblocker und Tracking-Schutz.</p>
+          <span class="tag">🛡️ Sicher</span>
+        </a>
+        <a href="https://duckduckgo.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="DuckDuckGo" data-desc="Suchmaschine ohne Tracking. Keine personalisierte Werbung. Keine Suchhistorie.">
+          <h3>DuckDuckGo</h3>
+          <p>Suchmaschine ohne personalisiertes Tracking.</p>
+          <span class="tag">🔒 Kein Tracking</span>
+        </a>
+        <a href="https://startpage.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Startpage" data-desc="Suchmaschine mit Fokus auf Privatsphäre. Nutzt Google-Ergebnisse, ohne IP zu speichern.">
+          <h3>Startpage</h3>
+          <p>Suchergebnisse von Google — ohne Tracking.</p>
+          <span class="tag">🔒 Privatsphäre</span>
+        </a>
+      </div>
+      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+    </div>
 
-    </ul>
-  </div>
+    <div class="section" data-section="social">
+      <h2>📱 Soziale Netzwerke</h2>
+      <div class="links-grid">
+        <a href="https://mastodon.social" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Mastodon" data-desc="Dezentrales Mikroblogging-Netzwerk. Open Source. Keine Werbung. Daten bleiben auf deinem eigenen Server.">
+          <h3>Mastodon</h3>
+          <p>Dezentrales soziales Netzwerk. Keine Werbung.</p>
+          <span class="tag">🔓 Dezentral</span>
+        </a>
+        <a href="https://pixelfed.org" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Pixelfed" data-desc="Dezentrale Foto-Sharing-Plattform. Instagram-Alternative. Open Source.">
+          <h3>Pixelfed</h3>
+          <p>Dezentrale Foto-Plattform. Instagram-Alternative.</p>
+          <span class="tag">📷 Fotos</span>
+        </a>
+        <a href="https://joinmastodon.org" target="_blank" rel="noopener noreferrer" class="link-card" data-name="TikTok Alternative" data-desc="Dezentrale Video-Plattformen als Alternative zu TikTok. ActivityPub-kompatibel.">
+          <h3>TikTok-Alternativen</h3>
+          <p>Dezentrale Video-Plattformen als Alternative.</p>
+          <span class="tag">🎥 Video</span>
+        </a>
+        <a href="https://wsocial.eu" target="_blank" rel="noopener noreferrer" class="link-card" data-name="wSocial" data-desc="Europäische Social-Media-Alternative. Datenschutzkonform nach DSGVO.">
+          <h3>wSocial.eu</h3>
+          <p>Europäische Social-Media-Alternative. DSGVO-konform.</p>
+          <span class="tag">🇪🇺 Europa</span>
+        </a>
+      </div>
+      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+    </div>
 
-  <!-- SOZIALES & KOMMUNIKATION -->
-  <div class="card c-blue">
-    <div class="card-header"><div class="card-icon">💬</div><span class="card-title">Soziales & Kommunikation</span></div>
-    <ul>
-      <li><a href="https://app.element.io" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=element.io" alt="">Element</a></li>
-      <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=facebook.com" alt="">Facebook</a></li>
-      <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=instagram.com" alt="">Instagram</a></li>
-      <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=linkedin.com" alt="">LinkedIn</a></li>
-      <li><a href="https://signal.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=signal.org" alt="">Signal</a></li>
-      <li><a href="https://getsession.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=getsession.org" alt="">Session (dezentraler Messenger)</a></li>
-      <li><a href="https://web.telegram.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=telegram.org" alt="">Telegram</a></li>
-      <li><a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=web.whatsapp.com" alt="">WhatsApp Web</a></li>
-      <li><a href="https://www.xing.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=xing.com" alt="">Xing</a></li>
-      <li><a href="https://x.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=x.com" alt="">X / Twitter</a></li>
-      <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=youtube.com" alt="">YouTube</a></li>
-    </ul>
-  </div>
+    <div class="section" data-section="cloud">
+      <h2>☁️ Cloud & Dateien</h2>
+      <div class="links-grid">
+        <a href="https://nextcloud.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Nextcloud" data-desc="Open-Source-Cloud-Speicher. Selbst hostbar. Dateien, Kalender, Kontakte, Notizen. EU-gehostete Angebote verfügbar.">
+          <h3>Nextcloud</h3>
+          <p>Open-Source-Cloud. Selbst hostbar oder gehostet nutzen.</p>
+          <span class="tag">🔓 Open Source</span>
+        </a>
+        <a href="https://tresorit.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Tresorit" data-desc="Verschlüsselter Cloud-Speicher aus der Schweiz. Zero-Knowledge-Verschlüsselung. Schweizer Datenschutzrecht.">
+          <h3>Tresorit</h3>
+          <p>Schweizer Cloud-Speicher mit Zero-Knowledge-Verschlüsselung.</p>
+          <span class="tag">🇨🇭 Schweiz</span>
+        </a>
+      </div>
+      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+    </div>
 
-  <!-- SICHERHEIT -->
-  <div class="card c-red">
-    <div class="card-header"><div class="card-icon">🚨</div><span class="card-title">Sicherheit</span></div>
-    <ul>
-      <li><a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bsi.bund.de" alt="">BSI – Bundesamt für IT-Sicherheit</a></li>
-      <li><a href="https://cybr360.saarland/erste-hilfe" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cybr360.saarland" alt="">Cybr360 – Erste Hilfe bei Cyberangriff</a></li>
-      <li><a href="https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">Online-Wache (Anzeige erstatten)</a></li>
-      <li><a href="https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=saarland.de" alt="">ZAC – Cybercrime Saarland</a></li>
-      <li><a href="https://duuscht.github.io/wizard" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duuscht.github.io" alt="">Browser-Diagnose (Wizard)</a></li>
-      <li><a href="https://ipleak.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ipleak.net" alt="">IPLeak.net (IP- &amp; DNS-Leak-Test)</a></li>
-      <li><a href="https://browserleaks.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=browserleaks.com" alt="">BrowserLeaks (Browser-Fingerprint-Test)</a></li>
-      <li><a href="https://dnscheck.tools" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dnscheck.tools" alt="">DNS Check Tools</a></li>
-      <li><a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=coveryourtracks.eff.org" alt="">Cover Your Tracks (EFF – Browser-Fingerprint)</a></li>
-      <li><a href="https://controld.com/tools/dns-leak-test" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=controld.com" alt="">ControlD DNS-Leak-Test</a></li>
-    
-      <li><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com" alt="">Have I Been Pwned? (Datenleck-Check)</a></li>
-      <li><a href="https://bankenverband.de/verbraucher/fuenf-tipps-fuer-sicheres-onlinebanking" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bankenverband.de" alt="">Online-Banking Sicherheit</a></li>
-    </ul>
-  </div>
-</main>
-<div class="nav-btn-wrap">
-  <a href="index.html" class="nav-btn secondary">⌂ Zur Übersicht</a>
-  <a href="links.html" class="nav-btn">🔗 Nützliche Links →</a>
-</div>
-<div class="version-bar">
-  <span class="v-num">Version 3.3</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-06-16@20:02:52</span>
-</div>
+  </main>
 
+  <footer>
+    🛡️ Cyber-Sicherheit · Version 3.5 · 17.06.2026
+  </footer>
 
-<script>
-  var allLinks = [{"l":"BHW Bausparkasse","u":"https://www.bhw.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"Bank 1 Saar (Volksbank Saarland)","u":"https://www.bank1saar.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"DKB Online-Banking","u":"https://www.dkb.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"LBS Merzig (Bausparkasse)","u":"https://www.lbs.de/standorte/merzig-saar_mzg","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"VB Volksbank Raiffeisenbank","u":"https://www.vb-rb.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"SAARLAND Versicherungen","u":"https://www.saarland-versicherungen.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"Sparda-Bank Südwest","u":"https://www.sparda-sw.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"Sparkasse Merzig-Wadern","u":"https://www.spkmw.de","r":"Banken","s":"sicher.html","b":"🔒"},{"l":"GMX","u":"https://www.gmx.de","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Gmail","u":"https://mail.google.com","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Outlook / Hotmail","u":"https://outlook.live.com","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Posteo","u":"https://posteo.de","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Proton Mail","u":"https://mail.proton.me","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"T-Online Mail","u":"https://email.t-online.de","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Tuta Mail","u":"https://app.tuta.com","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Web.de","u":"https://web.de","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Yahoo Mail","u":"https://mail.yahoo.com","r":"E-Mail","s":"sicher.html","b":"🔒"},{"l":"Amazon","u":"https://www.amazon.de","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"eBay","u":"https://www.ebay.de","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"eBay Kleinanzeigen","u":"https://www.kleinanzeigen.de","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"Klarna","u":"https://www.klarna.com/de","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"PayPal","u":"https://www.paypal.com/de","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"Wero (Bezahlsystem)","u":"https://www.wero-wallet.eu/de","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"Shop Apotheke","u":"https://www.shop-apotheke.com","r":"Einkaufen","s":"sicher.html","b":"🔒"},{"l":"Dropbox","u":"https://www.dropbox.com","r":"Cloud","s":"sicher.html","b":"🔒"},{"l":"iCloud","u":"https://www.icloud.com","r":"Cloud","s":"sicher.html","b":"🔒"},{"l":"Nextcloud","u":"https://nextcloud.com","r":"Cloud","s":"sicher.html","b":"🔒"},{"l":"pCloud","u":"https://www.pcloud.com","r":"Cloud","s":"sicher.html","b":"🔒"},{"l":"Advanzia Bank","u":"https://www.advanzia.com/de","r":"Luxemburg – Banken","s":"sicher.html","b":"🔒"},{"l":"BCEE / Spuerkeess","u":"https://www.bcee.lu/de","r":"Luxemburg – Banken","s":"sicher.html","b":"🔒"},{"l":"BIL Banque Internationale Luxembourg","u":"https://www.bil.com/de/individuals.html","r":"Luxemburg – Banken","s":"sicher.html","b":"🔒"},{"l":"BGL BNP Paribas","u":"https://www.bgl.lu/de/individuals.html","r":"Luxemburg – Banken","s":"sicher.html","b":"🔒"},{"l":"ING Luxembourg","u":"https://www.ing.lu/content/siteing/de/Individuals.html","r":"Luxemburg – Banken","s":"sicher.html","b":"🔒"},{"l":"POST Luxembourg Finance / eboo","u":"https://www.post.lu/de/particuliers/les-packs-eboo","r":"Luxemburg – Banken","s":"sicher.html","b":"🔒"},{"l":"Element","u":"https://app.element.io","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"Facebook","u":"https://www.facebook.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"Instagram","u":"https://www.instagram.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"LinkedIn","u":"https://www.linkedin.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"Signal","u":"https://signal.org","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"Session (dezentraler Messenger)","u":"https://getsession.org","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"Telegram","u":"https://web.telegram.org","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"WhatsApp Web","u":"https://web.whatsapp.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"Xing","u":"https://www.xing.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"X / Twitter","u":"https://x.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"YouTube","u":"https://www.youtube.com","r":"Soziales & Kommunikation","s":"sicher.html","b":"🔒"},{"l":"BSI – Bundesamt für IT-Sicherheit","u":"https://www.bsi.bund.de","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"Cybr360 – Erste Hilfe bei Cyberangriff","u":"https://cybr360.saarland/erste-hilfe","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"Online-Wache (Anzeige erstatten)","u":"https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"ZAC – Cybercrime Saarland","u":"https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"Browser-Diagnose (Wizard)","u":"https://duuscht.github.io/wizard","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"IPLeak.net (IP- &amp; DNS-Leak-Test)","u":"https://ipleak.net","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"BrowserLeaks (Browser-Fingerprint-Test)","u":"https://browserleaks.com","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"DNS Check Tools","u":"https://dnscheck.tools","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"Cover Your Tracks (EFF – Browser-Fingerprint)","u":"https://coveryourtracks.eff.org","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"ControlD DNS-Leak-Test","u":"https://controld.com/tools/dns-leak-test","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"Have I Been Pwned? (Datenleck-Check)","u":"https://haveibeenpwned.com","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"Online-Banking Sicherheit","u":"https://bankenverband.de/verbraucher/fuenf-tipps-fuer-sicheres-onlinebanking","r":"Sicherheit","s":"sicher.html","b":"🔒"},{"l":"116117 – Ärztlicher Bereitschaftsdienst","u":"https://www.116117.de","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"112.lu – Notrufe Luxemburg (112 / 113)","u":"https://112.lu/de","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Polizei Luxemburg – Notruf 113","u":"https://police.public.lu/de.html","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Giftnotruf Saarland – 06131 / 19240","u":"https://www.unimedizin-mainz.de/giz","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Telefonseelsorge – 0800 111 0 111","u":"https://online.telefonseelsorge.de","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Apothekennotdienst Merzig – PLZ 66663 (aponet.de)","u":"https://www.aponet.de/notdienstsuche/66663-Merzig","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Pharmacie.lu – Apothekensuche Luxemburg","u":"https://www.pharmacie.lu","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Editus – Notdienst-Apotheken Luxemburg","u":"https://www.editus.lu/de/diensthabenden-apotheken","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"ADAC Pannenhilfe – 0800 5 10 11 12","u":"https://www.adac.de/der-adac/pannenhilfe","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"ACL Luxemburg – Pannenhilfe","u":"https://www.acl.lu/de","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Karte sperren – Sperr-Notruf 116 116","u":"https://www.sperr-notruf.de","r":"Notfall & Notdienst","s":"links.html","b":"🔗"},{"l":"Benzinpreis-Blitz","u":"https://www.benzinpreis-blitz.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Clever Tanken Merzig","u":"https://www.clever-tanken.de/tankstellen/umkreis-merzig","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Der Spiegel","u":"https://www.spiegel.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Die Zeit","u":"https://www.zeit.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"EVZ – Europäisches Verbraucherzentrum","u":"https://www.evz.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"n-tv","u":"https://www.n-tv.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Neues aus Merzig","u":"https://www.merzig.de/rathaus-buergerservice/neues-aus-merzig/","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"SR – Saarländischer Rundfunk","u":"https://www.sr.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Saarbrücker Zeitung","u":"https://www.saarbruecker-zeitung.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Stadt Merzig","u":"https://www.merzig.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Stiftung Warentest","u":"https://www.stiftung-warentest.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Tagesschau","u":"https://www.tagesschau.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Tanke Günstig","u":"https://www.tanke-guenstig.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Wetter.com","u":"https://www.wetter.com","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"Wochenspiegel Saarland","u":"https://www.wochenspiegelonline.de","r":"Nachrichten & Info","s":"links.html","b":"🔗"},{"l":"DeepL Übersetzer","u":"https://www.deepl.com","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"DuckDuckGo","u":"https://www.duckduckgo.com","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Google","u":"https://www.google.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Google Übersetzer","u":"https://translate.google.com","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"MetaGer (deutsche Datenschutz-Suche)","u":"https://www.metager.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Tellows (Rufnummern-Auskunft)","u":"https://www.tellows.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"BrowserBench (Browser-Geschwindigkeitstest)","u":"https://browserbench.org","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"LibreQoS (Bufferbloat- &amp; Netzwerktest)","u":"https://test.libreqos.com","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"nPerf (Internet-Geschwindigkeitstest)","u":"https://www.nperf.com/de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"TECSON – Heizölpreise &amp; Preisentwicklung","u":"https://www.tecson.de/de/heizoelpreise.html","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Telekom Pass (Datenvolumen)","u":"https://pass.telekom.de/","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Klack – Fernsehprogramm","u":"https://www.klack.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Worldometers (Weltstatistiken live)","u":"https://www.worldometers.info/de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Speedof.me (Internetgeschwindigkeit)","u":"https://speedof.me/m","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"OpenSpeedtest","u":"https://openspeedtest.com","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Onlinestreet (Straßenansicht Deutschland)","u":"https://www.onlinestreet.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"MyOEM (Software-Lizenzen)","u":"https://www.myoem.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"WHO.is (Domain-Eigentümer nachschlagen)","u":"https://who.is","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"CORRECTIV Faktencheck","u":"https://correctiv.org/faktencheck/","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"SWR Fakefinder (Fake News erkennen)","u":"https://swrfakefinder.de","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Wikipedia","u":"https://www.wikipedia.org","r":"Nützliches","s":"links.html","b":"🔗"},{"l":"Booking.com","u":"https://www.booking.com","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"Deutsche Bahn","u":"https://www.bahn.de","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"FlixBus","u":"https://www.flixbus.de","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"Google Maps","u":"https://maps.google.com","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"Mobiliteit.lu (ÖPNV Luxemburg)","u":"https://www.mobiliteit.lu/de","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"Reisebüro montClaire Merzig","u":"https://maps.google.com/?q=Montclair+Reisebüro+Merzig+Schankstraße+1","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"Reisebüro Krings Merzig","u":"https://www.holiday-reisen-krings.de","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"Saarfahrplan (Bus & Bahn Saarland)","u":"https://www.saarfahrplan.de","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"TUI Reisen","u":"https://www.tui.com/de","r":"Reise & Verkehr","s":"links.html","b":"🔗"},{"l":"ARD Mediathek","u":"https://www.ardmediathek.de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"ARD Audiothek","u":"https://www.ardaudiothek.de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"Joyn","u":"https://www.joyn.de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"waipu.tv","u":"https://www.waipu.tv","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"MagentaTV","u":"https://www.magentatv.de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"Zattoo (Live-TV)","u":"https://zattoo.com/de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"Netflix","u":"https://www.netflix.com","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"SR Mediathek Saarland","u":"https://www.sr-mediathek.de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"ZDF Mediathek","u":"https://www.zdf.de","r":"Streaming & Mediathek","s":"links.html","b":"🔗"},{"l":"Blasius (Ratsstube)","u":"https://www.ratsstube-blasius.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Brauhaus Merzig","u":"https://www.merzigerbrauhaus.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Da Roberto – Zum Skipper (Yachthafen)","u":"https://daroberto-ristorante.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Ellerhof Merzig","u":"https://www.ellerhof.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Grieche Stadthalle","u":"https://maps.google.com/?q=Griechisches+Restaurant+Zur+Stadthalle+Merzig","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Kolpinghaus Merzig","u":"https://www.kolpinghausmerzig.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Kolorit Merzig","u":"https://www.restaurant-kolorit.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Wirtshaus zur Saar","u":"https://www.wirtshaus-zur-saar.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Römer Merzig","u":"https://roemer-merzig.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Sant'Angelo (Ristorante & Pizzeria)","u":"https://sant-angelo.de","r":"Restaurants Merzig","s":"links.html","b":"🔗"},{"l":"Das Bad Merzig","u":"https://dasbadmerzig.de","r":"Freizeit Merzig","s":"links.html","b":"🔗"},{"l":"Lichtspiele Losheim","u":"https://www.lichtspiele-losheim.de/programm/","r":"Freizeit Merzig","s":"links.html","b":"🔗"},{"l":"Odeon Kinocenter Merzig","u":"https://www.kino-merzig.de/programm","r":"Freizeit Merzig","s":"links.html","b":"🔗"},{"l":"Ski-Club Merzig","u":"https://www.ski-club-merzig.de","r":"Freizeit Merzig","s":"links.html","b":"🔗"},{"l":"Tennisclub Schwarz-Weiß Merzig","u":"https://www.tc-merzig.de","r":"Freizeit Merzig","s":"links.html","b":"🔗"},{"l":"Augenarzt Merzig (Sehen Saar)","u":"https://sehen-saar.de/praxis-merzig/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Gesundheitscampus Merzig","u":"https://gesundheitscampus-merzig.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Hautmedizin Saar (Gesundheitscampus)","u":"https://www.hautmedizin-saar.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"HNO-Praxis Dr. Kulas Merzig","u":"https://hno-kulas.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"MVZ Hausarzt Merzig","u":"https://ihr-hausarzt-merzig.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"MVZ Hausarzt Stadthalle","u":"https://ihr-hausarzt-stadthalle.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"MVZ Hautarzt Dr. Kessler","u":"https://www.praxis-kessler.info","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Orthopäde Merzig (Torstr. 28)","u":"https://maps.google.com/?q=Orthopäde+Torstraße+28+Merzig","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"CaritasKlinikum Saarbrücken (St. Theresia)","u":"https://www.caritasklinikum.de/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"DRK Krankenhaus Saarlouis","u":"https://www.drk-krankenhausgesellschaft.saarland/krankenhaus-saarlouis-vom-drk","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Klinikum Saarbrücken (Winterberg)","u":"https://www.klinikum-saarbruecken.de/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Marienhaus Klinikum Neunkirchen","u":"https://www.marienhaus-neunkirchen.de/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Marienhaus Klinikum Saarlouis","u":"https://www.marienhaus-klinikum-saar.de/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"SHG Klinikum Merzig","u":"https://www.shg-kliniken.de/merzig/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"SHG-Kliniken Sonnenberg Saarbrücken","u":"https://www.shg-kliniken.de/sonnenberg/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"SHG-Kliniken Völklingen","u":"https://www.shg-kliniken.de/voelklingen/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"AOK","u":"https://www.aok.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Barmer Krankenkasse","u":"https://www.barmer.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"IKK Südwest","u":"https://www.ikk-suedwest.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Techniker Krankenkasse","u":"https://www.tk.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Apotheken-Umschau","u":"https://www.apotheken-umschau.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Caritas Saar-Hochwald","u":"https://www.caritas-saar-hochwald.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"DocToLib Merzig (Termine)","u":"https://www.doctolib.de/allgemeinmedizin/merzig","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"NetDoktor (Symptom-Checker)","u":"https://www.netdoktor.de","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Xcare Merzig (Radiologie)","u":"https://x-care.de/standorte/merzig-stadtmitte/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"Xcare Saarland – alle Standorte","u":"https://x-care.de/standorte/","r":"Gesundheit","s":"links.html","b":"🔗"},{"l":"AG Altenhilfe / Seniorenbüro Merzig","u":"https://www.seniorenbuero-merzig.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Bundesagentur für Arbeit","u":"https://www.arbeitsagentur.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Bundesregierung","u":"https://www.bundesregierung.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"ELSTER (Steuer)","u":"https://www.elster.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Einwohnermeldeamt / Bürgerbüro Merzig","u":"https://www.merzig.de/rathaus-buergerservice/dienststellen/sicherheit-und-buergerservice/buergerservice/","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Finanzamt Merzig","u":"https://www.saarland.de/mfw/DE/portale/steuernundfinanzaemter/finanzaemter/finanzamt-merzig","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Führerscheinstelle","u":"https://www.merzig-wadern.de/Zulassung-Verkehr/Fahrerlaubnisrecht/F%C3%BChrerschein/","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Jobcenter Merzig-Wadern","u":"https://www.jobcenter-merzig-wadern.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Jugendamt Merzig-Wadern","u":"https://www.merzig-wadern.de/Familienportal/Jugendamt/","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Katasteramt / LVGL Saarland","u":"https://www.saarland.de/lvgl/DE/themen-aufgaben/themen/kataster/kataster_node.html","r":"Behörden","s":"links.html","b":"🔗"},{"l":"KFZ-Zulassungsstelle","u":"https://www.merzig-wadern.de/Zulassung-Verkehr/Zulassungstelle/","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Landratsamt Merzig-Wadern","u":"https://www.merzig-wadern.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Rentenversicherung Saarland (DRV)","u":"https://www.deutsche-rentenversicherung.de/Saarland/DE/Home/home_node.html","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Saarland.de (Landesportal)","u":"https://www.saarland.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Stadtwerke Merzig","u":"https://www.stadtwerke-merzig.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Verbraucherzentrale Saarland","u":"https://www.verbraucherzentrale-saarland.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Volkshochschule Merzig-Wadern","u":"https://www.vhs-merzig-wadern.de","r":"Behörden","s":"links.html","b":"🔗"},{"l":"Aldi Süd Merzig – Prospekt","u":"https://www.kaufda.de/Filialen/Merzig/ALDI-SUeD-Im-Kieselgarten/v-f36451","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"dm Merzig – Prospekt","u":"https://www.kaufda.de/Merzig/dm-drogerie-markt/p-r104","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"EDEKA Beckingen – Prospekt","u":"https://www.kaufda.de/Filialen/Beckingen/EDEKA-Talstrasse/v-f1240722902","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"Globus Losheim – Prospekt","u":"https://www.globus.de/losheim/aktuelles-prospekt.php","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"Kaufland Dillingen – Prospekt","u":"https://www.kaufda.de/Filialen/Dillingen-Saar/Kaufland-Daimlerstrasse/v-f424319168","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"Lidl Merzig – Prospekt","u":"https://www.kaufda.de/Filialen/Merzig/Lidl-Rieffstrasse/v-f34755","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"Netto Merzig – Prospekt","u":"https://www.kaufda.de/Merzig/Netto-Marken-Discount/p-r9","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"REWE Merzig – Prospekt","u":"https://www.kaufda.de/Filialen/Merzig/REWE-Merzig-Bahnhofstr-REWE/v-f406218727","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"Rossmann Mettlach – Prospekt","u":"https://www.kaufda.de/Filialen/Mettlach/Rossmann-Britter-Strasse/v-f1093056004","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"WASGAU Merzig-Ballern – Angebote","u":"https://www.wasgau.de/maerkte/wasgau-frischemarkt-merzig-ballern/","r":"Einkaufen","s":"links.html","b":"🔗"},{"l":"Deutsche Post – Sendungsverfolgung","u":"https://www.deutschepost.de/de/s/sendungsverfolgung.html","r":"Post & Pakete","s":"links.html","b":"🔗"},{"l":"DPD","u":"https://www.dpd.com/de/de/","r":"Post & Pakete","s":"links.html","b":"🔗"},{"l":"Hermes/Evri – Konto &amp; Tracking","u":"https://www.myhermes.de/konto","r":"Post & Pakete","s":"links.html","b":"🔗"},{"l":"UPS – Sendungsverfolgung (DE)","u":"https://www.ups.com/track?loc=de_DE","r":"Post & Pakete","s":"links.html","b":"🔗"},{"l":"Brutto-Netto-Rechner","u":"https://www.brutto-netto-rechner.info","r":"Finanzen & Steuern","s":"links.html","b":"🔗"},{"l":"Check24 (Versicherung, Strom, Kredit)","u":"https://www.check24.de","r":"Finanzen & Steuern","s":"links.html","b":"🔗"},{"l":"Finanzrechner (Kredit, Zinsen, Rente)","u":"https://www.finanzrechner.org","r":"Finanzen & Steuern","s":"links.html","b":"🔗"},{"l":"Finanztip (unabhängige Finanzberatung)","u":"https://www.finanztip.de","r":"Finanzen & Steuern","s":"links.html","b":"🔗"},{"l":"Verivox (Energie, Handy, Internet)","u":"https://www.verivox.de","r":"Finanzen & Steuern","s":"links.html","b":"🔗"},{"l":"Spritpreise.lu – aktuelle Benzinpreise","u":"https://www.spritpreise.lu","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Die Grenzgänger (News, Steuern, Jobs)","u":"https://www.diegrenzgaenger.lu","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Creos (Gas- &amp; Stromnetz Luxemburg)","u":"https://www.creos.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Enovos (Energie Luxemburg)","u":"https://www.enovos.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Loterie Nationale Luxembourg","u":"https://www.loterie.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"ADEM (Arbeitsverwaltung)","u":"https://www.adem.public.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"BEE SECURE (Internet-Sicherheit LU)","u":"https://www.bee-secure.lu/de/","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"CCSS (Sozialversicherung)","u":"https://www.ccss.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"CNS (Gesundheitskasse)","u":"https://cns.public.lu/de.html","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"CnAP (Rentenversicherung)","u":"https://cnap.public.lu/de.html","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"DKV Luxembourg (Zusatzkrankenversicherung)","u":"https://www.dkv.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Guichet.lu (Bürgerportal)","u":"https://guichet.public.lu/de/citoyens.html","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Impôts / Steuerverwaltung (ACD)","u":"https://impotsdirects.public.lu/fr.html","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Luxembourg Online / LOL (Telecom)","u":"https://www.internet.lu/de/index.html","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Orange Luxembourg","u":"https://www.orange.lu/fr","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"POST / POP Mobile (ehem. LuxGSM)","u":"https://www.post.lu/de/particuliers/mobile","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"Tango Luxembourg","u":"https://www.tango.lu/de","r":"Luxemburg","s":"links.html","b":"🔗"},{"l":"ChatGPT","u":"https://chat.openai.com","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Claude","u":"https://claude.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Le Chat (Mistral AI)","u":"https://chat.mistral.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"LM Arena (KI-Modelle vergleichen)","u":"https://lmarena.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Mammouth AI (viele Modelle, ein Abo)","u":"https://mammouth.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Perplexity","u":"https://www.perplexity.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"ChatHub (mehrere KI gleichzeitig)","u":"https://chathub.gg","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Felo AI (KI-Suchmaschine)","u":"https://felo.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Groq (extrem schnelle KI-Inferenz)","u":"https://groq.com","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"KI Compass (100+ Modelle testen)","u":"https://www.buzzwoo.de/artificial-intelligence","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Artificial Analysis (KI-Modell-Vergleich)","u":"https://artificialanalysis.ai","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Poe (viele KI-Modelle, Quora)","u":"https://poe.com","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Replit AI (KI-Coding-Assistent)","u":"https://replit.com","r":"Künstliche Intelligenz","s":"links.html","b":"🔗"},{"l":"Our World in Data","u":"https://www.ourworldindata.org","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Snopes (Faktencheck)","u":"https://www.snopes.com","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Statista (Statistiken)","u":"https://de.statista.com","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Wolfram Alpha (Wissen berechnen)","u":"https://www.wolframalpha.com","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Duden","u":"https://www.duden.de","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"DWDS (Wortherkunft Deutsch)","u":"https://www.dwds.de","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"LEO (Wörterbuch DE/FR/EN)","u":"https://dict.leo.org/german-english/","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Wikiquote (Zitate)","u":"https://de.wikiquote.org","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Floor796 (animiertes Wimmelbild)","u":"https://floor796.com","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Radio Garden (Weltradio)","u":"https://radio.garden","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Wayback Machine (Webseiten-Archiv)","u":"https://web.archive.org","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Witz des Tages","u":"https://www.witz-des-tages.de","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Witze.at – Witz des Tages","u":"https://witze.at/witz-des-tages","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Witze.net (nach Kategorien)","u":"https://witze.net","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"DeBeste.de (Witze &amp; Sprüche täglich)","u":"https://www.debeste.de","r":"Kurioses","s":"links.html","b":"🔗"},{"l":"Witze-Paradies.de (täglich neu)","u":"https://witze-paradies.de","r":"Kurioses","s":"links.html","b":"🔗"}];
+  <script>
+    function filterAll() {
+      const query = document.getElementById('search').value.toLowerCase().trim();
+      const sections = document.querySelectorAll('.section');
+      let anyVisible = false;
 
-  const searchInput = document.getElementById('search');
-  const searchCount = document.getElementById('searchCount');
-  const noResults   = document.getElementById('noResults');
+      sections.forEach(section => {
+        const cards = section.querySelectorAll('.link-card');
+        let sectionVisible = false;
 
-  var _origTexts = new Map();
-  document.querySelectorAll('div.card li a').forEach(function(a) {
-    _origTexts.set(a, a.textContent.trim());
-  });
-
-  searchInput.addEventListener('input', () => {
-    const q = searchInput.value.trim().toLowerCase();
-    let totalVisible = 0;
-
-    document.querySelectorAll('div.card').forEach(card => {
-      let cardHasMatch = false;
-      card.querySelectorAll('li').forEach(li => {
-        const a = li.querySelector('a');
-        if (!a) return;
-        const text = _origTexts.get(a) || a.textContent.trim();
-        const img = a.querySelector('img');
-
-        if (!q) {
-          li.classList.remove('hidden');
-          a.innerHTML = '';
-          if (img) a.appendChild(img);
-          a.appendChild(document.createTextNode(text));
-          cardHasMatch = true;
-        } else if (text.toLowerCase().indexOf(q) >= 0) {
-          li.classList.remove('hidden');
-          cardHasMatch = true;
-          totalVisible++;
-          a.innerHTML = '';
-          if (img) a.appendChild(img);
-          const idx = text.toLowerCase().indexOf(q);
-          const span = document.createElement('span');
-          span.appendChild(document.createTextNode(text.substring(0, idx)));
-          const mark = document.createElement('mark');
-          mark.textContent = text.substring(idx, idx + q.length);
-          span.appendChild(mark);
-          span.appendChild(document.createTextNode(text.substring(idx + q.length)));
-          a.appendChild(span);
-        } else {
-          li.classList.add('hidden');
-        }
-      });
-      card.classList.toggle('hidden', q !== '' && !cardHasMatch);
-    });
-
-    if (!q) {
-      searchCount.textContent = '';
-      noResults.style.display = 'none';
-    } else if (totalVisible === 0) {
-      searchCount.textContent = 'Kein Treffer';
-      noResults.style.display = 'block';
-    } else {
-      searchCount.textContent = totalVisible + ' Treffer';
-      noResults.style.display = 'none';
-    }
-  });
-
-
-  // Seitenübergreifende Suche
-  (function() {
-    var curPage = window.location.pathname.split('/').pop() || 'index.html';
-    var inp = document.getElementById('search');
-    var cnt = document.getElementById('searchCount');
-    var crs = document.getElementById('crossResults');
-    if (!inp || !crs || typeof allLinks === 'undefined') return;
-
-    inp.addEventListener('input', function() {
-      var q = this.value.trim().toLowerCase();
-      if (!q) { crs.style.display = 'none'; crs.innerHTML = ''; return; }
-
-      var matches = allLinks.filter(function(lnk) {
-        return lnk.s !== curPage &&
-          (lnk.l.toLowerCase().indexOf(q) >= 0 || lnk.r.toLowerCase().indexOf(q) >= 0);
-      });
-
-      if (matches.length > 0) {
-        var safe = q.replace(/[-[\]{}()*+?.,\^$|#]/g, '\$&');
-        var html = '<div class="cross-header">Auch gefunden auf anderer Seite:</div>';
-        matches.forEach(function(lnk) {
-          var hi = lnk.l.replace(new RegExp('(' + safe + ')', 'gi'), '<mark>$1</mark>');
-          html += '<a href="' + lnk.u + '" target="_blank" rel="noopener noreferrer" class="cross-item">'
-            + '<span class="cross-badge">' + lnk.b + ' ' + lnk.s + '</span>'
-            + '<span class="cross-label">' + hi + '</span>'
-            + '<span class="cross-rubrik">' + lnk.r + '</span></a>';
+        cards.forEach(card => {
+          const name = (card.dataset.name || '').toLowerCase();
+          const desc = (card.dataset.desc || '').toLowerCase();
+          const match = query === '' || name.includes(query) || desc.includes(query);
+          card.classList.toggle('hidden', !match);
+          if (match) sectionVisible = true;
         });
-        crs.innerHTML = html;
-        crs.style.display = 'block';
-      } else {
-        crs.style.display = 'none';
-      }
 
-      var localCount = document.querySelectorAll('div.card li:not(.hidden) a').length;
-      var total = localCount + matches.length;
-      cnt.textContent = total === 0 ? 'Kein Treffer' : total + ' Treffer';
-    });
-  })();
-
-
-
-  // ════════════════════════════════════════════════════════════
-// PERSONALISIERUNG — localStorage
-// ════════════════════════════════════════════════════════════
-(function() {
-  var STORAGE_KEY = 'meine-startseite-hidden';
-  var editMode = false;
-  var hiddenLinks = {};
-
-  // Gespeicherte Einstellungen laden
-  try {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) hiddenLinks = JSON.parse(saved);
-  } catch(e) {}
-
-  // Versteckte Links ausblenden
-  function applyHidden() {
-    document.querySelectorAll('div.card li').forEach(function(li) {
-      var a = li.querySelector('a');
-      if (!a) return;
-      var key = a.href;
-      if (hiddenLinks[key]) {
-        li.style.display = editMode ? '' : 'none';
-        li.setAttribute('data-hidden', '1');
-      } else {
-        li.removeAttribute('data-hidden');
-      }
-    });
-    // Leere Karten ausblenden
-    document.querySelectorAll('div.card').forEach(function(card) {
-      var visibleLinks = card.querySelectorAll('li:not([data-hidden]) a');
-      if (!editMode) {
-        card.style.opacity = '1';
-      }
-    });
-  }
-
-  // Checkboxen in Edit-Modus anzeigen
-  function enterEditMode() {
-    editMode = true;
-    document.querySelectorAll('div.card li').forEach(function(li) {
-      var a = li.querySelector('a');
-      if (!a) return;
-      li.style.display = '';
-      var cb = li.querySelector('.pz-cb');
-      if (!cb) {
-        cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.className = 'pz-cb';
-        cb.checked = !hiddenLinks[a.href];
-        cb.style.cssText = 'margin-right:8px;accent-color:#c8a96e;width:15px;height:15px;cursor:pointer;flex-shrink:0;';
-        cb.addEventListener('change', function() {
-          if (cb.checked) {
-            delete hiddenLinks[a.href];
-          } else {
-            hiddenLinks[a.href] = 1;
-          }
-        });
-        li.insertBefore(cb, li.firstChild);
-      }
-      cb.style.display = 'inline-block';
-    });
-    document.getElementById('pz-btn').textContent = '✓ Speichern';
-    document.getElementById('pz-btn').style.borderColor = 'rgba(126,184,164,0.5)';
-    document.getElementById('pz-btn').style.color = 'var(--accent2)';
-    document.getElementById('pz-reset').style.display = 'inline-flex';
-  }
-
-  function exitEditMode() {
-    editMode = false;
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(hiddenLinks)); } catch(e) {}
-    document.querySelectorAll('.pz-cb').forEach(function(cb) { cb.style.display = 'none'; });
-    applyHidden();
-    document.getElementById('pz-btn').textContent = '⚙ Anpassen';
-    document.getElementById('pz-btn').style.borderColor = '';
-    document.getElementById('pz-btn').style.color = '';
-    document.getElementById('pz-reset').style.display = 'none';
-    // Export-Code aktualisieren
-    updateExportCode();
-  }
-
-  function resetAll() {
-    hiddenLinks = {};
-    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-    document.querySelectorAll('.pz-cb').forEach(function(cb) { cb.checked = true; });
-    document.querySelectorAll('div.card li').forEach(function(li) {
-      li.removeAttribute('data-hidden');
-      li.style.display = '';
-    });
-  }
-
-  // Export/Import Code
-  function updateExportCode() {
-    var el = document.getElementById('pz-code');
-    if (!el) return;
-    var keys = Object.keys(hiddenLinks);
-    if (keys.length === 0) { el.value = '(keine Anpassungen)'; return; }
-    el.value = btoa(JSON.stringify(hiddenLinks));
-  }
-
-  function importCode(code) {
-    try {
-      var parsed = JSON.parse(atob(code));
-      hiddenLinks = parsed;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(hiddenLinks));
-      applyHidden();
-      updateExportCode();
-      alert('Einstellungen importiert!');
-    } catch(e) {
-      alert('Ungültiger Code.');
+        section.classList.toggle('hidden', !sectionVisible);
+        section.classList.toggle('empty', sectionVisible);
+        if (sectionVisible) anyVisible = true;
+      });
     }
-  }
-
-  // Buttons einfügen
-  window.addEventListener('DOMContentLoaded', function() {
-    var wrap = document.querySelector('.nav-btn-wrap');
-    if (!wrap) return;
-
-    // Anpassen-Button
-    var btn = document.createElement('button');
-    btn.id = 'pz-btn';
-    btn.textContent = '⚙ Anpassen';
-    btn.style.cssText = 'display:inline-flex;align-items:center;gap:0.6rem;background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.25);color:var(--accent);font-family:"DM Sans",sans-serif;font-size:0.85rem;font-weight:500;padding:0.7rem 1.6rem;border-radius:8px;cursor:pointer;transition:background 0.2s,border-color 0.2s;';
-    btn.addEventListener('click', function() {
-      if (!editMode) enterEditMode(); else exitEditMode();
-    });
-    wrap.appendChild(btn);
-
-    // Reset-Button
-    var resetBtn = document.createElement('button');
-    resetBtn.id = 'pz-reset';
-    resetBtn.textContent = '↺ Alles anzeigen';
-    resetBtn.style.cssText = 'display:none;align-items:center;gap:0.6rem;background:rgba(220,80,80,0.08);border:1px solid rgba(220,80,80,0.25);color:#e07070;font-family:"DM Sans",sans-serif;font-size:0.85rem;font-weight:500;padding:0.7rem 1.2rem;border-radius:8px;cursor:pointer;';
-    resetBtn.addEventListener('click', function() { resetAll(); });
-    wrap.appendChild(resetBtn);
-
-    // Export/Import Box
-    var pzBox = document.createElement('div');
-    pzBox.id = 'pz-exportbox';
-    pzBox.style.cssText = 'display:none;margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.75rem;color:var(--muted);max-width:900px;margin-left:auto;margin-right:auto;';
-    pzBox.innerHTML = '<div style="margin-bottom:0.5rem">📋 <strong style="color:var(--text)">Code für andere Geräte:</strong> Kopiere diesen Code und importiere ihn auf deinem anderen Gerät.</div>'
-      + '<input id="pz-code" type="text" readonly style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:0.4rem 0.7rem;color:var(--accent2);font-size:0.72rem;font-family:monospace;margin-bottom:0.6rem;">'
-      + '<div><input id="pz-import-field" type="text" placeholder="Code einfügen…" style="background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:0.4rem 0.7rem;color:var(--text);font-size:0.72rem;width:calc(100% - 100px);">'
-      + '<button onclick="importCode(document.getElementById(\'pz-import-field\').value)" style="margin-left:8px;background:rgba(126,184,164,0.1);border:1px solid rgba(126,184,164,0.3);color:var(--accent2);padding:0.4rem 0.7rem;border-radius:5px;cursor:pointer;font-size:0.72rem;">Importieren</button></div>';
-    wrap.parentNode.insertBefore(pzBox, wrap.nextSibling);
-
-    // Export-Box bei Edit-Modus anzeigen
-    var origEnter = enterEditMode;
-    document.getElementById('pz-btn').addEventListener('click', function() {
-      setTimeout(function() {
-        pzBox.style.display = editMode ? 'none' : 'block';
-        updateExportCode();
-      }, 10);
-    });
-
-    // Beim Laden: versteckte Links anwenden
-    applyHidden();
-    updateExportCode();
-  });
-
-  // importCode global machen
-  window.importCode = importCode;
-})();
-
-</script>
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

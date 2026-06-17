@@ -3,221 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meine Startseite</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>🛡️ Cyber-Sicherheit</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0f0f13;--surface:#18181f;--border:#2a2a38;--accent:#c8a96e;--accent2:#7eb8a4;--text:#e8e4dc;--muted:#7a7880}
-    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background-image:radial-gradient(ellipse 60% 40% at 80% 10%,rgba(200,169,110,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 10% 80%,rgba(126,184,164,.06) 0%,transparent 60%)}
-    .wrap{max-width:560px;width:100%;animation:fadeUp .6s ease both}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    h1{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,5vw,2.4rem);color:var(--accent);letter-spacing:-.02em;margin-bottom:.6rem;text-align:center}
-    .logo{font-size:3rem;text-align:center;margin-bottom:1rem}
-    .subtitle{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;text-align:center}
-    .btn-group{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
-    .btn{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.6rem;border-radius:12px;text-decoration:none;border:1px solid var(--border);background:var(--surface);transition:transform .2s,border-color .2s,background .2s}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-icon{font-size:1.8rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:10px;flex-shrink:0}
-    .btn-sicher .btn-icon{background:rgba(200,169,110,.12)}
-    .btn-links  .btn-icon{background:rgba(126,184,164,.12)}
-    .btn-sicher:hover{border-color:var(--accent);background:rgba(200,169,110,.06)}
-    .btn-links:hover{border-color:var(--accent2);background:rgba(126,184,164,.06)}
-    .btn-text{flex:1}
-    .btn-title{font-family:'DM Serif Display',serif;font-size:1.05rem;margin-bottom:.2rem}
-    .btn-sicher .btn-title{color:var(--accent)}
-    .btn-links  .btn-title{color:var(--accent2)}
-    .btn-desc{font-size:.75rem;color:var(--muted);line-height:1.4}
-    .btn-arrow{font-size:1.1rem;color:var(--muted);transition:color .2s,transform .2s}
-    .btn:hover .btn-arrow{transform:translateX(4px)}
-    .btn-sicher:hover .btn-arrow{color:var(--accent)}
-    .btn-links:hover  .btn-arrow{color:var(--accent2)}
-    .info{font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);padding-top:1.2rem;line-height:1.6}
-    .info strong{color:var(--accent2)}
-    .version{margin-top:1.2rem;font-size:.68rem;color:#3a3848;text-align:center}
-    .v-num{color:#39c96e;font-weight:700}
-    /* ── Zitat-Banner ── */
-    .quote-banner {
-      max-width: 900px; margin: 0 auto 2rem;
-      background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(126,184,164,0.06) 100%);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-left: 3px solid var(--accent);
-      border-radius: 10px; padding: 1.2rem 1.6rem;
-      position: relative; overflow: hidden;
-      animation: fadeUp 0.7s ease both;
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --danger: #f85149;
     }
-    .quote-banner::before {
-      content: '\201C';
-      position: absolute; top: -0.2rem; left: 0.8rem;
-      font-size: 4rem; color: rgba(200,169,110,0.12);
-      font-family: 'DM Serif Display', serif; line-height: 1;
-      pointer-events: none;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    .quote-label {
-      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
     }
-    .quote-text {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-      color: var(--text); line-height: 1.65;
-      font-style: italic; padding-left: 0.5rem;
-      min-height: 2.5rem;
+    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    header p { color: var(--muted); font-size: 0.95rem; }
+    header .version { color: var(--accent); font-size: 0.8rem; margin-top: 0.5rem; }
+
+    main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%; }
+
+    .box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
     }
-    .quote-text.loading {
+    .quote-box { border-left: 4px solid var(--accent); }
+    .quote-box h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 1rem; }
+    .quote-text { font-size: 1.1rem; font-style: italic; margin-bottom: 0.75rem; line-height: 1.6; }
+    .quote-author { color: var(--muted); font-size: 0.9rem; text-align: right; }
+
+    .phishing-box { border-left: 4px solid var(--danger); }
+    .phishing-box h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+    .phishing-toggle {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .phishing-toggle:hover { background: #21262d; }
+    .phishing-toggle .arrow { margin-left: auto; transition: transform 0.3s; }
+    .phishing-toggle.open .arrow { transform: rotate(180deg); }
+    .phishing-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .phishing-content.open { max-height: 2000px; }
+    .phishing-inner { padding-top: 1.25rem; }
+    .phishing-inner p { margin-bottom: 1rem; line-height: 1.7; }
+    .phishing-inner h3 { color: var(--accent); font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+    .phishing-inner ul { list-style: none; padding-left: 0; }
+    .phishing-inner ul li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; }
+    .phishing-inner ul li::before { content: '⚠️'; position: absolute; left: 0; }
+    .tip-box {
+      background: rgba(63, 185, 80, 0.1);
+      border: 1px solid var(--accent2);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .tip-box strong { color: var(--accent2); }
+    .tip-box p { margin: 0 !important; }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .nav-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .nav-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .nav-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .nav-card p { color: var(--muted); font-size: 0.85rem; }
+
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.25rem;
       color: var(--muted);
-      animation: pulse 1.5s ease-in-out infinite;
+      font-size: 0.85rem;
     }
-    .quote-author {
-      font-size: 0.78rem; color: var(--accent2);
-      margin-top: 0.6rem; padding-left: 0.5rem;
-      letter-spacing: 0.5px;
-    }
-    .quote-footer {
-      display: flex; align-items: center;
-      justify-content: space-between; margin-top: 0.5rem;
-    }
-    .quote-source {
-      font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
-    }
-    .quote-refresh {
-      background: none; border: 1px solid rgba(200,169,110,0.2);
-      cursor: pointer; color: var(--muted); font-size: 0.72rem;
-      padding: 0.2rem 0.6rem; border-radius: 4px;
-      transition: color 0.2s, border-color 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .quote-refresh:hover { color: var(--accent); border-color: rgba(200,169,110,0.5); }
-    .quote-banner{margin-bottom:1.5rem}
-  
-    /* ── Feedback-Box ── */
-    .feedback-box {
-      max-width: 560px; margin: 1.5rem auto 0;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.4rem 1.6rem;
-    }
-    .feedback-box h2 { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--accent); margin-bottom:0.3rem; }
-    .feedback-box p  { font-size:0.75rem; color:var(--muted); margin-bottom:1rem; line-height:1.5; }
-    .feedback-row    { display:flex; gap:0.8rem; margin-bottom:0.8rem; flex-wrap:wrap; }
-    .feedback-row input {
-      flex:1; min-width:120px;
-      background:var(--bg); border:1px solid var(--border); border-radius:7px;
-      padding:0.55rem 0.8rem; color:var(--text);
-      font-family:'DM Sans',sans-serif; font-size:0.82rem; outline:none;
-      transition:border-color 0.2s;
-    }
-    .feedback-row input:focus { border-color:var(--accent); }
-    .feedback-row input::placeholder { color:var(--muted); }
-    .feedback-box textarea {
-      width:100%; min-height:90px; resize:vertical;
-      background:var(--bg); border:1px solid var(--border); border-radius:7px;
-      padding:0.6rem 0.8rem; color:var(--text);
-      font-family:'DM Sans',sans-serif; font-size:0.82rem; outline:none;
-      margin-bottom:0.8rem; transition:border-color 0.2s;
-    }
-    .feedback-box textarea:focus  { border-color:var(--accent); }
-    .feedback-box textarea::placeholder { color:var(--muted); }
-    .feedback-send {
-      background:rgba(200,169,110,0.1); border:1px solid rgba(200,169,110,0.35);
-      color:var(--accent); font-family:'DM Sans',sans-serif;
-      font-size:0.82rem; font-weight:500;
-      padding:0.55rem 1.2rem; border-radius:7px; cursor:pointer;
-      transition:background 0.2s;
-    }
-    .feedback-send:hover    { background:rgba(200,169,110,0.2); }
-    .feedback-send:disabled { opacity:0.5; cursor:not-allowed; }
-    .feedback-status { margin-top:0.7rem; font-size:0.78rem; display:none; padding:0.5rem 0.8rem; border-radius:6px; }
-    .feedback-status.ok  { background:rgba(126,184,164,0.12); color:var(--accent2); display:block; }
-    .feedback-status.err { background:rgba(220,80,80,0.12);   color:#e07070;        display:block; }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="logo">🛡</div>
-  <h1>Meine Startseite</h1>
-  <p class="subtitle">Verifizierte Links als Schutz vor Phishing — öffne sensible Seiten wie Banken und E-Mail immer nur von hier aus.</p>
+  <header>
+    <h1>🛡️ Cyber-Sicherheit</h1>
+    <p>Dein Ausgangspunkt für sicheres Surfen im Netz</p>
+    <div class="version">Version 3.5 · Stand: 17.06.2026</div>
+  </header>
 
-  <div class="quote-banner" id="quoteBanner">
-    <div class="quote-label">// Gedanke des Tages</div>
-    <div class="quote-text loading" id="quoteText">Lade Zitat…</div>
-    <div class="quote-author" id="quoteAuthor"></div>
-    <div class="quote-footer">
-      <span class="quote-source" id="quoteSource"></span>
-      <button class="quote-refresh" id="quoteBtn" onclick="loadQuote()">&#8635; neues Zitat</button>
+  <main>
+    <div class="box quote-box">
+      <h2>💡 Gedanke des Tages</h2>
+      <div id="quote-text" class="quote-text">Lädt…</div>
+      <div id="quote-author" class="quote-author">—</div>
     </div>
-  </div>
 
-  <div class="btn-group">
-    <a href="sicher.html" class="btn btn-sicher">
-      <div class="btn-icon">🔒</div>
-      <div class="btn-text">
-        <div class="btn-title">Sichere Startseite</div>
-        <div class="btn-desc">Banken · E-Mail · Online-Shops · Cloud<br>Schutz vor Phishing-Angriffen</div>
+    <div class="box phishing-box">
+      <h2>🎣 Was ist Phishing?</h2>
+      <button class="phishing-toggle" onclick="togglePhishing()" aria-expanded="false">
+        <span>Was ist Phishing? — Mehr erfahren</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="phishing-content" id="phishing-content">
+        <div class="phishing-inner">
+          <p><strong>Phishing</strong> ist eine Methode, mit der Betrüger versuchen, an deine persönlichen Daten zu kommen — zum Beispiel Passwörter, Bankdaten oder Account-Informationen. Sie geben sich dabei als vertrauenswürdige Person oder Organisation aus.</p>
+
+          <h3>🔧 Wie funktioniert das?</h3>
+          <p>Oft bekommst du eine E-Mail, SMS oder Nachricht, die so aussieht, als käme sie von deiner Bank, von Amazon, Netflix oder sogar von einem Kollegen. Darin wirst du aufgefordert, auf einen Link zu klicken und dich anzumelden. Die Webseite sieht echt aus — ist es aber nicht. Gibst du dort deine Daten ein, landen sie direkt bei den Betrügern.</p>
+
+          <h3>🚩 Typische Warnsignale</h3>
+          <ul>
+            <li><strong>Dringende Aufforderungen</strong> — „Sofort handeln!", „Dein Konto wird gesperrt!"</li>
+            <li><strong>Seltsame Absender</strong> — Die E-Mail-Adresse stimmt nicht mit dem echten Unternehmen überein</li>
+            <li><strong>Falsche Links</strong> — Bewege die Maus über den Link und prüfe, wohin er wirklich führt</li>
+            <li><strong>Rechtschreib- und Grammatikfehler</strong> — Seriöse Unternehmen machen selten solche Fehler</li>
+            <li><strong>Unerwartete Anhänge</strong> — Öffne keine Dateianhänge von unbekannten Absendern</li>
+            <li><strong>Drohungen oder Verlockungen</strong> — „Du hast gewonnen!" oder „Wir verklagen dich!" sind fast immer gefälscht</li>
+          </ul>
+
+          <h3>📱 Smishing & Vishing</h3>
+          <p>Nicht nur E-Mails werden genutzt. <strong>Smishing</strong> ist Phishing per SMS, <strong>Vishing</strong> per Telefon. Beim Anruf behauptet jemand, von deiner Bank oder der Polizei zu sein, und verlangt Daten oder Geld. Auch hier gilt: Niemals vertrauliche Daten am Telefon herausgeben.</p>
+
+          <h3>✅ Was tun, wenn du eine Phishing-Nachricht bekommst?</h3>
+          <ul>
+            <li>Klicke <strong>nicht</strong> auf Links und öffne keine Anhänge</li>
+            <li>Gib <strong>keine</strong> Daten ein</li>
+            <li>Markiere die Nachricht als Spam und lösche sie</li>
+            <li>Wenn du unsicher bist, kontaktiere das angebliche Unternehmen <strong>direkt</strong> über deren offizielle Webseite</li>
+            <li>Hat jemand deine Daten erhalten? <strong>Ändere sofort</strong> deine Passwörter und informiere betroffene Dienste</li>
+          </ul>
+
+          <div class="tip-box">
+            <p><strong>💡 Goldene Regel:</strong> Kein seriöses Unternehmen wird dich jemals per E-Mail oder SMS nach deinem Passwort, deiner PIN oder deinen vollständigen Kontodaten fragen. Wenn du dir nicht sicher bist — lass es bleiben!</p>
+          </div>
+        </div>
       </div>
-      <div class="btn-arrow">→</div>
-    </a>
-    <a href="links.html" class="btn btn-links">
-      <div class="btn-icon">🔗</div>
-      <div class="btn-text">
-        <div class="btn-title">Nützliche Links</div>
-        <div class="btn-desc">Nachrichten · Gesundheit · Behörden · KI<br>Luxemburg · Notfall · Kurioses & mehr</div>
-      </div>
-      <div class="btn-arrow">→</div>
-    </a>
-  </div>
-
-  <div class="info">
-    <strong>Was ist Phishing?</strong><br>
-    Betrüger versenden E-Mails, die aussehen wie echte Nachrichten von Banken oder Online-Shops.
-    Wer auf einen Link in einer E-Mail, einem WhatsApp-Chat oder einer SMS klickt,
-    kann auf einer gefälschten Seite landen und unwissentlich Passwörter preisgeben.
-    <strong>Wer immer nur über diese Seite geht, kann nicht hereinfallen</strong> — egal wie echt die Nachricht aussieht.
-  </div>
-
-<div class="feedback-box">
-  <h2>💬 Feedback & Wünsche</h2>
-  <p>Ideen, neue Links, Fehler melden — alles willkommen.<br>Name und Telefon sind freiwillig.</p>
-  <form id="feedbackForm" action="https://formspree.io/f/xzdqqdjo" method="POST">
-    <div class="feedback-row">
-      <input type="text" name="name"    placeholder="Name (freiwillig)">
-      <input type="tel"  name="telefon" placeholder="Telefon (freiwillig)">
     </div>
-    <textarea name="nachricht" placeholder="Deine Nachricht, Idee oder Wunsch…" required></textarea>
-    <button type="submit" class="feedback-send" id="feedbackBtn">✉ Senden</button>
-    <div class="feedback-status" id="feedbackStatus"></div>
-  </form>
-</div>
-  <div class="version">
-    <span class="v-num">Version 3.3</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-06-16@20:02:52</span>
-  </div>
-</div>
 
-<script src="quote.js">
-  // Feedback
-  var ffForm = document.getElementById('feedbackForm');
-  if (ffForm) {
-    ffForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = document.getElementById('feedbackBtn');
-      var st  = document.getElementById('feedbackStatus');
-      btn.disabled = true; btn.textContent = 'Wird gesendet…';
-      st.className = 'feedback-status';
-      fetch(ffForm.action, {
-        method:'POST', body:new FormData(ffForm),
-        headers:{'Accept':'application/json'}
-      }).then(function(r) {
-        if (r.ok) {
-          st.textContent = '✓ Danke! Deine Nachricht wurde gesendet.';
-          st.className = 'feedback-status ok';
-          ffForm.reset();
-        } else { throw new Error(); }
-      }).catch(function() {
-        st.textContent = '✗ Fehler beim Senden. Bitte später nochmal versuchen.';
-        st.className = 'feedback-status err';
-      }).finally(function() {
-        btn.disabled = false; btn.textContent = '✉ Senden';
-      });
-    });
-  }
-</script>
+    <h2 style="color: var(--text); margin-bottom: 1rem; font-size: 1.3rem;">📌 Schnellzugriff</h2>
+    <div class="nav-grid">
+      <a href="sicher.html" class="nav-card">
+        <div class="icon">🔒</div>
+        <h3>Sichere Links</h3>
+        <p>Geprüfte und sichere Dienste</p>
+      </a>
+      <a href="links.html" class="nav-card">
+        <div class="icon">🔗</div>
+        <h3>Linksammlung</h3>
+        <p>Nützliche Ressourcen im Überblick</p>
+      </a>
+      <a href="cybersec.html" class="nav-card">
+        <div class="icon">🛡️</div>
+        <h3>Cyber-Sicherheit</h3>
+        <p>Tools, Wissen und Hilfe</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    🛡️ Cyber-Sicherheit · Version 3.5 · 17.06.2026
+  </footer>
+
+  <script>
+    const quotes = [
+      { text: "Das größte Sicherheitsrisiko ist der Mensch hinter dem Bildschirm.", author: "Sicherheitsweisheit" },
+      { text: "Ein starkes Passwort ist wie ein gutes Schloss — es hält ungebetene Gäste fern.", author: "IT-Grundschutz" },
+      { text: "Vertrauen ist gut, Verschlüsselung ist besser.", author: "Datenschutzprinzip" },
+      { text: "Du bist nur so sicher wie dein schwächstes Passwort.", author: "Sicherheitsexperten" },
+      { text: "Im Internet ist nichts umsonst — wenn du nicht zahlst, bezahlst du mit deinen Daten.", author: "Datenschützer" },
+      { text: "Eine Sekunde Unachtsamkeit kann Monate an Arbeit zunichte machen.", author: "IT-Notfallteam" },
+      { text: "Wer seine Daten schützt, schützt seine Freiheit.", author: "Digital-Deklaration" },
+      { text: "Der beste Virenschutz beginnt mit gesundem Menschenverstand.", author: "Cybersicherheits-Ratgeber" },
+      { text: "Jedes Klick zählt — klicke bewusst und informiert.", author: "Online-Sicherheitsleitfaden" },
+      { text: "Datensparsamkeit ist der beste Datenschutz.", author: "Bundesdatenschutzbeauftragter" },
+      { text: "Auch der stärkste Burggraben nutzt nichts, wenn das Tor offen steht.", author: "IT-Sicherheitsmetapher" },
+      { text: "Zwei-Faktor-Authentifizierung ist der Bodyguard für deine Online-Konten.", author: "Cybersicherheits-Tipp" },
+      { text: "Angreifer nutzen keine Lücken im System — sie nutzen Lücken im Verhalten.", author: "Social Engineering Report" },
+      { text: "Jede Software hat Fehler — Updates schließen die bekanntesten davon.", author: "Patch-Management" },
+      { text: "Wer backuppt, schläft besser — Datenverlust passiert schneller als gedacht.", author: "Backup-Weisheit" },
+      { text: "Eine sichere Verbindung erkennen: Achte auf das Schloss-Symbol und https:// in der Adresszeile.", author: "Browser-Sicherheit" },
+      { text: "Phishing-Mails werden immer besser — doch auch die Warnsignale bleiben sichtbar.", author: "E-Mail-Sicherheit" },
+      { text: "Privatsphäre ist kein Luxus, sondern ein Menschenrecht im digitalen Zeitalter.", author: "Digitalcourage e.V." },
+      { text: "Deine digitale Identität ist so wertvoll wie dein Personalausweis — schütze sie gleichermaßen.", author: "Verbraucherzentrale" },
+      { text: "Sicherheit ist kein Produkt, sondern ein Prozess — und eine Haltung.", author: "Bruce Schneier" },
+      { text: "Wer heute online geht, braucht nicht nur Technik, sondern auch Wissen.", author: "BSI — Bundesamt für Sicherheit" },
+      { text: "Freies Wissen ist auch sicheres Wissen — informiere dich aus vertrauenswürdigen Quellen.", author: "Bildungsressource" },
+      { text: "Eine Firewall ohne Benutzerbewusstsein ist wie ein Rettungsring mit Loch.", author: "IT-Sicherheitsvergleich" },
+      { text: "In der Ruhe liegt die Sicherheit — bei verdächtigen Nachrichten erst nachdenken, dann klicken.", author: "Präventionsratgeber" },
+      { text: "Open Source bedeutet nicht nur Transparenz — es bedeutet auch gemeinsame Sicherheit durch viele Augen.", author: "Open-Source-Community" },
+      { text: "Dein Smartphone ist der persönlichste Computer — behandle es entsprechend.", author: "Mobile-Security-Ratgeber" },
+      { text: "Updates sind keine Belästigung, sondern Rettungsringe für deine Sicherheit.", author: "Software-Updates" },
+      { text: "Mache es Angreifern schwer: Verschiedene Passwörter für verschiedene Dienste.", author: "Passwort-Strategie" },
+      { text: "Cyberangriffe kennen keine Geschäftszeiten — Wachsamkeit ist 24/7 gefragt.", author: "CERT (Computer Emergency Response Team)" },
+      { text: "Der erste Schritt zur Sicherheit ist das Bewusstsein, dass Gefahren existieren.", author: "Sicherheitsbewusstsein" }
+    ];
+
+    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+    const quote = quotes[dayOfYear % quotes.length];
+    document.getElementById('quote-text').textContent = '„' + quote.text + '."';
+    document.getElementById('quote-author').textContent = '— ' + quote.author;
+
+    function togglePhishing() {
+      const btn = document.querySelector('.phishing-toggle');
+      const content = document.getElementById('phishing-content');
+      const isOpen = content.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+    }
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
