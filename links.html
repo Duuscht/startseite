@@ -517,12 +517,14 @@
     </ul>
   </div>
 </main>
+
+
 <div class="nav-btn-wrap">
   <a href="index.html" class="nav-btn secondary">⌂ Zur Übersicht</a>
   <a href="sicher.html" class="nav-btn">🛡 Sichere Startseite →</a>
 </div>
 <div class="version-bar">
-  <span class="v-num">Version 3.1</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-06-10@11:54:44</span>
+  <span class="v-num">Version 3.3</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-06-16@20:02:52</span>
 </div>
 
 
@@ -630,6 +632,171 @@
     });
   })();
 
+
+
+
+  // ════════════════════════════════════════════════════════════
+// PERSONALISIERUNG — localStorage
+// ════════════════════════════════════════════════════════════
+(function() {
+  var STORAGE_KEY = 'meine-startseite-hidden';
+  var editMode = false;
+  var hiddenLinks = {};
+
+  // Gespeicherte Einstellungen laden
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) hiddenLinks = JSON.parse(saved);
+  } catch(e) {}
+
+  // Versteckte Links ausblenden
+  function applyHidden() {
+    document.querySelectorAll('div.card li').forEach(function(li) {
+      var a = li.querySelector('a');
+      if (!a) return;
+      var key = a.href;
+      if (hiddenLinks[key]) {
+        li.style.display = editMode ? '' : 'none';
+        li.setAttribute('data-hidden', '1');
+      } else {
+        li.removeAttribute('data-hidden');
+      }
+    });
+    // Leere Karten ausblenden
+    document.querySelectorAll('div.card').forEach(function(card) {
+      var visibleLinks = card.querySelectorAll('li:not([data-hidden]) a');
+      if (!editMode) {
+        card.style.opacity = '1';
+      }
+    });
+  }
+
+  // Checkboxen in Edit-Modus anzeigen
+  function enterEditMode() {
+    editMode = true;
+    document.querySelectorAll('div.card li').forEach(function(li) {
+      var a = li.querySelector('a');
+      if (!a) return;
+      li.style.display = '';
+      var cb = li.querySelector('.pz-cb');
+      if (!cb) {
+        cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'pz-cb';
+        cb.checked = !hiddenLinks[a.href];
+        cb.style.cssText = 'margin-right:8px;accent-color:#c8a96e;width:15px;height:15px;cursor:pointer;flex-shrink:0;';
+        cb.addEventListener('change', function() {
+          if (cb.checked) {
+            delete hiddenLinks[a.href];
+          } else {
+            hiddenLinks[a.href] = 1;
+          }
+        });
+        li.insertBefore(cb, li.firstChild);
+      }
+      cb.style.display = 'inline-block';
+    });
+    document.getElementById('pz-btn').textContent = '✓ Speichern';
+    document.getElementById('pz-btn').style.borderColor = 'rgba(126,184,164,0.5)';
+    document.getElementById('pz-btn').style.color = 'var(--accent2)';
+    document.getElementById('pz-reset').style.display = 'inline-flex';
+  }
+
+  function exitEditMode() {
+    editMode = false;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(hiddenLinks)); } catch(e) {}
+    document.querySelectorAll('.pz-cb').forEach(function(cb) { cb.style.display = 'none'; });
+    applyHidden();
+    document.getElementById('pz-btn').textContent = '⚙ Anpassen';
+    document.getElementById('pz-btn').style.borderColor = '';
+    document.getElementById('pz-btn').style.color = '';
+    document.getElementById('pz-reset').style.display = 'none';
+    // Export-Code aktualisieren
+    updateExportCode();
+  }
+
+  function resetAll() {
+    hiddenLinks = {};
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+    document.querySelectorAll('.pz-cb').forEach(function(cb) { cb.checked = true; });
+    document.querySelectorAll('div.card li').forEach(function(li) {
+      li.removeAttribute('data-hidden');
+      li.style.display = '';
+    });
+  }
+
+  // Export/Import Code
+  function updateExportCode() {
+    var el = document.getElementById('pz-code');
+    if (!el) return;
+    var keys = Object.keys(hiddenLinks);
+    if (keys.length === 0) { el.value = '(keine Anpassungen)'; return; }
+    el.value = btoa(JSON.stringify(hiddenLinks));
+  }
+
+  function importCode(code) {
+    try {
+      var parsed = JSON.parse(atob(code));
+      hiddenLinks = parsed;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(hiddenLinks));
+      applyHidden();
+      updateExportCode();
+      alert('Einstellungen importiert!');
+    } catch(e) {
+      alert('Ungültiger Code.');
+    }
+  }
+
+  // Buttons einfügen
+  window.addEventListener('DOMContentLoaded', function() {
+    var wrap = document.querySelector('.nav-btn-wrap');
+    if (!wrap) return;
+
+    // Anpassen-Button
+    var btn = document.createElement('button');
+    btn.id = 'pz-btn';
+    btn.textContent = '⚙ Anpassen';
+    btn.style.cssText = 'display:inline-flex;align-items:center;gap:0.6rem;background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.25);color:var(--accent);font-family:"DM Sans",sans-serif;font-size:0.85rem;font-weight:500;padding:0.7rem 1.6rem;border-radius:8px;cursor:pointer;transition:background 0.2s,border-color 0.2s;';
+    btn.addEventListener('click', function() {
+      if (!editMode) enterEditMode(); else exitEditMode();
+    });
+    wrap.appendChild(btn);
+
+    // Reset-Button
+    var resetBtn = document.createElement('button');
+    resetBtn.id = 'pz-reset';
+    resetBtn.textContent = '↺ Alles anzeigen';
+    resetBtn.style.cssText = 'display:none;align-items:center;gap:0.6rem;background:rgba(220,80,80,0.08);border:1px solid rgba(220,80,80,0.25);color:#e07070;font-family:"DM Sans",sans-serif;font-size:0.85rem;font-weight:500;padding:0.7rem 1.2rem;border-radius:8px;cursor:pointer;';
+    resetBtn.addEventListener('click', function() { resetAll(); });
+    wrap.appendChild(resetBtn);
+
+    // Export/Import Box
+    var pzBox = document.createElement('div');
+    pzBox.id = 'pz-exportbox';
+    pzBox.style.cssText = 'display:none;margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:0.75rem;color:var(--muted);max-width:900px;margin-left:auto;margin-right:auto;';
+    pzBox.innerHTML = '<div style="margin-bottom:0.5rem">📋 <strong style="color:var(--text)">Code für andere Geräte:</strong> Kopiere diesen Code und importiere ihn auf deinem anderen Gerät.</div>'
+      + '<input id="pz-code" type="text" readonly style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:0.4rem 0.7rem;color:var(--accent2);font-size:0.72rem;font-family:monospace;margin-bottom:0.6rem;">'
+      + '<div><input id="pz-import-field" type="text" placeholder="Code einfügen…" style="background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:0.4rem 0.7rem;color:var(--text);font-size:0.72rem;width:calc(100% - 100px);">'
+      + '<button onclick="importCode(document.getElementById(\'pz-import-field\').value)" style="margin-left:8px;background:rgba(126,184,164,0.1);border:1px solid rgba(126,184,164,0.3);color:var(--accent2);padding:0.4rem 0.7rem;border-radius:5px;cursor:pointer;font-size:0.72rem;">Importieren</button></div>';
+    wrap.parentNode.insertBefore(pzBox, wrap.nextSibling);
+
+    // Export-Box bei Edit-Modus anzeigen
+    var origEnter = enterEditMode;
+    document.getElementById('pz-btn').addEventListener('click', function() {
+      setTimeout(function() {
+        pzBox.style.display = editMode ? 'none' : 'block';
+        updateExportCode();
+      }, 10);
+    });
+
+    // Beim Laden: versteckte Links anwenden
+    applyHidden();
+    updateExportCode();
+  });
+
+  // importCode global machen
+  window.importCode = importCode;
+})();
 
 </script>
 </body>
