@@ -3,276 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🛡️ Cyber-Sicherheit</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>🔒 Cyber-Sicherheit</title>
+  <link rel="icon" href="https://www.google.com/s2/favicons?domain=google.com&sz=32" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0d1117; --card: #161b22; --border: #30363d;
-      --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
-      --muted: #8b949e;
-      --red: #ff7b72; --blue: #79c0ff; --green: #3fb950;
-      --gold: #e3b341; --purple: #bc8cff; --teal: #39d353;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
-      min-height: 100vh; padding: 1.5rem 1rem 5rem; }
-    header { max-width: 1100px; margin: 0 auto 1rem; text-align: center; }
-    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--accent); }
-    .header-sub { color: var(--muted); font-size: 0.85rem; }
-
-    /* Suchfeld */
-    .search-wrap { max-width: 1100px; margin: 0 auto 1.2rem; position: relative; }
-    .search-wrap input { width: 100%; padding: 0.65rem 1rem 0.65rem 2.6rem;
-      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-      color: var(--text); font-size: 0.9rem; font-family: 'DM Sans', sans-serif; }
-    .search-wrap input:focus { outline: none; border-color: var(--accent); }
-    .search-wrap .search-icon { position: absolute; left: 0.85rem; top: 50%;
-      transform: translateY(-50%); font-size: 0.9rem; pointer-events: none; }
-    .search-count { position: absolute; right: 0.85rem; top: 50%;
-      transform: translateY(-50%); font-size: 0.75rem; color: var(--muted); }
-
-    main { max-width: 1100px; margin: 0 auto; }
-
-    /* Kompakte Kategorie-Sektion */
-    .cat-section { margin-bottom: 1.5rem; }
-    .cat-section.hidden { display: none; }
-    .cat-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.07em; margin-bottom: 0.45rem; padding: 3px 8px;
-      border-radius: 4px; display: inline-block; }
-    .cat-title.c-red { color: var(--red); }
-    .cat-title.c-blue { color: var(--blue); }
-    .cat-title.c-green { color: var(--green); }
-    .cat-title.c-gold { color: var(--gold); }
-    .cat-title.c-purple { color: var(--purple); }
-    .cat-title.c-teal { color: var(--teal); }
-
-    .card-grid { display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px; }
-
-    .link-card { display: flex; flex-direction: column;
-      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-      padding: 7px 10px; text-decoration: none; color: var(--text);
-      transition: border-color 0.15s, background 0.15s; }
-    .link-card:hover { border-color: var(--accent); background: rgba(200,169,110,0.06); }
-    .link-card.hidden { display: none; }
-    .link-name { font-size: 0.78rem; font-weight: 500; line-height: 1.3;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .link-url { font-size: 0.68rem; color: var(--muted);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-
-    /* Navigation */
-    .footer-nav { max-width: 1100px; margin: 2rem auto 0;
-      border-top: 1px solid var(--border); padding-top: 1rem; text-align: center; }
-    .footer-nav a { display: inline-block; background: rgba(200,169,110,0.1);
-      border: 1px solid rgba(200,169,110,0.35); color: var(--accent);
-      text-decoration: none; padding: 0.5rem 1.2rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 500; transition: background 0.2s, border-color 0.2s; }
-    .footer-nav a:hover { background: rgba(200,169,110,0.18); border-color: var(--accent); }
-
-    .version-bar { max-width: 1100px; margin: 1rem auto 0;
-      text-align: center; font-size: 0.72rem; color: var(--muted); }
-    .version-bar .v-num { color: #39c96e; font-weight: 700; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#06120a;--surface:#0c1e12;--border:#1a3525;--accent:#00e676;--accent2:#1de9b6;--text:#c8f5d8;--muted:#5a8a68;--warn:#ffca28}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1.5rem 4rem;background-image:radial-gradient(ellipse 60% 40% at 80% 10%,rgba(0,230,118,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 10% 80%,rgba(29,233,182,0.05) 0%,transparent 60%)}
+    header{max-width:900px;margin:0 auto 1.5rem;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:1.2rem}
+    header h1{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--accent);letter-spacing:-0.02em}
+    header p{font-size:0.78rem;color:var(--muted);font-weight:300}
+    .search-wrap{max-width:900px;margin:0 auto 2rem;position:relative}
+    .search-wrap input{width:100%;padding:0.75rem 1rem 0.75rem 2.8rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s}
+    .search-wrap input:focus{border-color:var(--accent)}
+    .search-wrap input::placeholder{color:var(--muted)}
+    .search-icon{position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none}
+    .search-count{position:absolute;right:0.9rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--muted)}
+    .no-results{max-width:900px;margin:0 auto;text-align:center;color:var(--muted);font-size:0.9rem;padding:2rem;display:none}
+    main{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.4rem 1.2rem;transition:border-color 0.2s,transform 0.2s;animation:fadeUp 0.4s ease both}
+    .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .card.hidden{display:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .card-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem}
+    .card-icon{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-size:1rem;flex-shrink:0;background:rgba(0,230,118,0.12)}
+    .card-title{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--text)}
+    ul{list-style:none}
+    ul li{margin-bottom:0.3rem}
+    ul li.hidden{display:none}
+    ul li a{display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0.6rem 0;border-radius:7px;text-decoration:none;font-size:0.875rem;color:var(--text);font-weight:400;transition:background 0.15s,color 0.15s;word-break:break-all}
+    ul li a:hover{background:rgba(0,230,118,0.07);color:var(--accent)}
+    ul li a mark{background:rgba(0,230,118,0.2);color:#00e676;font-weight:700;border-radius:2px;padding:0 1px}
+    .favicon{width:16px;height:16px;border-radius:3px;flex-shrink:0;object-fit:contain;vertical-align:middle;background:#fff;border-radius:2px;padding:1px}
+    .url-display{display:block;font-size:0.65rem;color:var(--muted);padding:0 0.6rem 0.45rem;word-break:break-all}
+    .nav-btn-wrap{max-width:900px;margin:2rem auto 0;text-align:center}
+    .nav-btn{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.35);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;padding:0.7rem 1.6rem;border-radius:8px;text-decoration:none;transition:background 0.2s,border-color 0.2s}
+    .nav-btn:hover{background:rgba(0,230,118,0.18);border-color:var(--accent)}
+    .cross-results{max-width:900px;margin:0 auto 1.5rem;background:rgba(29,233,182,0.06);border:1px solid rgba(29,233,182,0.2);border-radius:10px;padding:0.8rem 1rem;display:none}
+    .cross-header{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;opacity:0.8}
+    .cross-item{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.5rem;border-radius:6px;text-decoration:none;transition:background 0.15s;margin-bottom:0.2rem;overflow:hidden}
+    .cross-item:hover{background:rgba(255,255,255,0.05)}
+    .cross-badge{font-size:0.65rem;background:rgba(29,233,182,0.15);color:var(--accent2);border-radius:3px;padding:1px 5px;white-space:nowrap;flex-shrink:0}
+    .cross-label{font-size:0.875rem;color:var(--text);flex:1;word-break:break-word}
+    .cross-label mark{background:rgba(0,230,118,0.3);color:var(--accent);font-weight:700;border-radius:2px}
+    .cross-rubrik{font-size:0.68rem;color:var(--muted);opacity:0.7;flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px}
+    .version-bar{max-width:900px;margin:1.5rem auto 0;text-align:center;font-size:0.75rem;color:#4a4858;border-top:1px solid #1a3525;padding-top:1rem}
+    .version-bar .v-num{color:#39c96e;font-weight:700;font-size:0.8rem}
   </style>
 </head>
 <body>
 <header>
-  <h1>🛡️ Cyber-Sicherheit</h1>
-  <p class="header-sub">Tools, Wissen und Hilfe für deine digitale Sicherheit</p>
+  <h1>🔒 Cyber-Sicherheit</h1>
+  <p>Datenschutz, VPNs, Passwörter & sichere Kommunikation</p>
 </header>
-
 <div class="search-wrap">
   <span class="search-icon">🔍</span>
-  <input type="text" id="searchInput" placeholder="Suche (z. B. Passwort, VPN, Malware, Melden)…" autocomplete="off">
+  <input type="text" id="search" placeholder="Link suchen…" autocomplete="off">
   <span class="search-count" id="searchCount"></span>
 </div>
-
+<div class="no-results" id="noResults">Kein Link gefunden 🤔</div>
+<div class="cross-results" id="crossResults"></div>
 <main id="main">
-
-  <!-- 🔍 SICHERHEITS-TOOLS -->
-  <div class="cat-section">
-    <h2 class="cat-title c-red">🔍 SICHERHEITS-TOOLS</h2>
-    <div class="card-grid">
-      <a href="https://www.virustotal.com" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">VirusTotal</span>
-        <span class="link-url">www.virustotal.com</span>
-      </a>
-      <a href="https://haveibeenpwned.com" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Have I Been Pwned? (Datenleck-Check)</span>
-        <span class="link-url">haveibeenpwned.com</span>
-      </a>
-      <a href="https://www.shodan.io" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Shodan (Suchmaschine für IoT)</span>
-        <span class="link-url">www.shodan.io</span>
-      </a>
-      <a href="https://urlscan.io" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">URLScan.io</span>
-        <span class="link-url">urlscan.io</span>
-      </a>
-      <a href="https://duuscht.github.io/wizard" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Browser-Diagnose (Wizard)</span>
-        <span class="link-url">duuscht.github.io/wizard</span>
-      </a>
-      <a href="https://ipleak.net" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">IPLeak.net (IP- & DNS-Leak-Test)</span>
-        <span class="link-url">ipleak.net</span>
-      </a>
-      <a href="https://browserleaks.com" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">BrowserLeaks (Fingerprint-Test)</span>
-        <span class="link-url">browserleaks.com</span>
-      </a>
-      <a href="https://dnscheck.tools" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">DNS Check Tools</span>
-        <span class="link-url">dnscheck.tools</span>
-      </a>
-      <a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Cover Your Tracks (EFF)</span>
-        <span class="link-url">coveryourtracks.eff.org</span>
-      </a>
-      <a href="https://controld.com/tools/dns-leak-test" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">ControlD DNS-Leak-Test</span>
-        <span class="link-url">controld.com/tools/dns-leak-test</span>
-      </a>
-    </div>
+  <div class="card">
+    <div class="card-header"><div class="card-icon">🔒</div><span class="card-title">Datenschutz & Anonymität</span></div>
+    <ul>
+      <li><a href="https://duckduckgo.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=duckduckgo.com&sz=32" alt="">DuckDuckGo</a><span class="url-display">duckduckgo.com</span></li>
+      <li><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com&sz=32" alt="">Have I Been Pwned</a><span class="url-display">haveibeenpwned.com</span></li>
+      <li><a href="https://privacybadger.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=privacybadger.org&sz=32" alt="">Privacy Badger</a><span class="url-display">privacybadger.org</span></li>
+      <li><a href="https://torproject.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=torproject.org&sz=32" alt="">Tor Browser</a><span class="url-display">torproject.org</span></li>
+    </ul>
   </div>
-
-  <!-- 🔐 PASSWORT-MANAGER -->
-  <div class="cat-section">
-    <h2 class="cat-title c-teal">🔐 PASSWORT-MANAGER</h2>
-    <div class="card-grid">
-      <a href="https://bitwarden.com" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Bitwarden (Open Source)</span>
-        <span class="link-url">bitwarden.com</span>
-      </a>
-      <a href="https://keepass.info" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">KeePass (lokal, keine Cloud)</span>
-        <span class="link-url">keepass.info</span>
-      </a>
-      <a href="https://1password.com" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">1Password</span>
-        <span class="link-url">1password.com</span>
-      </a>
-    </div>
+  <div class="card">
+    <div class="card-header"><div class="card-icon">📚</div><span class="card-title">Informationsquellen</span></div>
+    <ul>
+      <li><a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bsi.bund.de&sz=32" alt="">BSI – Bundesamt für IT-Sicherheit</a><span class="url-display">bsi.bund.de</span></li>
+      <li><a href="https://www.eff.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=eff.org&sz=32" alt="">EFF – Electronic Frontier Foundation</a><span class="url-display">eff.org</span></li>
+      <li><a href="https://www.heise.de/security" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=heise.de&sz=32" alt="">Heise Security</a><span class="url-display">heise.de</span></li>
+      <li><a href="https://www.kuketz-blog.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=kuketz-blog.de&sz=32" alt="">Kuketz IT-Security Blog</a><span class="url-display">kuketz-blog.de</span></li>
+    </ul>
   </div>
-
-  <!-- 🛡️ VPN & ANONYMITÄT -->
-  <div class="cat-section">
-    <h2 class="cat-title c-blue">🛡️ VPN &amp; ANONYMITÄT</h2>
-    <div class="card-grid">
-      <a href="https://mullvad.net" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Mullvad VPN (Schweden, keine Logs)</span>
-        <span class="link-url">mullvad.net</span>
-      </a>
-      <a href="https://protonvpn.com" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">ProtonVPN (Schweiz, Tor-Integration)</span>
-        <span class="link-url">protonvpn.com</span>
-      </a>
-      <a href="https://www.torproject.org" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Tor Browser (anonymer Browser)</span>
-        <span class="link-url">www.torproject.org</span>
-      </a>
-    </div>
+  <div class="card">
+    <div class="card-header"><div class="card-icon">🔐</div><span class="card-title">Passwort-Manager</span></div>
+    <ul>
+      <li><a href="https://1password.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=1password.com&sz=32" alt="">1Password</a><span class="url-display">1password.com</span></li>
+      <li><a href="https://bitwarden.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bitwarden.com&sz=32" alt="">Bitwarden</a><span class="url-display">bitwarden.com</span></li>
+      <li><a href="https://dashlane.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dashlane.com&sz=32" alt="">Dashlane</a><span class="url-display">dashlane.com</span></li>
+      <li><a href="https://keepass.info" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=keepass.info&sz=32" alt="">KeePass</a><span class="url-display">keepass.info</span></li>
+      <li><a href="https://nordpass.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=nordpass.com&sz=32" alt="">NordPass</a><span class="url-display">nordpass.com</span></li>
+    </ul>
   </div>
-
-  <!-- 📚 WISSEN &amp; LERNEN -->
-  <div class="cat-section">
-    <h2 class="cat-title c-purple">📚 WISSEN &amp; LERNEN</h2>
-    <div class="card-grid">
-      <a href="https://www.bsi.bund.de" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">BSI – Bundesamt für IT-Sicherheit</span>
-        <span class="link-url">www.bsi.bund.de</span>
-      </a>
-      <a href="https://www.heise.de/security" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Heise Security (Nachrichten)</span>
-        <span class="link-url">www.heise.de/security</span>
-      </a>
-      <a href="https://isc.sans.edu" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">SANS Internet Stormcenter</span>
-        <span class="link-url">isc.sans.edu</span>
-      </a>
-      <a href="https://www.ccc.de" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">CCC – Chaos Computer Club</span>
-        <span class="link-url">www.ccc.de</span>
-      </a>
-      <a href="https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Online-Wache (Anzeige erstatten)</span>
-        <span class="link-url">www.saarland.de/polizei</span>
-      </a>
-      <a href="https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">ZAC – Cybercrime Saarland</span>
-        <span class="link-url">www.saarland.de/polizei/zac</span>
-      </a>
-      <a href="https://cybr360.saarland/erste-hilfe" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Cybr360 – Erste Hilfe bei Cyberangriff</span>
-        <span class="link-url">cybr360.saarland/erste-hilfe</span>
-      </a>
-      <a href="https://bankenverband.de/verbraucher/fuenf-tipps-fuer-sicheres-onlinebanking" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Online-Banking Sicherheit (Bankenverband)</span>
-        <span class="link-url">bankenverband.de</span>
-      </a>
-    </div>
+  <div class="card">
+    <div class="card-header"><div class="card-icon">💬</div><span class="card-title">Sichere Kommunikation</span></div>
+    <ul>
+      <li><a href="https://briarproject.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=briarproject.org&sz=32" alt="">Briar</a><span class="url-display">briarproject.org</span></li>
+      <li><a href="https://element.io" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=element.io&sz=32" alt="">Element (Matrix)</a><span class="url-display">element.io</span></li>
+      <li><a href="https://mail.proton.me" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mail.proton.me&sz=32" alt="">ProtonMail</a><span class="url-display">mail.proton.me</span></li>
+      <li><a href="https://signal.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=signal.org&sz=32" alt="">Signal</a><span class="url-display">signal.org</span></li>
+      <li><a href="https://threema.ch" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=threema.ch&sz=32" alt="">Threema</a><span class="url-display">threema.ch</span></li>
+      <li><a href="https://wire.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wire.com&sz=32" alt="">Wire</a><span class="url-display">wire.com</span></li>
+    </ul>
   </div>
-
-  <!-- 🚨 MELDEN &amp; HILFE -->
-  <div class="cat-section">
-    <h2 class="cat-title c-red">🚨 MELDEN &amp; HILFE</h2>
-    <div class="card-grid">
-      <a href="https://www.polizei.de" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Polizei – Cybercrime Meldestelle</span>
-        <span class="link-url">www.polizei.de</span>
-      </a>
-      <a href="https://www.verbraucherzentrale.de" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Verbraucherzentrale</span>
-        <span class="link-url">www.verbraucherzentrale.de</span>
-      </a>
-      <a href="https://www.watchlist-internet.at" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Watchlist Internet (Österreich)</span>
-        <span class="link-url">www.watchlist-internet.at</span>
-      </a>
-      <a href="https://www.evz.de" target="_blank" rel="noopener" class="link-card">
-        <span class="link-name">Europäisches Verbraucherzentrum (EVZ)</span>
-        <span class="link-url">www.evz.de</span>
-      </a>
-    </div>
+  <div class="card">
+    <div class="card-header"><div class="card-icon">🛡️</div><span class="card-title">Sicherheits-Tools</span></div>
+    <ul>
+      <li><a href="https://adguard.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=adguard.com&sz=32" alt="">AdGuard</a><span class="url-display">adguard.com</span></li>
+      <li><a href="https://clamav.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=clamav.net&sz=32" alt="">ClamAV</a><span class="url-display">clamav.net</span></li>
+      <li><a href="https://malwarebytes.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=malwarebytes.com&sz=32" alt="">Malwarebytes</a><span class="url-display">malwarebytes.com</span></li>
+      <li><a href="https://virustotal.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=virustotal.com&sz=32" alt="">VirusTotal</a><span class="url-display">virustotal.com</span></li>
+    </ul>
   </div>
-
+  <div class="card">
+    <div class="card-header"><div class="card-icon">🌐</div><span class="card-title">VPN-Dienste</span></div>
+    <ul>
+      <li><a href="https://mullvad.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mullvad.net&sz=32" alt="">Mullvad VPN</a><span class="url-display">mullvad.net</span></li>
+      <li><a href="https://nordvpn.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=nordvpn.com&sz=32" alt="">NordVPN</a><span class="url-display">nordvpn.com</span></li>
+      <li><a href="https://protonvpn.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=protonvpn.com&sz=32" alt="">ProtonVPN</a><span class="url-display">protonvpn.com</span></li>
+      <li><a href="https://windscribe.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=windscribe.com&sz=32" alt="">Windscribe</a><span class="url-display">windscribe.com</span></li>
+    </ul>
+  </div>
 </main>
-
-<div class="footer-nav">
-  <a href="index.html">🏠 Zurück zur Startseite</a>
+<div class="nav-btn-wrap">
+  <a href="index.html" class="nav-btn">← Zurück zur Startseite</a>
 </div>
 <div class="version-bar">
-  <span class="v-num">Version 3.6</span> &nbsp;·&nbsp; 18.06.2026
+  <span class="v-num">Version 3.8</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-06-18@10:35:00</span>
 </div>
-
 <script>
-(function() {
-  var inp = document.getElementById('searchInput');
-  var cnt = document.getElementById('searchCount');
-  var sections = document.querySelectorAll('.cat-section');
-
-  inp.addEventListener('input', function() {
-    var q = this.value.trim().toLowerCase();
-    var totalVisible = 0;
-
-    sections.forEach(function(sec) {
-      var cards = sec.querySelectorAll('.link-card');
-      var secVisible = 0;
-      cards.forEach(function(card) {
-        var name = card.querySelector('.link-name').textContent.toLowerCase();
-        var url  = card.querySelector('.link-url').textContent.toLowerCase();
-        if (!q || name.includes(q) || url.includes(q)) {
-          card.classList.remove('hidden');
-          secVisible++;
-          totalVisible++;
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-      sec.classList.toggle('hidden', secVisible === 0);
-    });
-
-    cnt.textContent = q ? (totalVisible + ' Treffer') : '';
-  });
+var curPage="cybersec.html";
+var allLinks=[{l:"1Password",u:"https://1password.com",r:"Passwort-Manager",s:"cybersec.html"},{l:"Bitwarden",u:"https://bitwarden.com",r:"Passwort-Manager",s:"cybersec.html"},{l:"Dashlane",u:"https://dashlane.com",r:"Passwort-Manager",s:"cybersec.html"},{l:"KeePass",u:"https://keepass.info",r:"Passwort-Manager",s:"cybersec.html"},{l:"NordPass",u:"https://nordpass.com",r:"Passwort-Manager",s:"cybersec.html"},{l:"Mullvad VPN",u:"https://mullvad.net",r:"VPN-Dienste",s:"cybersec.html"},{l:"NordVPN",u:"https://nordvpn.com",r:"VPN-Dienste",s:"cybersec.html"},{l:"ProtonVPN",u:"https://protonvpn.com",r:"VPN-Dienste",s:"cybersec.html"},{l:"Windscribe",u:"https://windscribe.com",r:"VPN-Dienste",s:"cybersec.html"},{l:"AdGuard",u:"https://adguard.com",r:"Sicherheits-Tools",s:"cybersec.html"},{l:"ClamAV",u:"https://clamav.net",r:"Sicherheits-Tools",s:"cybersec.html"},{l:"Malwarebytes",u:"https://malwarebytes.com",r:"Sicherheits-Tools",s:"cybersec.html"},{l:"VirusTotal",u:"https://virustotal.com",r:"Sicherheits-Tools",s:"cybersec.html"},{l:"DuckDuckGo",u:"https://duckduckgo.com",r:"Datenschutz & Anonymität",s:"cybersec.html"},{l:"Have I Been Pwned",u:"https://haveibeenpwned.com",r:"Datenschutz & Anonymität",s:"cybersec.html"},{l:"Privacy Badger",u:"https://privacybadger.org",r:"Datenschutz & Anonymität",s:"cybersec.html"},{l:"Tor Browser",u:"https://torproject.org",r:"Datenschutz & Anonymität",s:"cybersec.html"},{l:"BSI – Bundesamt für IT-Sicherheit",u:"https://www.bsi.bund.de",r:"Informationsquellen",s:"cybersec.html"},{l:"EFF – Electronic Frontier Foundation",u:"https://www.eff.org",r:"Informationsquellen",s:"cybersec.html"},{l:"Heise Security",u:"https://www.heise.de/security",r:"Informationsquellen",s:"cybersec.html"},{l:"Kuketz IT-Security Blog",u:"https://www.kuketz-blog.de",r:"Informationsquellen",s:"cybersec.html"},{l:"Briar",u:"https://briarproject.org",r:"Sichere Kommunikation",s:"cybersec.html"},{l:"Element (Matrix)",u:"https://element.io",r:"Sichere Kommunikation",s:"cybersec.html"},{l:"ProtonMail",u:"https://mail.proton.me",r:"Sichere Kommunikation",s:"cybersec.html"},{l:"Signal",u:"https://signal.org",r:"Sichere Kommunikation",s:"cybersec.html"},{l:"Threema",u:"https://threema.ch",r:"Sichere Kommunikation",s:"cybersec.html"},{l:"Wire",u:"https://wire.com",r:"Sichere Kommunikation",s:"cybersec.html"}];
+(function(){var si=document.getElementById('search'),sc=document.getElementById('searchCount'),nr=document.getElementById('noResults'),cards=document.querySelectorAll('.card');var ot=new Map();cards.forEach(function(c){c.querySelectorAll('li a').forEach(function(a){ot.set(a,a.textContent.trim())})});si.addEventListener('input',function(){var q=si.value.trim().toLowerCase(),tv=0;cards.forEach(function(card){var ch=false;card.querySelectorAll('li').forEach(function(li){var a=li.querySelector('a');if(!a)return;var img=a.querySelector('img');if(!q){li.classList.remove('hidden');a.innerHTML='';if(img)a.appendChild(img);a.appendChild(document.createTextNode(ot.get(a)||''));ch=true}else{var t=(ot.get(a)||'').toLowerCase();if(t.indexOf(q)!==-1){li.classList.remove('hidden');var i=t.indexOf(q);a.innerHTML='';if(img)a.appendChild(img);var sp=document.createElement('span'),bef=document.createTextNode((ot.get(a)||'').slice(0,i)),m=document.createElement('mark');m.textContent=(ot.get(a)||'').slice(i,i+q.length),aft=document.createTextNode((ot.get(a)||'').slice(i+q.length));sp.appendChild(bef);sp.appendChild(m);sp.appendChild(aft);a.appendChild(sp);ch=true;tv++}else{li.classList.add('hidden')}});card.style.display=ch?'':'none'});if(!q){sc.textContent='';nr.style.display='none'}else if(tv===0){sc.textContent='Kein Treffer';nr.style.display='block'}else{sc.textContent=tv+' Treffer';nr.style.display='none'}});var inp=document.getElementById('search'),cnt=document.getElementById('searchCount'),crs=document.getElementById('crossResults');inp.addEventListener('input',function(){var q=this.value.trim().toLowerCase();if(!q){crs.innerHTML='';crs.style.display='none';cnt.textContent='';return}var lc=0;document.querySelectorAll('#main .card li:not(.hidden) a').forEach(function(){lc++});var matches=allLinks.filter(function(l){return l.s!==curPage&&(l.l.toLowerCase().indexOf(q)!==-1||l.r.toLowerCase().indexOf(q)!==-1)}).slice(0,8);if(matches.length>0){var html='<div class="cross-header">Auch auf anderen Seiten</div>';matches.forEach(function(l){var label=l.l.length>38?l.l.slice(0,38)+'…':l.l,idx=label.toLowerCase().indexOf(q);if(idx!==-1){label=label.slice(0,idx)+'<mark>'+label.slice(idx,idx+q.length)+'</mark>'+label.slice(idx+q.length)}html+='<a class="cross-item" href="'+l.u+'" target="_blank" rel="noopener"><span class="cross-badge">'+l.s+'</span><span class="cross-label">'+label+'</span><span class="cross-rubrik">'+l.r+'</span></a>'});crs.innerHTML=html;crs.style.display='block'}else{crs.style.display='none'}})
 })();
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
