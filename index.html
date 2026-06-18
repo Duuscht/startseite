@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🛡️ Cyber-Sicherheit</title>
+
   <style>
     :root {
       --bg: #0d1117;
@@ -18,24 +17,30 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
+
     header {
       background: var(--card);
       border-bottom: 1px solid var(--border);
       padding: 2rem 1.5rem;
       text-align: center;
     }
-    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    header p { color: var(--muted); font-size: 0.95rem; }
-    header .version { color: var(--accent); font-size: 0.8rem; margin-top: 0.5rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .version { color: var(--muted); font-size: 0.9rem; }
 
-    main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%; }
+    main {
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      width: 100%;
+    }
 
     .box {
       background: var(--card);
@@ -45,12 +50,11 @@
       margin-bottom: 1.5rem;
     }
     .quote-box { border-left: 4px solid var(--accent); }
-    .quote-box h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 1rem; }
-    .quote-text { font-size: 1.1rem; font-style: italic; margin-bottom: 0.75rem; line-height: 1.6; }
-    .quote-author { color: var(--muted); font-size: 0.9rem; text-align: right; }
+    .quote-box h2 { color: var(--accent); margin-bottom: 1rem; }
+    .quote-box blockquote { font-style: italic; font-size: 1.1rem; line-height: 1.6; }
+    .quote-box cite { display: block; margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem; }
 
-    .phishing-box { border-left: 4px solid var(--danger); }
-    .phishing-box h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+    .phishing-box h2 { margin-bottom: 1rem; }
     .phishing-toggle {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -66,8 +70,7 @@
       transition: background 0.2s;
     }
     .phishing-toggle:hover { background: #21262d; }
-    .phishing-toggle .arrow { margin-left: auto; transition: transform 0.3s; }
-    .phishing-toggle.open .arrow { transform: rotate(180deg); }
+
     .phishing-content {
       max-height: 0;
       overflow: hidden;
@@ -75,11 +78,20 @@
     }
     .phishing-content.open { max-height: 2000px; }
     .phishing-inner { padding-top: 1.25rem; }
-    .phishing-inner p { margin-bottom: 1rem; line-height: 1.7; }
-    .phishing-inner h3 { color: var(--accent); font-size: 1rem; margin: 1.25rem 0 0.5rem; }
-    .phishing-inner ul { list-style: none; padding-left: 0; }
-    .phishing-inner ul li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; }
-    .phishing-inner ul li::before { content: '⚠️'; position: absolute; left: 0; }
+
+    h3 { color: var(--text); margin: 1.5rem 0 0.75rem; font-size: 1.1rem; }
+    h3:first-child { margin-top: 0; }
+
+    ul { list-style: none; padding: 0; }
+    li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    li:last-child { border-bottom: none; }
+    li::before { content: '•'; position: absolute; left: 0; color: var(--danger); }
+
     .tip-box {
       background: rgba(63, 185, 80, 0.1);
       border: 1px solid var(--accent2);
@@ -92,7 +104,6 @@
 
     .nav-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
       margin-top: 1rem;
     }
@@ -101,66 +112,109 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
+      text-align: center;
       text-decoration: none;
       color: var(--text);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      transition: all 0.2s;
     }
     .nav-card:hover {
       border-color: var(--accent);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
-    .nav-card-header {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .nav-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
-    .nav-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .nav-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .nav-card h3 { margin: 0.5rem 0; font-size: 1.1rem; }
+    .nav-card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
-    .nav-card-toggle {
+    /* ── Feedback-Box ── */
+    .feedback-box {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 0.9rem auto; /* klein & sauber vor Footer */
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      text-align: left;
+    }
+    .feedback-box h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: var(--accent);
+    }
+    .feedback-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+    .feedback-row input {
+      flex: 1;
+      min-width: 120px;
       background: var(--bg);
       border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
       color: var(--text);
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: inherit;
+      font-size: 0.88rem;
+      transition: border-color 0.2s;
+    }
+    .feedback-row input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .feedback-box textarea {
       width: 100%;
-      transition: background 0.2s;
-      margin-bottom: 0.75rem;
-    }
-    .nav-card-toggle:hover { background: #21262d; }
-    .nav-card-toggle .arrow { margin-left: auto; transition: transform 0.3s; }
-    .nav-card-toggle.open .arrow { transform: rotate(180deg); }
-
-    .nav-card-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-    }
-    .nav-card-content.open { max-height: 1000px; }
-    .nav-card-inner {
-      padding-bottom: 1rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .nav-card-link {
-      display: block;
-      background: var(--accent);
-      color: var(--bg);
-      text-align: center;
-      padding: 0.75rem;
+      min-height: 90px;
+      resize: vertical;
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-top: 0.75rem;
+      padding: 0.6rem 0.9rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.88rem;
+      transition: border-color 0.2s;
+      margin-bottom: 0.4rem;
     }
-    .nav-card-link:hover { background: #79c0ff; }
+    .feedback-box textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .feedback-send {
+      width: 100%;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem;
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.2rem;
+    }
+    .feedback-send:hover { background: #4ea0e8; }
+    .feedback-status {
+      text-align: center;
+      margin-top: 0.7rem;
+      font-size: 0.82rem;
+      padding: 0.4rem;
+      border-radius: 6px;
+      display: none;
+    }
+    .feedback-status.ok {
+      display: block;
+      background: rgba(57,201,110,.15);
+      color: var(--accent2);
+    }
+    .feedback-status.err {
+      display: block;
+      background: rgba(239,68,68,.15);
+      color: #ef4444;
+    }
 
     footer {
       background: var(--card);
@@ -170,178 +224,187 @@
       color: var(--muted);
       font-size: 0.85rem;
     }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
+
 <body>
   <header>
     <h1>🛡️ Cyber-Sicherheit</h1>
-    <p>Dein Ausgangspunkt für sicheres Surfen im Netz</p>
-    <div class="version">Version 3.6 · Stand: 18.06.2026</div>
   </header>
 
   <main>
     <div class="box quote-box">
       <h2>💡 Gedanke des Tages</h2>
-      <div id="quote-text" class="quote-text">Lädt…</div>
-      <div id="quote-author" class="quote-author">—</div>
+      <blockquote id="daily-quote"></blockquote>
+      <cite id="quote-author"></cite>
     </div>
 
     <div class="box phishing-box">
       <h2>🎣 Was ist Phishing?</h2>
       <button class="phishing-toggle" onclick="togglePhishing()" aria-expanded="false">
-        <span>Was ist Phishing? — Mehr erfahren</span>
-        <span class="arrow">▼</span>
+        <span class="arrow">▼</span> Mehr erfahren
       </button>
+
       <div class="phishing-content" id="phishing-content">
         <div class="phishing-inner">
-          <p><strong>Phishing</strong> ist eine Methode, mit der Betrüger versuchen, an deine persönlichen Daten zu kommen — zum Beispiel Passwörter, Bankdaten oder Account-Informationen. Sie geben sich dabei als vertrauenswürdige Person oder Organisation aus.</p>
-
           <h3>🔧 Wie funktioniert das?</h3>
-          <p>Oft bekommst du eine E-Mail, SMS oder Nachricht, die so aussieht, als käme sie von deiner Bank, von Amazon, Netflix oder sogar von einem Kollegen. Darin wirst du aufgefordert, auf einen Link zu klicken und dich anzumelden. Die Webseite sieht echt aus — ist es aber nicht. Gibst du dort deine Daten ein, landen sie direkt bei den Betrügern.</p>
+          <p>Phishing ist der Versuch, durch gefälschte E-Mails, SMS oder Webseiten an deine persönlichen Daten zu kommen. Der Angreifer gibt sich als vertrauenswürdige Person oder Firma aus.</p>
 
           <h3>🚩 Typische Warnsignale</h3>
           <ul>
-            <li><strong>Dringende Aufforderungen</strong> — „Sofort handeln!", „Dein Konto wird gesperrt!"</li>
-            <li><strong>Seltsame Absender</strong> — Die E-Mail-Adresse stimmt nicht mit dem echten Unternehmen überein</li>
-            <li><strong>Falsche Links</strong> — Bewege die Maus über den Link und prüfe, wohin er wirklich führt</li>
-            <li><strong>Rechtschreib- und Grammatikfehler</strong> — Seriöse Unternehmen machen selten solche Fehler</li>
-            <li><strong>Unerwartete Anhänge</strong> — Öffne keine Dateianhänge von unbekannten Absendern</li>
-            <li><strong>Drohungen oder Verlockungen</strong> — „Du hast gewonnen!" oder „Wir verklagen dich!" sind fast immer gefälscht</li>
+            <li>Dringende Handlungsaufforderungen ("Sofort handeln!", "Konto wird gesperrt")</li>
+            <li>Unbekannte Absender oder verdächtige E-Mail-Adressen</li>
+            <li>Rechtschreibfehler und unprofessionelles Layout</li>
+            <li>Forderung nach persönlichen Daten, Passwörtern oder Bankinformationen</li>
+            <li>Verdächtige Links oder angehängte Dateien</li>
+            <li>Vage oder generische Anreden ("Sehr geehrter Kunde")</li>
           </ul>
 
           <h3>📱 Smishing & Vishing</h3>
-          <p>Nicht nur E-Mails werden genutzt. <strong>Smishing</strong> ist Phishing per SMS, <strong>Vishing</strong> per Telefon. Beim Anruf behauptet jemand, von deiner Bank oder der Polizei zu sein, und verlangt Daten oder Geld. Auch hier gilt: Niemals vertrauliche Daten am Telefon herausgeben.</p>
-
-          <h3>✅ Was tun, wenn du eine Phishing-Nachricht bekommst?</h3>
+          <p>
+            <strong>Smishing</strong> = Phishing per SMS (z.B. "Ihre Bank fragt...")
+            <br>
+            <strong>Vishing</strong> = Phishing per Telefon (z.B. "Ihr Support-Anruf")
+          </p>
           <ul>
-            <li>Klicke <strong>nicht</strong> auf Links und öffne keine Anhänge</li>
-            <li>Gib <strong>keine</strong> Daten ein</li>
-            <li>Markiere die Nachricht als Spam und lösche sie</li>
-            <li>Wenn du unsicher bist, kontaktiere das angebliche Unternehmen <strong>direkt</strong> über deren offizielle Webseite</li>
-            <li>Hat jemand deine Daten erhalten? <strong>Ändere sofort</strong> deine Passwörter und informiere betroffene Dienste</li>
+            <li>Keine sensiblen Daten am Telefon herausgeben</li>
+            <li>Bei SMS-Links: Niemals direct weiterleiten, immer selbst die Website aufrufen</li>
+            <li>Banken und Behörden fragen NIEMALS nach Passwörtern</li>
           </ul>
 
           <div class="tip-box">
-            <p><strong>💡 Goldene Regel:</strong> Kein seriöses Unternehmen wird dich jemals per E-Mail oder SMS nach deinem Passwort, deiner PIN oder deinen vollständigen Kontodaten fragen. Wenn du dir nicht sicher bist — lass es bleiben!</p>
+            <strong>💡 Tipp:</strong> Im Zweifel immer direkt beim vermeintlichen Absender nachfragen – aber über die offizielle Website oder Telefonnummer, NICHT über Links in der Nachricht.
           </div>
         </div>
       </div>
     </div>
 
-    <h2 style="color: var(--text); margin-bottom: 1rem; font-size: 1.3rem;">📌 Schnellzugriff</h2>
     <div class="nav-grid">
-      <div class="nav-card">
-        <div class="nav-card-header">
-          <span class="icon">🔒</span>
-          <h3>Sichere Links</h3>
-        </div>
-        <button class="nav-card-toggle" onclick="toggleNavCard(event)" aria-expanded="false">
-          <span>+ Mehr erfahren</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="nav-card-content">
-          <div class="nav-card-inner">
-            <p>Eine kuratierte Sammlung von vertrauenswürdigen und sicheren Online-Diensten, Tools und Plattformen. Jeder Link wurde überprüft und bietet einen hohen Sicherheitsstandard.</p>
-          </div>
-        </div>
-        <a href="sicher.html" class="nav-card-link">Zu den sicheren Links →</a>
-      </div>
+      <a href="sicher.html" class="nav-card">
+        <div class="icon">🔒</div>
+        <h3>Sichere Links</h3>
+        <p>Geprüfte und sichere Dienste</p>
+      </a>
 
-      <div class="nav-card">
-        <div class="nav-card-header">
-          <span class="icon">🔗</span>
-          <h3>Linksammlung</h3>
-        </div>
-        <button class="nav-card-toggle" onclick="toggleNavCard(event)" aria-expanded="false">
-          <span>+ Mehr erfahren</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="nav-card-content">
-          <div class="nav-card-inner">
-            <p>Eine umfassende Ressourcensammlung mit hilfreichen Tools, Tutorials, News und Informationen rund um Cybersicherheit, Datenschutz und sicheres Surfen im Internet.</p>
-          </div>
-        </div>
-        <a href="links.html" class="nav-card-link">Zur Linksammlung →</a>
-      </div>
+      <a href="links.html" class="nav-card">
+        <div class="icon">🔗</div>
+        <h3>Linksammlung</h3>
+        <p>Nützliche Ressourcen im Überblick</p>
+      </a>
 
-      <div class="nav-card">
-        <div class="nav-card-header">
-          <span class="icon">🛡️</span>
-          <h3>Cyber-Sicherheit</h3>
-        </div>
-        <button class="nav-card-toggle" onclick="toggleNavCard(event)" aria-expanded="false">
-          <span>+ Mehr erfahren</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="nav-card-content">
-          <div class="nav-card-inner">
-            <p>Detaillierte Informationen über Sicherheitsrisiken, Schutzmaßnahmen, Best Practices und praktische Tipps für einen sicheren Umgang mit digitalen Diensten und Daten.</p>
-          </div>
-        </div>
-        <a href="cybersec.html" class="nav-card-link">Zu Cyber-Sicherheit →</a>
-      </div>
+      <a href="cybersec.html" class="nav-card">
+        <div class="icon">🛡️</div>
+        <h3>Cyber-Sicherheit</h3>
+        <p>Tools, Wissen und Hilfe</p>
+      </a>
     </div>
   </main>
 
+  <!-- ── Feedback ganz unten (vor Footer) ── -->
+  <div class="feedback-box">
+    <h2>💬 Feedback & Wünsche</h2>
+    <form id="feedbackForm" action="https://formspree.io/f/xeo1234567890" method="POST">
+      <div class="feedback-row">
+        <input type="text" name="name" placeholder="Dein Name (optional)">
+        <input type="email" name="email" placeholder="Deine E-Mail" required>
+      </div>
+
+      <textarea name="message" placeholder="Dein Feedback oder Wunsch..." required></textarea>
+
+      <button type="submit" class="feedback-send" id="feedbackBtn">Absenden</button>
+      <div class="feedback-status" id="feedbackStatus"></div>
+    </form>
+  </div>
+
   <footer>
-    🛡️ Cyber-Sicherheit · Version 3.6 · 18.06.2026 @ 16:58
+    <p>
+      🛡️ Cyber-Sicherheit ·
+      <span style="color: var(--accent); font-size: 1.1rem; font-weight: bold;">Version 3.10</span>
+      · 18.06.2026 @ 23:40
+    </p>
   </footer>
 
   <script>
     const quotes = [
-      { text: "Das größte Sicherheitsrisiko ist der Mensch hinter dem Bildschirm.", author: "Sicherheitsweisheit" },
-      { text: "Ein starkes Passwort ist wie ein gutes Schloss — es hält ungebetene Gäste fern.", author: "IT-Grundschutz" },
-      { text: "Vertrauen ist gut, Verschlüsselung ist besser.", author: "Datenschutzprinzip" },
-      { text: "Du bist nur so sicher wie dein schwächstes Passwort.", author: "Sicherheitsexperten" },
-      { text: "Im Internet ist nichts umsonst — wenn du nicht zahlst, bezahlst du mit deinen Daten.", author: "Datenschützer" },
-      { text: "Eine Sekunde Unachtsamkeit kann Monate an Arbeit zunichte machen.", author: "IT-Notfallteam" },
-      { text: "Wer seine Daten schützt, schützt seine Freiheit.", author: "Digital-Deklaration" },
-      { text: "Der beste Virenschutz beginnt mit gesundem Menschenverstand.", author: "Cybersicherheits-Ratgeber" },
-      { text: "Jedes Klick zählt — klicke bewusst und informiert.", author: "Online-Sicherheitsleitfaden" },
-      { text: "Datensparsamkeit ist der beste Datenschutz.", author: "Bundesdatenschutzbeauftragter" },
-      { text: "Auch der stärkste Burggraben nutzt nichts, wenn das Tor offen steht.", author: "IT-Sicherheitsmetapher" },
-      { text: "Zwei-Faktor-Authentifizierung ist der Bodyguard für deine Online-Konten.", author: "Cybersicherheits-Tipp" },
-      { text: "Angreifer nutzen keine Lücken im System — sie nutzen Lücken im Verhalten.", author: "Social Engineering Report" },
-      { text: "Jede Software hat Fehler — Updates schließen die bekanntesten davon.", author: "Patch-Management" },
-      { text: "Wer backuppt, schläft besser — Datenverlust passiert schneller als gedacht.", author: "Backup-Weisheit" },
-      { text: "Eine sichere Verbindung erkennen: Achte auf das Schloss-Symbol und https:// in der Adresszeile.", author: "Browser-Sicherheit" },
-      { text: "Phishing-Mails werden immer besser — doch auch die Warnsignale bleiben sichtbar.", author: "E-Mail-Sicherheit" },
-      { text: "Privatsphäre ist kein Luxus, sondern ein Menschenrecht im digitalen Zeitalter.", author: "Digitalcourage e.V." },
-      { text: "Deine digitale Identität ist so wertvoll wie dein Personalausweis — schütze sie gleichermaßen.", author: "Verbraucherzentrale" },
-      { text: "Sicherheit ist kein Produkt, sondern ein Prozess — und eine Haltung.", author: "Bruce Schneier" },
-      { text: "Wer heute online geht, braucht nicht nur Technik, sondern auch Wissen.", author: "BSI — Bundesamt für Sicherheit" },
-      { text: "Freies Wissen ist auch sicheres Wissen — informiere dich aus vertrauenswürdigen Quellen.", author: "Bildungsressource" },
-      { text: "Eine Firewall ohne Benutzerbewusstsein ist wie ein Rettungsring mit Loch.", author: "IT-Sicherheitsvergleich" },
-      { text: "In der Ruhe liegt die Sicherheit — bei verdächtigen Nachrichten erst nachdenken, dann klicken.", author: "Präventionsratgeber" },
-      { text: "Open Source bedeutet nicht nur Transparenz — es bedeutet auch gemeinsame Sicherheit durch viele Augen.", author: "Open-Source-Community" },
-      { text: "Dein Smartphone ist der persönlichste Computer — behandle es entsprechend.", author: "Mobile-Security-Ratgeber" },
-      { text: "Updates sind keine Belästigung, sondern Rettungsringe für deine Sicherheit.", author: "Software-Updates" },
-      { text: "Mache es Angreifern schwer: Verschiedene Passwörter für verschiedene Dienste.", author: "Passwort-Strategie" },
-      { text: "Cyberangriffe kennen keine Geschäftszeiten — Wachsamkeit ist 24/7 gefragt.", author: "CERT (Computer Emergency Response Team)" },
-      { text: "Der erste Schritt zur Sicherheit ist das Bewusstsein, dass Gefahren existieren.", author: "Sicherheitsbewusstsein" }
+      { text: "Die größte Schwachstelle in der IT-Sicherheit sitzt meistens vor dem Bildschirm.", author: "— Unbekannt" },
+      { text: "Cybersicherheit ist kein Produkt, sondern ein Prozess.", author: "— Bruce Schneier" },
+      { text: "Ein Passwort ist wie ein Zahnbürsten: Teile es nicht und wechsle es regelmäßig.", author: "— известная мудрость" },
+      { text: "Vertrauen ist gut, Passwörter sind besser.", author: "— IT-Sicherheit" },
+      { text: "Hacker sind die neue Mafia – aber mit besserem Internet.", author: "— Unbekannt" },
+      { text: "Angreifer müssen nur einmal richtig liegen. Verteidiger müssen immer richtig liegen.", author: "— security maxim" },
+      { text: "Datensicherung ist wie Versicherung – man braucht sie erst, wenn es zu spät ist.", author: "— IT-Weisheit" },
+      { text: "Phishing-E-Mails werden immer professioneller. Aber auch die Augen der Empfänger werden geschärfter.", author: "— hope spricht" }
     ];
 
-    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+
     const quote = quotes[dayOfYear % quotes.length];
-    document.getElementById('quote-text').textContent = '„' + quote.text + '."';
-    document.getElementById('quote-author').textContent = '— ' + quote.author;
+    document.getElementById('daily-quote').textContent = quote.text;
+    document.getElementById('quote-author').textContent = quote.author;
 
     function togglePhishing() {
-      const btn = document.querySelector('.phishing-toggle');
       const content = document.getElementById('phishing-content');
+      const btn = document.querySelector('.phishing-toggle');
       const isOpen = content.classList.toggle('open');
-      btn.classList.toggle('open', isOpen);
-      btn.setAttribute('aria-expanded', isOpen);
-    }
-
-    function toggleNavCard(event) {
-      const btn = event.currentTarget;
-      const content = btn.nextElementSibling;
-      const isOpen = content.classList.toggle('open');
-      btn.classList.toggle('open', isOpen);
       btn.setAttribute('aria-expanded', isOpen);
     }
   </script>
-</body>
-</html>
-```
+
+  <!-- Feedback-Formular Logik (aus 3.6 übernommen) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var ffForm = document.getElementById('feedbackForm');
+
+      if (!ffForm) {
+        console.error('feedbackForm nicht gefunden');
+        return;
+      }
+
+      ffForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var st = document.getElementById('feedbackStatus');
+        st.className = 'feedback-status';
+        st.textContent = 'Wird gesendet...';
+        st.style.display = 'block';
+
+        fetch(ffForm.action, {
+          method: 'POST',
+          body: new FormData(ffForm),
+          headers: { 'Accept': 'application/json' }
+        }).then(function(r) {
+          if (r.ok) {
+            st.className = 'feedback-status ok';
+            st.textContent = '✓ Erfolgreich gesendet!';
+            ffForm.reset();
+          } else {
+            throw new Error('Send failed');
+          }
+        }).catch(function() {
+          st.className = 'feedback-status err';
+          st.textContent = '✗ Fehler beim Senden';
+        });
+      });
+    });
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WELH4D5T5C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WELH4D5T5C');
+  </script>
+
+  <script defer
+          src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447"
+          integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ=="
+          data-cf-beacon='{"version":"2024
+
