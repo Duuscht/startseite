@@ -4,296 +4,277 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🛡️ Cyber-Sicherheit</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --border: #30363d;
-      --accent: #58a6ff;
-      --accent2: #3fb950;
-      --text: #e6edf3;
+      --bg: #0d1117; --card: #161b22; --border: #30363d;
+      --accent: #c8a96e; --accent2: #7eb8a4; --text: #e8e4dc;
       --muted: #8b949e;
+      --red: #ff7b72; --blue: #79c0ff; --green: #3fb950;
+      --gold: #e3b341; --purple: #bc8cff; --teal: #39d353;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    header {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    header p { color: var(--muted); }
-    header .version { color: var(--accent); font-size: 0.8rem; margin-top: 0.5rem; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; padding: 1.5rem 1rem 5rem; }
+    header { max-width: 1100px; margin: 0 auto 1rem; text-align: center; }
+    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--accent); }
+    .header-sub { color: var(--muted); font-size: 0.85rem; }
 
-    main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%; }
+    /* Suchfeld */
+    .search-wrap { max-width: 1100px; margin: 0 auto 1.2rem; position: relative; }
+    .search-wrap input { width: 100%; padding: 0.65rem 1rem 0.65rem 2.6rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-size: 0.9rem; font-family: 'DM Sans', sans-serif; }
+    .search-wrap input:focus { outline: none; border-color: var(--accent); }
+    .search-wrap .search-icon { position: absolute; left: 0.85rem; top: 50%;
+      transform: translateY(-50%); font-size: 0.9rem; pointer-events: none; }
+    .search-count { position: absolute; right: 0.85rem; top: 50%;
+      transform: translateY(-50%); font-size: 0.75rem; color: var(--muted); }
 
-    .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.75rem 1.25rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: background 0.2s, border-color 0.2s;
-      margin-bottom: 2rem;
-    }
-    .nav-btn:hover { background: #21262d; border-color: var(--accent); }
+    main { max-width: 1100px; margin: 0 auto; }
 
-    .search-box {
-      width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 2rem;
-    }
-    .search-box input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      color: var(--text);
-      font-size: 1rem;
-    }
-    .search-box input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .search-box label {
-      display: block;
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-    }
+    /* Kompakte Kategorie-Sektion */
+    .cat-section { margin-bottom: 1.5rem; }
+    .cat-section.hidden { display: none; }
+    .cat-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; margin-bottom: 0.45rem; padding: 3px 8px;
+      border-radius: 4px; display: inline-block; }
+    .cat-title.c-red { color: var(--red); }
+    .cat-title.c-blue { color: var(--blue); }
+    .cat-title.c-green { color: var(--green); }
+    .cat-title.c-gold { color: var(--gold); }
+    .cat-title.c-purple { color: var(--purple); }
+    .cat-title.c-teal { color: var(--teal); }
 
-    .section {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .section.hidden { display: none; }
-    .section h2 { font-size: 1.2rem; margin-bottom: 1rem; }
-    .section .empty-msg { color: var(--muted); font-style: italic; display: none; }
-    .section.empty .empty-msg { display: block; }
+    .card-grid { display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px; }
 
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-    .link-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .link-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .link-card { display: flex; flex-direction: column;
+      background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+      padding: 7px 10px; text-decoration: none; color: var(--text);
+      transition: border-color 0.15s, background 0.15s; }
+    .link-card:hover { border-color: var(--accent); background: rgba(200,169,110,0.06); }
     .link-card.hidden { display: none; }
-    .link-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
-    .link-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
-    .link-card .tag {
-      display: inline-block;
-      background: rgba(63, 185, 80, 0.15);
-      color: var(--accent2);
-      border-radius: 20px;
-      padding: 0.2rem 0.6rem;
-      font-size: 0.75rem;
-      margin-top: 0.5rem;
-    }
+    .link-name { font-size: 0.78rem; font-weight: 500; line-height: 1.3;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .link-url { font-size: 0.68rem; color: var(--muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
 
-    footer {
-      background: var(--card);
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 1.25rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
+    /* Navigation */
+    .footer-nav { max-width: 1100px; margin: 2rem auto 0;
+      border-top: 1px solid var(--border); padding-top: 1rem; text-align: center; }
+    .footer-nav a { display: inline-block; background: rgba(200,169,110,0.1);
+      border: 1px solid rgba(200,169,110,0.35); color: var(--accent);
+      text-decoration: none; padding: 0.5rem 1.2rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500; transition: background 0.2s, border-color 0.2s; }
+    .footer-nav a:hover { background: rgba(200,169,110,0.18); border-color: var(--accent); }
+
+    .version-bar { max-width: 1100px; margin: 1rem auto 0;
+      text-align: center; font-size: 0.72rem; color: var(--muted); }
+    .version-bar .v-num { color: #39c96e; font-weight: 700; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🛡️ Cyber-Sicherheit</h1>
-    <p>Tools, Wissen und Hilfe</p>
-    <div class="version">Version 3.5 · Stand: 17.06.2026</div>
-  </header>
+<header>
+  <h1>🛡️ Cyber-Sicherheit</h1>
+  <p class="header-sub">Tools, Wissen und Hilfe für deine digitale Sicherheit</p>
+</header>
 
-  <main>
-    <a href="index.html" class="nav-btn">🏠 Zurück zur Startseite</a>
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput" placeholder="Suche (z. B. Passwort, VPN, Malware, Melden)…" autocomplete="off">
+  <span class="search-count" id="searchCount"></span>
+</div>
 
-    <div class="search-box">
-      <label for="search">🔍 Suchen…</label>
-      <input type="text" id="search" placeholder="z. B. Passwort, VPN, Malware, Melden…" oninput="filterAll()">
+<main id="main">
+
+  <!-- 🔍 SICHERHEITS-TOOLS -->
+  <div class="cat-section">
+    <h2 class="cat-title c-red">🔍 SICHERHEITS-TOOLS</h2>
+    <div class="card-grid">
+      <a href="https://www.virustotal.com" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">VirusTotal</span>
+        <span class="link-url">www.virustotal.com</span>
+      </a>
+      <a href="https://haveibeenpwned.com" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Have I Been Pwned? (Datenleck-Check)</span>
+        <span class="link-url">haveibeenpwned.com</span>
+      </a>
+      <a href="https://www.shodan.io" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Shodan (Suchmaschine für IoT)</span>
+        <span class="link-url">www.shodan.io</span>
+      </a>
+      <a href="https://urlscan.io" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">URLScan.io</span>
+        <span class="link-url">urlscan.io</span>
+      </a>
+      <a href="https://duuscht.github.io/wizard" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Browser-Diagnose (Wizard)</span>
+        <span class="link-url">duuscht.github.io/wizard</span>
+      </a>
+      <a href="https://ipleak.net" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">IPLeak.net (IP- & DNS-Leak-Test)</span>
+        <span class="link-url">ipleak.net</span>
+      </a>
+      <a href="https://browserleaks.com" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">BrowserLeaks (Fingerprint-Test)</span>
+        <span class="link-url">browserleaks.com</span>
+      </a>
+      <a href="https://dnscheck.tools" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">DNS Check Tools</span>
+        <span class="link-url">dnscheck.tools</span>
+      </a>
+      <a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Cover Your Tracks (EFF)</span>
+        <span class="link-url">coveryourtracks.eff.org</span>
+      </a>
+      <a href="https://controld.com/tools/dns-leak-test" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">ControlD DNS-Leak-Test</span>
+        <span class="link-url">controld.com/tools/dns-leak-test</span>
+      </a>
     </div>
+  </div>
 
-    <div class="section" data-section="tools">
-      <h2>🔍 Sicherheits-Tools</h2>
-      <div class="links-grid">
-        <a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="VirusTotal" data-desc="Datei oder URL auf Malware prüfen. Nutzt über 70 Antivirus-Engines gleichzeitig. Kostenlos im Browser.">
-          <h3>VirusTotal</h3>
-          <p>Datei oder URL mit 70+ Engines auf Schadsoftware prüfen.</p>
-          <span class="tag">🔍 Prüfen</span>
-        </a>
-        <a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Have I Been Pwned" data-desc="Prüfen ob deine E-Mail-Adresse oder dein Passwort in einem Datenleck aufgetaucht ist.">
-          <h3>Have I Been Pwned</h3>
-          <p>Prüfen ob deine Daten in einem Leak enthalten sind.</p>
-          <span class="tag">🔐 Passwort-Check</span>
-        </a>
-        <a href="https://www.shodan.io" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Shodan" data-desc="Suchmaschine für das Internet der Dinge. Zeigt offene Ports, verwundbare Geräte und Server.">
-          <h3>Shodan</h3>
-          <p>Suchmaschine für vernetzte Geräte und Server.</p>
-          <span class="tag">🌐 Netzwerk</span>
-        </a>
-        <a href="https://urlscan.io" target="_blank" rel="noopener noreferrer" class="link-card" data-name="URLScan.io" data-desc="URL auf bösartige Inhalte prüfen. Zeigt Screenshots, Header und Verbindungen der Webseite.">
-          <h3>URLScan.io</h3>
-          <p>Verdächtige URLs prüfen und einsehen.</p>
-          <span class="tag">🔍 URL-Prüfung</span>
-        </a>
-      </div>
-      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+  <!-- 🔐 PASSWORT-MANAGER -->
+  <div class="cat-section">
+    <h2 class="cat-title c-teal">🔐 PASSWORT-MANAGER</h2>
+    <div class="card-grid">
+      <a href="https://bitwarden.com" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Bitwarden (Open Source)</span>
+        <span class="link-url">bitwarden.com</span>
+      </a>
+      <a href="https://keepass.info" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">KeePass (lokal, keine Cloud)</span>
+        <span class="link-url">keepass.info</span>
+      </a>
+      <a href="https://1password.com" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">1Password</span>
+        <span class="link-url">1password.com</span>
+      </a>
     </div>
+  </div>
 
-    <div class="section" data-section="passwort">
-      <h2>🔐 Passwort-Manager</h2>
-      <div class="links-grid">
-        <a href="https://bitwarden.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Bitwarden" data-desc="Open-Source Passwort-Manager. Synchronisiert Passwörter über alle Geräte. Kostenlose Version nutzbar.">
-          <h3>Bitwarden</h3>
-          <p>Open-Source Passwort-Manager. Selbst hostbar.</p>
-          <span class="tag">🔓 Open Source</span>
-        </a>
-        <a href="https://keepass.info" target="_blank" rel="noopener noreferrer" class="link-card" data-name="KeePass" data-desc="Lokaler Passwort-Tresor. Keine Cloud, keine Synchronisation. Daten bleiben lokal auf deinem Gerät.">
-          <h3>KeePass</h3>
-          <p>Lokaler Passwort-Tresor. Keine Cloud. Maximale Kontrolle.</p>
-          <span class="tag">🔐 Lokal</span>
-        </a>
-        <a href="https://1password.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="1Password" data-desc="Passwort-Manager mit Fokus auf Benutzerfreundlichkeit. Teilen von Passwörtern in Teams. Für alle Plattformen.">
-          <h3>1Password</h3>
-          <p>Benutzerfreundlicher Passwort-Manager für alle Geräte.</p>
-          <span class="tag">💼 Teams</span>
-        </a>
-      </div>
-      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+  <!-- 🛡️ VPN & ANONYMITÄT -->
+  <div class="cat-section">
+    <h2 class="cat-title c-blue">🛡️ VPN &amp; ANONYMITÄT</h2>
+    <div class="card-grid">
+      <a href="https://mullvad.net" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Mullvad VPN (Schweden, keine Logs)</span>
+        <span class="link-url">mullvad.net</span>
+      </a>
+      <a href="https://protonvpn.com" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">ProtonVPN (Schweiz, Tor-Integration)</span>
+        <span class="link-url">protonvpn.com</span>
+      </a>
+      <a href="https://www.torproject.org" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Tor Browser (anonymer Browser)</span>
+        <span class="link-url">www.torproject.org</span>
+      </a>
     </div>
+  </div>
 
-    <div class="section" data-section="vpn">
-      <h2>🛡️ VPN & Anonymität</h2>
-      <div class="links-grid">
-        <a href="https://mullvad.net" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Mullvad" data-desc="VPN-Dienst aus Schweden. Keine Protokollierung. Anonyme Anmeldung möglich. Open Source.">
-          <h3>Mullvad</h3>
-          <p>VPN ohne Protokollierung. Schweden. Anonyme Anmeldung.</p>
-          <span class="tag">🇸🇪 Schweden</span>
-        </a>
-        <a href="https://protonvpn.com" target="_blank" rel="noopener noreferrer" class="link-card" data-name="ProtonVPN" data-desc="VPN des ProtonMail-Teams. Schweiz. Keine Protokollierung. Tor-Integration verfügbar.">
-          <h3>ProtonVPN</h3>
-          <p>VPN aus der Schweiz. ProtonMail-Anbieter. Keine Logs.</p>
-          <span class="tag">🇨🇭 Schweiz</span>
-        </a>
-        <a href="https://www.torproject.org" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Tor Browser" data-desc="Anonymer Browser über das Tor-Netzwerk. Verschlüsselte Verbindungen über mehrere Relays.">
-          <h3>Tor Browser</h3>
-          <p>Anonymer Browser über das Tor-Netzwerk.</p>
-          <span class="tag">🧅 Anonym</span>
-        </a>
-      </div>
-      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+  <!-- 📚 WISSEN &amp; LERNEN -->
+  <div class="cat-section">
+    <h2 class="cat-title c-purple">📚 WISSEN &amp; LERNEN</h2>
+    <div class="card-grid">
+      <a href="https://www.bsi.bund.de" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">BSI – Bundesamt für IT-Sicherheit</span>
+        <span class="link-url">www.bsi.bund.de</span>
+      </a>
+      <a href="https://www.heise.de/security" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Heise Security (Nachrichten)</span>
+        <span class="link-url">www.heise.de/security</span>
+      </a>
+      <a href="https://isc.sans.edu" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">SANS Internet Stormcenter</span>
+        <span class="link-url">isc.sans.edu</span>
+      </a>
+      <a href="https://www.ccc.de" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">CCC – Chaos Computer Club</span>
+        <span class="link-url">www.ccc.de</span>
+      </a>
+      <a href="https://www.saarland.de/polizei/DE/onlinewache/onlinewache_node.html" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Online-Wache (Anzeige erstatten)</span>
+        <span class="link-url">www.saarland.de/polizei</span>
+      </a>
+      <a href="https://www.saarland.de/polizei/DE/themen-aufgaben/kriminalitaet/zac/zac_node.html" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">ZAC – Cybercrime Saarland</span>
+        <span class="link-url">www.saarland.de/polizei/zac</span>
+      </a>
+      <a href="https://cybr360.saarland/erste-hilfe" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Cybr360 – Erste Hilfe bei Cyberangriff</span>
+        <span class="link-url">cybr360.saarland/erste-hilfe</span>
+      </a>
+      <a href="https://bankenverband.de/verbraucher/fuenf-tipps-fuer-sicheres-onlinebanking" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Online-Banking Sicherheit (Bankenverband)</span>
+        <span class="link-url">bankenverband.de</span>
+      </a>
     </div>
+  </div>
 
-    <div class="section" data-section="wissen">
-      <h2>📚 Wissen & Lernen</h2>
-      <div class="links-grid">
-        <a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer" class="link-card" data-name="BSI Bundesamt" data-desc="Bundesamt für Sicherheit in der Informationstechnik. Offizielle IT-Sicherheitsempfehlungen für Bürger und Unternehmen.">
-          <h3>BSI — Bundesamt für Sicherheit</h3>
-          <p>Offizielle IT-Sicherheitsempfehlungen des Bundes.</p>
-          <span class="tag">🏛️ Behörde</span>
-        </a>
-        <a href="https://www.heise.de/security" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Heise Security" data-desc="IT-Sicherheitsnachrichten von Heise Online. Aktuelle Meldungen, Hintergründe und Tools.">
-          <h3>Heise Security</h3>
-          <p>IT-Sicherheitsnachrichten und Hintergründe.</p>
-          <span class="tag">📰 Nachrichten</span>
-        </a>
-        <a href="https://isc.sans.edu" target="_blank" rel="noopener noreferrer" class="link-card" data-name="SANS Internet Stormcenter" data-desc="Kostenlose Bedrohungsanalyse und Frühwarnsystem. Tägliche Analyse von Malware und Angriffen.">
-          <h3>SANS Internet Stormcenter</h3>
-          <p>Frühwarnsystem für Cyberbedrohungen. Tägliche Analysen.</p>
-          <span class="tag">🚨 Bedrohung</span>
-        </a>
-        <a href="https://www.ccc.de" target="_blank" rel="noopener noreferrer" class="link-card" data-name="CCC Chaos Computer Club" data-desc="Deutschlands größter Hackerverein. setzt sich für digitale Grundrechte und Datenschutz ein.">
-          <h3>Chaos Computer Club</h3>
-          <p>Hacker-Verein für digitale Grundrechte und Datenschutz.</p>
-          <span class="tag">✊ Zivilgesellschaft</span>
-        </a>
-      </div>
-      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
+  <!-- 🚨 MELDEN &amp; HILFE -->
+  <div class="cat-section">
+    <h2 class="cat-title c-red">🚨 MELDEN &amp; HILFE</h2>
+    <div class="card-grid">
+      <a href="https://www.polizei.de" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Polizei – Cybercrime Meldestelle</span>
+        <span class="link-url">www.polizei.de</span>
+      </a>
+      <a href="https://www.verbraucherzentrale.de" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Verbraucherzentrale</span>
+        <span class="link-url">www.verbraucherzentrale.de</span>
+      </a>
+      <a href="https://www.watchlist-internet.at" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Watchlist Internet (Österreich)</span>
+        <span class="link-url">www.watchlist-internet.at</span>
+      </a>
+      <a href="https://www.evz.de" target="_blank" rel="noopener" class="link-card">
+        <span class="link-name">Europäisches Verbraucherzentrum (EVZ)</span>
+        <span class="link-url">www.evz.de</span>
+      </a>
     </div>
+  </div>
 
-    <div class="section" data-section="melden">
-      <h2>🚨 Melden & Hilfe</h2>
-      <div class="links-grid">
-        <a href="https://www.polizei.de" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Polizei Cybercrime" data-desc="Cybercrime-Meldestelle der Polizei. Online-Anzeige erstatten bei Hacking, Betrug, Identitätsdiebstahl.">
-          <h3>Polizei — Cybercrime Meldestelle</h3>
-          <p>Online-Anzeige bei Cyberkriminalität erstatten.</p>
-          <span class="tag">🚔 Polizei</span>
-        </a>
-        <a href="https://www.verbraucherzentrale.de" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Verbraucherzentrale" data-desc="Unabhängige Verbraucherberatung. Unterstützung bei Betrug, Abofallen, Datenlecks und Vertragsproblemen.">
-          <h3>Verbraucherzentrale</h3>
-          <p>Beratung bei Betrug, Abofallen und Datenproblemen.</p>
-          <span class="tag">🛡️ Verbraucher</span>
-        </a>
-        <a href="https://www.watchlist-internet.at" target="_blank" rel="noopener noreferrer" class="link-card" data-name="Watchlist Internet" data-desc="Österreichische Meldestelle für betrügerische Online-Shops und Cyberkriminalität.">
-          <h3>Watchlist Internet</h3>
-          <p>Meldestelle für betrügerische Webseiten in Österreich.</p>
-          <span class="tag">🇦🇹 Österreich</span>
-        </a>
-      </div>
-      <div class="empty-msg">Keine Ergebnisse in dieser Kategorie.</div>
-    </div>
+</main>
 
-  </main>
+<div class="footer-nav">
+  <a href="index.html">🏠 Zurück zur Startseite</a>
+</div>
+<div class="version-bar">
+  <span class="v-num">Version 3.6</span> &nbsp;·&nbsp; 18.06.2026
+</div>
 
-  <footer>
-    🛡️ Cyber-Sicherheit · Version 3.5 · 17.06.2026
-  </footer>
+<script>
+(function() {
+  var inp = document.getElementById('searchInput');
+  var cnt = document.getElementById('searchCount');
+  var sections = document.querySelectorAll('.cat-section');
 
-  <script>
-    function filterAll() {
-      const query = document.getElementById('search').value.toLowerCase().trim();
-      const sections = document.querySelectorAll('.section');
-      let anyVisible = false;
+  inp.addEventListener('input', function() {
+    var q = this.value.trim().toLowerCase();
+    var totalVisible = 0;
 
-      sections.forEach(section => {
-        const cards = section.querySelectorAll('.link-card');
-        let sectionVisible = false;
-
-        cards.forEach(card => {
-          const name = (card.dataset.name || '').toLowerCase();
-          const desc = (card.dataset.desc || '').toLowerCase();
-          const match = query === '' || name.includes(query) || desc.includes(query);
-          card.classList.toggle('hidden', !match);
-          if (match) sectionVisible = true;
-        });
-
-        section.classList.toggle('hidden', !sectionVisible);
-        section.classList.toggle('empty', sectionVisible);
-        if (sectionVisible) anyVisible = true;
+    sections.forEach(function(sec) {
+      var cards = sec.querySelectorAll('.link-card');
+      var secVisible = 0;
+      cards.forEach(function(card) {
+        var name = card.querySelector('.link-name').textContent.toLowerCase();
+        var url  = card.querySelector('.link-url').textContent.toLowerCase();
+        if (!q || name.includes(q) || url.includes(q)) {
+          card.classList.remove('hidden');
+          secVisible++;
+          totalVisible++;
+        } else {
+          card.classList.add('hidden');
+        }
       });
-    }
-  </script>
+      sec.classList.toggle('hidden', secVisible === 0);
+    });
+
+    cnt.textContent = q ? (totalVisible + ' Treffer') : '';
+  });
+})();
+</script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
