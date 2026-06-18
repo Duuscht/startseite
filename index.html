@@ -1,15 +1,7 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-WELH4D5T5C');
-  </script>
-  <!-- End Google Analytics -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🛡️ Cyber-Sicherheit</title>
@@ -109,7 +101,6 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
-      text-align: center;
       text-decoration: none;
       color: var(--text);
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
@@ -119,9 +110,57 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
-    .nav-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .nav-card-header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .nav-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
     .nav-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
-    .nav-card p { color: var(--muted); font-size: 0.85rem; }
+
+    .nav-card-toggle {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+      transition: background 0.2s;
+      margin-bottom: 0.75rem;
+    }
+    .nav-card-toggle:hover { background: #21262d; }
+    .nav-card-toggle .arrow { margin-left: auto; transition: transform 0.3s; }
+    .nav-card-toggle.open .arrow { transform: rotate(180deg); }
+
+    .nav-card-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .nav-card-content.open { max-height: 1000px; }
+    .nav-card-inner {
+      padding-bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .nav-card-link {
+      display: block;
+      background: var(--accent);
+      color: var(--bg);
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.75rem;
+    }
+    .nav-card-link:hover { background: #79c0ff; }
 
     footer {
       background: var(--card);
@@ -137,7 +176,7 @@
   <header>
     <h1>🛡️ Cyber-Sicherheit</h1>
     <p>Dein Ausgangspunkt für sicheres Surfen im Netz</p>
-    <div class="version">Version 3.5 · Stand: 17.06.2026</div>
+    <div class="version">Version 3.6 · Stand: 18.06.2026</div>
   </header>
 
   <main>
@@ -191,26 +230,61 @@
 
     <h2 style="color: var(--text); margin-bottom: 1rem; font-size: 1.3rem;">📌 Schnellzugriff</h2>
     <div class="nav-grid">
-      <a href="sicher.html" class="nav-card">
-        <div class="icon">🔒</div>
-        <h3>Sichere Links</h3>
-        <p>Geprüfte und sichere Dienste</p>
-      </a>
-      <a href="links.html" class="nav-card">
-        <div class="icon">🔗</div>
-        <h3>Linksammlung</h3>
-        <p>Nützliche Ressourcen im Überblick</p>
-      </a>
-      <a href="cybersec.html" class="nav-card">
-        <div class="icon">🛡️</div>
-        <h3>Cyber-Sicherheit</h3>
-        <p>Tools, Wissen und Hilfe</p>
-      </a>
+      <div class="nav-card">
+        <div class="nav-card-header">
+          <span class="icon">🔒</span>
+          <h3>Sichere Links</h3>
+        </div>
+        <button class="nav-card-toggle" onclick="toggleNavCard(event)" aria-expanded="false">
+          <span>+ Mehr erfahren</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="nav-card-content">
+          <div class="nav-card-inner">
+            <p>Eine kuratierte Sammlung von vertrauenswürdigen und sicheren Online-Diensten, Tools und Plattformen. Jeder Link wurde überprüft und bietet einen hohen Sicherheitsstandard.</p>
+          </div>
+        </div>
+        <a href="sicher.html" class="nav-card-link">Zu den sicheren Links →</a>
+      </div>
+
+      <div class="nav-card">
+        <div class="nav-card-header">
+          <span class="icon">🔗</span>
+          <h3>Linksammlung</h3>
+        </div>
+        <button class="nav-card-toggle" onclick="toggleNavCard(event)" aria-expanded="false">
+          <span>+ Mehr erfahren</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="nav-card-content">
+          <div class="nav-card-inner">
+            <p>Eine umfassende Ressourcensammlung mit hilfreichen Tools, Tutorials, News und Informationen rund um Cybersicherheit, Datenschutz und sicheres Surfen im Internet.</p>
+          </div>
+        </div>
+        <a href="links.html" class="nav-card-link">Zur Linksammlung →</a>
+      </div>
+
+      <div class="nav-card">
+        <div class="nav-card-header">
+          <span class="icon">🛡️</span>
+          <h3>Cyber-Sicherheit</h3>
+        </div>
+        <button class="nav-card-toggle" onclick="toggleNavCard(event)" aria-expanded="false">
+          <span>+ Mehr erfahren</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="nav-card-content">
+          <div class="nav-card-inner">
+            <p>Detaillierte Informationen über Sicherheitsrisiken, Schutzmaßnahmen, Best Practices und praktische Tipps für einen sicheren Umgang mit digitalen Diensten und Daten.</p>
+          </div>
+        </div>
+        <a href="cybersec.html" class="nav-card-link">Zu Cyber-Sicherheit →</a>
+      </div>
     </div>
   </main>
 
   <footer>
-    🛡️ Cyber-Sicherheit · Version 3.5 · 18.06.2026 @ 11:26
+    🛡️ Cyber-Sicherheit · Version 3.6 · 18.06.2026 @ 16:58
   </footer>
 
   <script>
@@ -259,8 +333,15 @@
       btn.classList.toggle('open', isOpen);
       btn.setAttribute('aria-expanded', isOpen);
     }
+
+    function toggleNavCard(event) {
+      const btn = event.currentTarget;
+      const content = btn.nextElementSibling;
+      const isOpen = content.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+    }
   </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
+```
