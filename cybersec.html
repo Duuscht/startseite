@@ -1,870 +1,560 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELH4D5T5C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());gtag('config', 'G-WELH4D5T5C', {
-    anonymize_ip: true,
-    allow_google_signals: false
-  });
-</script>
-  <!-- End Google Analytics -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔒 Cyber-Sicherheit</title>
-  <link rel="icon" href="https://www.google.com/s2/favicons?domain=google.com&sz=32" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>🛡️ Cyber-Sicherheit</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#06120a;--surface:#0c1e12;--border:#1a3525;--accent:#00e676;--accent2:#1de9b6;--text:#c8f5d8;--muted:#5a8a68;--warn:#ffca28}
-    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1.5rem 4rem;background-image:radial-gradient(ellipse 60% 40% at 80% 10%,rgba(0,230,118,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 10% 80%,rgba(29,233,182,0.05) 0%,transparent 60%)}
-    header{max-width:900px;margin:0 auto 1.5rem;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:1.2rem}
-    header h1{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--accent);letter-spacing:-0.02em}
-    header p{font-size:0.78rem;color:var(--muted);font-weight:300}
-    .search-wrap{max-width:900px;margin:0 auto 2rem;position:relative}
-    .search-wrap input{width:100%;padding:0.75rem 1rem 0.75rem 2.8rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s}
-    .search-wrap input:focus{border-color:var(--accent)}
-    .search-wrap input::placeholder{color:var(--muted)}
-    .search-icon{position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none}
-    .search-count{position:absolute;right:0.9rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--muted)}
-    .no-results{max-width:900px;margin:0 auto;text-align:center;color:var(--muted);font-size:0.9rem;padding:2rem;display:none}
-    main{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
-
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.4rem 1.2rem;transition:border-color 0.2s,transform 0.2s;animation:fadeUp 0.4s ease both}
-    .card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .card.hidden{display:none}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-    .card-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem}
-    .card-icon{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-size:1rem;flex-shrink:0;background:rgba(0,230,118,0.12)}
-    .card-title{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--text)}
-
-    ul{list-style:none}
-    ul li{margin-bottom:0.45rem}
-    ul li.hidden{display:none}
-
-    /* Link + Info */
-    ul li a{display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0.6rem 0.45rem 0;border-radius:7px;text-decoration:none;font-size:0.875rem;color:var(--text);font-weight:400;transition:background 0.15s,color 0.15s;word-break:break-all}
-
-    ul li a:hover{background:rgba(0,230,118,0.07);color:var(--accent)}
-    ul li a mark{background:rgba(0,230,118,0.2);color:#00e676;font-weight:700;border-radius:2px;padding:0 1px}
-
-    .favicon{width:16px;height:16px;border-radius:3px;flex-shrink:0;object-fit:contain;vertical-align:middle;background:#fff;border-radius:2px;padding:1px}
-    .url-display{display:block;font-size:0.65rem;color:var(--muted);padding:0 0 0 0.6rem;word-break:break-all;line-height:1.2}
-
-    /* (i)-Icon */
-    .info-btn{
-      flex-shrink:0;
-      width:24px;height:24px;border-radius:7px;
-      display:inline-grid;place-items:center;
-      border:1px solid rgba(0,230,118,0.35);
-      color:var(--accent2);
-      background:rgba(29,233,182,0.08);
-      cursor:pointer;
-      transition:transform .15s, background .15s, border-color .15s, color .15s;
-      margin-right:0.2rem;
-      font-size:0.85rem;
-      user-select:none;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --border: #1e2a3a;
+      --accent: #4da6ff;
+      --accent2: #3fb950;
+      --text: #c9d8e8;
+      --muted: #5a6a7a;
     }
-    .info-btn:hover{transform:translateY(-1px);background:rgba(29,233,182,0.14);border-color:rgba(29,233,182,0.55)}
-    .link-row{display:flex;align-items:flex-start;gap:0.45rem;width:100%}
-    .link-main{display:flex;flex-direction:column;gap:0.05rem;min-width:0}
-    .link-info{
-      display:none;
-      margin:0.45rem 0 0.2rem 2.4rem;
-      padding:0.5rem 0.6rem;
-      border:1px solid rgba(29,233,182,0.25);
-      background:rgba(29,233,182,0.06);
-      border-radius:10px;
-      color:var(--muted);
-      font-size:0.78rem;
-      line-height:1.25;
-      max-width:52ch;
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; padding: 2rem 1.5rem 4rem;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(77,166,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(63,185,80,0.05) 0%, transparent 60%);
     }
-    .link-info.open{display:block}
-    .link-info strong{color:var(--text);font-weight:600}
-    .link-info .tiny{color:var(--muted);font-size:0.75rem}
-
-    /* Button + Cross */
-    .nav-btn-wrap{max-width:900px;margin:2rem auto 0;text-align:center;display:flex;justify-content:center;gap:0.7rem;flex-wrap:wrap}
-    .nav-btn{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.35);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;padding:0.7rem 1.6rem;border-radius:8px;text-decoration:none;transition:background 0.2s,border-color 0.2s}
-    .nav-btn:hover{background:rgba(0,230,118,0.18);border-color:var(--accent)}
-    .pz-btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:0.55rem;background:rgba(29,233,182,0.08);
-      border:1px solid rgba(29,233,182,0.3);
-      color:var(--accent2);
-      font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;
-      padding:0.7rem 1.2rem;border-radius:8px;cursor:pointer;
-      transition:background .2s,border-color .2s,transform .15s;
+    header {
+      max-width: 900px; margin: 0 auto 1.5rem;
+      display: flex; align-items: baseline; justify-content: space-between;
+      border-bottom: 1px solid var(--border); padding-bottom: 1.2rem;
     }
-    .pz-btn:hover{background:rgba(29,233,182,0.14);border-color:rgba(29,233,182,0.55);transform:translateY(-1px)}
-    .cross-results{max-width:900px;margin:0 auto 1.5rem;background:rgba(29,233,182,0.06);border:1px solid rgba(29,233,182,0.2);border-radius:10px;padding:0.8rem 1rem;display:none}
-    .cross-header{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:0.6rem;opacity:0.8}
-    .cross-item{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.5rem;border-radius:6px;text-decoration:none;transition:background 0.15s;margin-bottom:0.2rem;overflow:hidden}
-    .cross-item:hover{background:rgba(255,255,255,0.05)}
-    .cross-badge{font-size:0.65rem;background:rgba(29,233,182,0.15);color:var(--accent2);border-radius:3px;padding:1px 5px;white-space:nowrap;flex-shrink:0}
-    .cross-label{font-size:0.875rem;color:var(--text);flex:1;word-break:break-word}
-    .cross-label mark{background:rgba(0,230,118,0.3);color:var(--accent);font-weight:700;border-radius:2px}
-    .cross-rubrik{font-size:0.68rem;color:var(--muted);opacity:0.7;flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px}
+    header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; }
+    header p { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+    .shield { display: inline-block; margin-right: 0.4rem; font-size: 1.1rem; }
 
-    .version-bar{max-width:900px;margin:1.5rem auto 0;text-align:center;font-size:0.75rem;color:#4a4858;border-top:1px solid #1a3525;padding-top:1rem}
-    .version-bar .v-num{color:#39c96e;font-weight:700;font-size:0.8rem}
+    /* Suchfeld */
+    .search-wrap { max-width: 900px; margin: 0 auto 2rem; position: relative; }
+    .search-wrap input {
+      width: 100%; padding: 0.75rem 1rem 0.75rem 2.8rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+    }
+    .search-wrap input:focus { border-color: var(--accent); }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+    .search-count { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: var(--muted); }
+    .no-results { max-width: 900px; margin: 0 auto; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 2rem; display: none; }
+
+    main { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem;
+      transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.4s ease both;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card.hidden { display: none; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+    .card-icon { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text); }
+    .c-blue   .card-icon { background: rgba(77,166,255,0.15); }
+    .c-green  .card-icon { background: rgba(63,185,80,0.15); }
+    .c-yellow .card-icon { background: rgba(200,169,110,0.15); }
+    .c-red    .card-icon { background: rgba(224,112,112,0.15); }
+    .c-purple .card-icon { background: rgba(170,130,210,0.15); }
+    .c-teal   .card-icon { background: rgba(126,184,164,0.15); }
+    .c-orange .card-icon { background: rgba(230,150,60,0.15); }
+    ul { list-style: none; }
+    ul li { margin-bottom: 0.3rem; }
+    ul li.hidden { display: none; }
+    ul li a {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.45rem 0.6rem; border-radius: 7px; text-decoration: none;
+      font-size: 0.875rem; color: var(--text); font-weight: 400;
+      transition: background 0.15s, color 0.15s; word-break: break-all;
+    }
+    ul li a:hover { background: rgba(77,166,255,0.08); color: var(--accent); }
+    ul li a mark { background: rgba(200,20,20,0.25); color: #ff4444; font-weight: 700; border-radius: 2px; padding: 0 1px; }
+    .favicon { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: contain; vertical-align: middle; }
+
+    .list-divider {
+      display: block;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;
+      color: #b8d4f0;
+      background: rgba(60,100,160,0.35);
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin: 0.55rem 0 0.25rem;
+    }
+
+    .info-box {
+      max-width: 900px; margin: 2.5rem auto 0;
+      background: rgba(63,185,80,0.07); border: 1px solid rgba(63,185,80,0.2);
+      border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6;
+    }
+    .info-box strong { color: var(--accent2); }
+
+    .edit-note {
+      max-width: 900px; margin: 1rem auto 0;
+      background: rgba(77,166,255,0.07); border: 1px solid rgba(77,166,255,0.2);
+      border-radius: 10px; padding: 1rem 1.4rem; font-size: 0.8rem; color: #7a9ab8; line-height: 1.6;
+    }
+    .edit-note strong { color: #4da6ff; }
+
+    .version-bar {
+      max-width: 900px; margin: 1.5rem auto 0;
+      text-align: center; font-size: 0.75rem; color: #4a4858;
+      border-top: 1px solid #1e2a3a; padding-top: 1rem;
+    }
+    .version-bar .v-num { color: #3fb950; font-weight: 700; font-size: 0.8rem; }
+
+    /* ── Zitat-Banner ── */
+    .quote-banner {
+      max-width: 900px; margin: 0 auto 2rem;
+      background: linear-gradient(135deg, rgba(77,166,255,0.06) 0%, rgba(63,185,80,0.06) 100%);
+      border: 1px solid rgba(77,166,255,0.2);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px; padding: 1.2rem 1.6rem;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.7s ease both;
+    }
+    .quote-banner::before {
+      content: '\201C';
+      position: absolute; top: -0.2rem; left: 0.8rem;
+      font-size: 4rem; color: rgba(77,166,255,0.12);
+      font-family: 'DM Serif Display', serif; line-height: 1;
+      pointer-events: none;
+    }
+    .quote-label {
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--accent); opacity: 0.65; margin-bottom: 0.6rem;
+    }
+    .quote-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      color: var(--text); line-height: 1.65;
+      font-style: italic; padding-left: 0.5rem;
+      min-height: 2.5rem;
+    }
+    .quote-text.loading {
+      color: var(--muted);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .quote-author {
+      font-size: 0.78rem; color: var(--accent2);
+      margin-top: 0.6rem; padding-left: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .quote-footer {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-top: 0.5rem;
+    }
+    .quote-source {
+      font-size: 0.65rem; color: var(--muted); letter-spacing: 1px;
+    }
+    .quote-refresh {
+      background: none; border: 1px solid rgba(77,166,255,0.2);
+      cursor: pointer; color: var(--muted); font-size: 0.72rem;
+      padding: 0.2rem 0.6rem; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .quote-refresh:hover { color: var(--accent); border-color: rgba(77,166,255,0.5); }
+    .quote-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
+    @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
+
+    .nav-btn-wrap { max-width:900px; margin:2rem auto 0; text-align:center; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .nav-btn { display:inline-flex; align-items:center; gap:0.6rem; background:rgba(77,166,255,0.1); border:1px solid rgba(77,166,255,0.35); color:var(--accent); font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500; padding:0.7rem 1.6rem; border-radius:8px; text-decoration:none; transition:background 0.2s,border-color 0.2s; }
+    .nav-btn:hover { background:rgba(77,166,255,0.18); border-color:var(--accent); }
+    .nav-btn.secondary { border-color:rgba(63,185,80,0.35); color:var(--accent2); background:rgba(63,185,80,0.07); }
+    .nav-btn.secondary:hover { background:rgba(63,185,80,0.15); border-color:var(--accent2); }
+    .cross-results { max-width:900px; margin:0 auto 1.5rem; background:rgba(63,185,80,0.06); border:1px solid rgba(63,185,80,0.2); border-radius:10px; padding:0.8rem 1rem; display:none; }
+    .cross-header { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); margin-bottom:0.6rem; opacity:0.8; }
+    .cross-item { display:flex; align-items:center; gap:0.5rem; padding:0.4rem 0.5rem; border-radius:6px; text-decoration:none; transition:background 0.15s; margin-bottom:0.2rem; overflow:hidden; }
+    .cross-item:hover { background:rgba(255,255,255,0.05); }
+    .cross-badge { font-size:0.65rem; background:rgba(63,185,80,0.15); color:var(--accent2); border-radius:3px; padding:1px 5px; white-space:nowrap; flex-shrink:0; }
+    .cross-label { font-size:0.875rem; color:var(--text); flex:1; word-break:break-word; }
+    .cross-label mark { background:rgba(77,166,255,0.3); color:var(--accent); font-weight:700; border-radius:2px; }
+    .cross-rubrik { font-size:0.68rem; color:var(--muted); opacity:0.7; flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:120px; }
+
+    /* ===== 4.3: (i)-Info-Button pro Link ===== */
+    .link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .link-row a {
+      flex: 1;
+      min-width: 0;
+    }
+    .info-btn {
+      flex-shrink: 0;
+      background: rgba(77,166,255,0.1);
+      border: 1px solid rgba(77,166,255,0.2);
+      border-radius: 5px;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.68rem;
+      font-family: 'DM Sans', sans-serif;
+      padding: 0.28rem 0.42rem;
+      line-height: 1;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .info-btn:hover {
+      background: rgba(77,166,255,0.2);
+      border-color: rgba(77,166,255,0.45);
+    }
+    .info-btn.active {
+      background: rgba(77,166,255,0.18);
+      border-color: var(--accent);
+    }
+    .link-info {
+      display: none;
+      margin: 0.1rem 0.5rem 0.35rem 2.35rem;
+      background: rgba(63,185,80,0.06);
+      border: 1px solid rgba(63,185,80,0.16);
+      border-radius: 7px;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .link-info.visible {
+      display: block;
+    }
   </style>
 </head>
-
 <body>
 <header>
-  <h1>🔒 Cyber-Sicherheit</h1>
-  <p>Datenschutz, VPNs, Passwörter & sichere Kommunikation</p>
+  <h1><span class="shield">🛡️</span>Cyber-Sicherheit</h1>
 </header>
-
 <div class="search-wrap">
   <span class="search-icon">🔍</span>
-  <input type="text" id="search" placeholder="Link suchen…" autocomplete="off">
+  <input type="text" id="search" placeholder="Link suchen..." autocomplete="off">
   <span class="search-count" id="searchCount"></span>
 </div>
-
-<div class="no-results" id="noResults">Kein Link gefunden 🤔</div>
 <div class="cross-results" id="crossResults"></div>
-
 <main id="main">
-  <!-- Datenschutz & Anonymität -->
-  <div class="card">
-    <div class="card-header"><div class="card-icon">🔒</div><span class="card-title">Datenschutz & Anonymität</span></div>
+
+  <!-- PASSWÖRTER -->
+  <div class="card c-yellow">
+    <div class="card-header"><div class="card-icon">🔑</div><span class="card-title">Passwörter</span></div>
     <ul>
-      <li>
-        <a href="https://duckduckgo.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu DuckDuckGo" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=duckduckgo.com&sz=32" alt="">
-              <span><span style="font-weight:600">DuckDuckGo</span></span>
-              <span class="url-display">duckduckgo.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Suchmaschine mit Fokus auf Datenschutz. Reduziert Tracking und nutzt mehr Privatsphäre-Optionen.
-                <span class="tiny">Kurz: weniger Profiling.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Have I Been Pwned" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com&sz=32" alt="">
-              <span><span style="font-weight:600">Have I Been Pwned</span></span>
-              <span class="url-display">haveibeenpwned.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Prüft, ob E-Mail-Adressen in Datenlecks auftauchen. Hilft beim gezielten Wechseln & Absichern von Konten.
-                <span class="tiny">Kurz: Leak-Check.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://privacybadger.org" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Privacy Badger" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=privacybadger.org&sz=32" alt="">
-              <span><span style="font-weight:600">Privacy Badger</span></span>
-              <span class="url-display">privacybadger.org</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Blockiert bzw. begrenzt Werbe- und Tracking-Skripte, die Nutzer sonst über Seiten hinweg verfolgen.
-                <span class="tiny">Kurz: Tracking reduzieren.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://torproject.org" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Tor Browser" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=torproject.org&sz=32" alt="">
-              <span><span style="font-weight:600">Tor Browser</span></span>
-              <span class="url-display">torproject.org</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Leitet Verbindungen über mehrere Knoten, um IP & Aktivität zu verschleiern. Wichtig: sicher konfigurieren und keine sensiblen Logins nutzen.
-                <span class="tiny">Kurz: Anonym surfen.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
+      <li><div class="link-row"><a href="https://bitwarden.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bitwarden.com" alt="">Bitwarden (Passwort-Manager)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Sicherer, quelloffener Passwort-Manager. Speichert &amp; synchronisiert Passwörter verschlüsselt über eigene Server oder selbst gehostet. Kostenlose Version sehr umfangreich.</div></li>
+      <li><div class="link-row"><a href="https://keepass.info" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=keepass.info" alt="">KeePass (Passwort-Tresor)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Kostenloser, lokaler Passwort-Tresor. Die Datenbank liegt nur auf dem eigenen Gerät – kein Cloud-Speicher nötig. Sehr hohe Sicherheit bei lokaler Nutzung.</div></li>
+      <li><div class="link-row"><a href="https://1password.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=1password.com" alt="">1Password</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Premium Passwort-Manager mit exzellenter Usability. Bietet sichere Freigabe, 2FA-Integration und Travel-Modus (löscht beim Zoll sensible Daten vom Gerät).</div></li>
+      <li><div class="link-row"><a href="https://www.dashlane.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dashlane.com" alt="">Dashlane</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Passwort-Manager mit eingebautem VPN und Dark-Web-Monitoring. Die kostenlose Version ist auf ein Gerät beschränkt.</div></li>
+      <li><div class="link-row"><a href="https://www.nytimes.com/interactive/2021/09/29/opinion/password-tips.html" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=nytimes.com" alt="">NYT: Tipps für sichere Passwörter</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Praktische Tipps vom New York Times-Experten: Passphrasen statt Passwörter, nie dasselbe Passwort zweimal, Passwort-Manager nutzen.</div></li>
     </ul>
   </div>
 
-  <!-- Informationsquellen -->
-  <div class="card">
-    <div class="card-header"><div class="card-icon">📚</div><span class="card-title">Informationsquellen</span></div>
+  <!-- ZWEI-FAKTOR-AUTHENTIFIZIERUNG -->
+  <div class="card c-green">
+    <div class="card-header"><div class="card-icon">🔐</div><span class="card-title">2FA – Zwei-Faktor</span></div>
     <ul>
-      <li>
-        <a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu BSI" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=bsi.bund.de&sz=32" alt="">
-              <span><span style="font-weight:600">BSI – Bundesamt für IT-Sicherheit</span></span>
-              <span class="url-display">bsi.bund.de</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Offizielle Leitfäden, Warnungen und Empfehlungen zu IT-Sicherheit in verständlicher Form.
-                <span class="tiny">Kurz: verlässliche Infos.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://www.eff.org" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu EFF" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=eff.org&sz=32" alt="">
-              <span><span style="font-weight:600">EFF – Electronic Frontier Foundation</span></span>
-              <span class="url-display">eff.org</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Starker Fokus auf digitale Rechte, Privatsphäre & Sicherheit. Gute Ratgeber und Hintergrundanalysen.
-                <span class="tiny">Kurz: digitale Freiheitsrechte.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://www.heise.de/security" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Heise Security" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=heise.de&sz=32" alt="">
-              <span><span style="font-weight:600">Heise Security</span></span>
-              <span class="url-display">heise.de/security</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Nachrichten und Analysen zu Schwachstellen, Angriffen und Sicherheits-Trends – meist mit praxisnaher Einordnung.
-                <span class="tiny">Kurz: aktuelle Security-News.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://www.kuketz-blog.de" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Kuketz IT-Security Blog" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=kuketz-blog.de&sz=32" alt="">
-              <span><span style="font-weight:600">Kuketz IT-Security Blog</span></span>
-              <span class="url-display">kuketz-blog.de</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Praxis- und Verbraucher-orientierte Sicherheitsartikel, oft mit klaren Handlungsempfehlungen gegen typische Risiken.
-                <span class="tiny">Kurz: verständliche Warnungen.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
+      <li><div class="link-row"><a href="https://authy.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=authy.com" alt="">Authy (2FA-App)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Empfohlene 2FA-App. Speichert TOTP-Codes verschlüsselt und kann sie zwischen Geräten synchronisieren.icloud-Backup schützt vor Verlust des Codes.</div></li>
+      <li><div class="link-row"><a href="https://freeotpproject.github.io" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=freeotpproject.github.io" alt="">FreeOTP+ (2FA-App)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Quelloffene 2FA-App der Red Hat-Initiative. Generiert TOTP-Codes ohne Cloud-Speicher – alles lokal auf dem Gerät.</div></li>
+      <li><div class="link-row"><a href="https:// Aegis-Authenticator"><img class="favicon" src="https://www.google.com/s2/favicons?domain=github.com" alt="">Aegis Authenticator (2FA-App)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Sicherer Open-Source-TOTP-Generator für Android. Kann die Datenbank verschlüsselt exportieren und auf anderen Geräten importieren. Perfekt für paranoids.</div></li>
+      <li><div class="link-row"><a href="https://www.privacyguides.org/de/tools/2fa/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=privacyguides.org" alt="">Privacy Guides: 2FA-Übersicht</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Umfassender Leitfaden: Welche 2FA-Methode ist am sichersten? TOTP vs. Push vs. Hardware-Key. Mit Empfehlungen für jede Plattform.</div></li>
     </ul>
   </div>
 
-  <!-- Passwort-Manager -->
-  <div class="card">
-    <div class="card-header"><div class="card-icon">🔐</div><span class="card-title">Passwort-Manager</span></div>
+  <!-- E-MAIL & PHISHING -->
+  <div class="card c-red">
+    <div class="card-header"><div class="card-icon">📧</div><span class="card-title">E-Mail &amp; Phishing</span></div>
     <ul>
-      <li>
-        <a href="https://1password.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu 1Password" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=1password.com&sz=32" alt="">
-              <span><span style="font-weight:600">1Password</span></span>
-              <span class="url-display">1password.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Passwort-Manager mit starkem Sicherheitsfokus: sichere Speicherung, Auto-Ausfüllen und hilfreiche Schutzfunktionen.
-                <span class="tiny">Kurz: Passwörter sicher verwalten.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://bitwarden.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Bitwarden" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=bitwarden.com&sz=32" alt="">
-              <span><span style="font-weight:600">Bitwarden</span></span>
-              <span class="url-display">bitwarden.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Passwort-Manager (auch im Free-Plan) für sichere, verschlüsselte Passwörter und einfache Gerätesynchronisation.
-                <span class="tiny">Kurz: günstig & sicher.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://dashlane.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Dashlane" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=dashlane.com&sz=32" alt="">
-              <span><span style="font-weight:600">Dashlane</span></span>
-              <span class="url-display">dashlane.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Komfortabler Passwort-Manager mit Sicherheits-Features und Ausfüll-Funktionen. Hilft beim Sichern vieler Konten.
-                <span class="tiny">Kurz: bequeme Passwortverwaltung.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://keepass.info" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu KeePass" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=keepass.info&sz=32" alt="">
-              <span><span style="font-weight:600">KeePass</span></span>
-              <span class="url-display">keepass.info</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Lokaler Passwort-Speicher (Datenbank). Gut, wenn du möglichst Kontrolle und Offline-orientierten Betrieb willst.
-                <span class="tiny">Kurz: privat & lokal.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://nordpass.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu NordPass" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=nordpass.com&sz=32" alt="">
-              <span><span style="font-weight:600">NordPass</span></span>
-              <span class="url-display">nordpass.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Passwort-Manager aus dem Nord-Ökosystem. Ziel: sichere Speicherung, automatische Eingabe und bessere Passwort-Hygiene.
-                <span class="tiny">Kurz: Passwörter automatisieren.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
+      <li><div class="link-row"><a href="https://proton.me" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=proton.me" alt="">Proton Mail (Verschlüsselung)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Ende-zu-Ende verschlüsselter E-Mail-Dienst aus der Schweiz. Selbst Proton kann die Inhalte nicht lesen. Kostenlose Version mit 1 GB Speicher.</div></li>
+      <li><div class="link-row"><a href="https://posteo.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=posteo.de" alt="">Posteo (Datenschutz-E-Mail)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Deutscher E-Mail-Anbieter mit Fokus auf Datenschutz. Keine Werbung, kein Tracking, anonyme Bezahlung. E-Mails werden automatisch verschlüsselt.</div></li>
+      <li><div class="link-row"><a href="https://tuta.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=tuta.com" alt="">Tuta (ehem. Tutanota)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Quelloffener, in Deutschland gehosteter E-Mail-Dienst mit eingebauter Ende-zu-Ende-Verschlüsselung. Auch Kalender verschlüsselt.</div></li>
+      <li><div class="link-row"><a href="https://www.d separat-anti-phishing.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bundesamt.bsi.de" alt="">BSI: Phishing erkennen</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Offizielle Informationen des Bundesamtes für Sicherheit in der Informationstechnik (BSI). So erkennst du gefälschte E-Mails und bösartige Anhänge.</div></li>
     </ul>
   </div>
 
-  <!-- VPN-Dienste -->
-  <div class="card">
-    <div class="card-header"><div class="card-icon">🌐</div><span class="card-title">VPN-Dienste</span></div>
+  <!-- BROWSER & DATENSCHUTZ -->
+  <div class="card c-blue">
+    <div class="card-header"><div class="card-icon">🌐</div><span class="card-title">Browser &amp; Datenschutz</span></div>
     <ul>
-      <li>
-        <a href="https://mullvad.net" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Mullvad VPN" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=mullvad.net&sz=32" alt="">
-              <span><span style="font-weight:600">Mullvad VPN</span></span>
-              <span class="url-display">mullvad.net</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> VPN mit Fokus auf Privatsphäre und weniger Identitätsbezug. Eignet sich für verschlüsselten Traffic unterwegs.
-                <span class="tiny">Kurz: IP verstecken.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://nordvpn.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu NordVPN" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=nordvpn.com&sz=32" alt="">
-              <span><span style="font-weight:600">NordVPN</span></span>
-              <span class="url-display">nordvpn.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Weit verbreiteter VPN-Dienst. Kann helfen, IP/Standort-Anzeigen zu reduzieren und Traffic zu verschlüsseln.
-                <span class="tiny">Kurz: verschlüsselter Zugang.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://protonvpn.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu ProtonVPN" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=protonvpn.com&sz=32" alt="">
-              <span><span style="font-weight:600">ProtonVPN</span></span>
-              <span class="url-display">protonvpn.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> VPN vom Proton-Umfeld. Ziel ist Privatsphäre und sichere Verbindung – insbesondere bei unsicheren Netzwerken.
-                <span class="tiny">Kurz: mehr Schutz online.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://windscribe.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Windscribe" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=windscribe.com&sz=32" alt="">
-              <span><span style="font-weight:600">Windscribe</span></span>
-              <span class="url-display">windscribe.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> VPN mit zusätzlichen Schutzfunktionen. Kann helfen, Datenverkehr zu verschlüsseln und Tracking zu reduzieren.
-                <span class="tiny">Kurz: VPN + Schutz.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
+      <li><div class="link-row"><a href="https://www.mozilla.org/de/firefox/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mozilla.org" alt="">Mozilla Firefox</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Browser mit Fokus auf Privatsphäre. Enhanced Tracking Protection blockiert standardmäßig Tracker. Quelloffen, keine big-tech-Abhängigkeit.</div></li>
+      <li><div class="link-row"><a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=google.com" alt="">Google Chrome</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Meistgenutzter Browser. Gute Performance, aber starker Datenhunger. Mit Datenschutz-Einstellungen und uBlock Origin eine brauchbare Option.</div></li>
+      <li><div class="link-row"><a href="https://librewolf.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=librewolf.net" alt="">LibreWolf</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Firefox-Fork ohne Firefox-Kompromisse: kein Telemetrie, kein Pocket, keine Zertifikats-Updates von Mozilla. Optimiert für maximale Privatsphäre.</div></li>
+      <li><div class="link-row"><a href="https://www.brave.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=brave.com" alt="">Brave</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Browser mit eingebautem Ad-Blocker und Tracker-Blocker. Integriert Option für Tor-Tabs. Schaltet Werbung um, um eigene BAT-Coins zu verdienen.</div></li>
+      <li><div class="link-row"><a href="https:// Mullvad-Browser"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mullvad.net" alt="">Mullvad Browser</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Von Mullvad VPN entwickelter Firefox-Fork. Minimiert Fingerprinting und Telemetrie. Ohne VPN ebenfalls nutzbar, aber für beste Privatsphäre mit Mullvad VPN.</div></li>
     </ul>
   </div>
 
-  <!-- Sichere Kommunikation -->
-  <div class="card">
-    <div class="card-header"><div class="card-icon">💬</div><span class="card-title">Sichere Kommunikation</span></div>
+  <!-- VPN-DIENSTE -->
+  <div class="card c-purple">
+    <div class="card-header"><div class="card-icon">🔒</div><span class="card-title">VPN-Dienste</span></div>
     <ul>
-      <li>
-        <a href="https://briarproject.org" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Briar" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=briarproject.org&sz=32" alt="">
-              <span><span style="font-weight:600">Briar</span></span>
-              <span class="url-display">briarproject.org</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Messenger für zensurresistente Kommunikation. Nutzt unter anderem Offline-/Netzwerk-Umwege für die Verbindung.
-                <span class="tiny">Kurz: resilient kommunizieren.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://element.io" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Element (Matrix)" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=element.io&sz=32" alt="">
-              <span><span style="font-weight:600">Element (Matrix)</span></span>
-              <span class="url-display">element.io</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Client für das Matrix-Ökosystem. Unterstützt verschlüsselte Chats und föderierte Kommunikation.
-                <span class="tiny">Kurz: Matrix nutzen.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://mail.proton.me" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu ProtonMail" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=mail.proton.me&sz=32" alt="">
-              <span><span style="font-weight:600">ProtonMail</span></span>
-              <span class="url-display">mail.proton.me</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> E-Mail-Dienst mit Fokus auf Privatsphäre. Ziel: sichere Kommunikation, stärkere Kontrolle über Daten.
-                <span class="tiny">Kurz: E-Mail schützen.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://signal.org" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Signal" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=signal.org&sz=32" alt="">
-              <span><span style="font-weight:600">Signal</span></span>
-              <span class="url-display">signal.org</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Messenger mit starker Ende-zu-Ende-Verschlüsselung. Sehr bekannt für private Chats und Gruppenkommunikation.
-                <span class="tiny">Kurz: Ende-zu-Ende.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://threema.ch" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Threema" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=threema.ch&sz=32" alt="">
-              <span><span style="font-weight:600">Threema</span></span>
-              <span class="url-display">threema.ch</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Messenger mit Fokus auf Privatsphäre und sicherer Übertragung. Gut, wenn du eine einfache, datensparsame Lösung suchst.
-                <span class="tiny">Kurz: privater Chat.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://wire.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Wire" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=wire.com&sz=32" alt="">
-              <span><span style="font-weight:600">Wire</span></span>
-              <span class="url-display">wire.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Kommunikationsplattform für Chats/Calls mit Sicherheitsfokus. Häufig genutzt für Teams und private Gespräche.
-                <span class="tiny">Kurz: sicher kommunizieren.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
+      <li><div class="link-row"><a href="https://mullvad.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=mullvad.net" alt="">Mullvad VPN</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Schwedischer VPN ohne Logfiles, akzeptiert Bitcoin &amp; Cash. Kein Account nötig – man bekommt eine Zugangsnummer. Einer der transparentesten und unabhängig geprüften VPN-Dienste.</div></li>
+      <li><div class="link-row"><a href="https://www.protonvpn.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=protonvpn.com" alt="">ProtonVPN</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">VPN des ProtonMail-Teams. Strenge No-Log-Policy, in der Schweiz gehostet. Die kostenlose Version drosselt – reicht für gelegentliche Nutzung.</div></li>
+      <li><div class="link-row"><a href="https://ivpn.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ivpn.net" alt="">IVPN</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Minimalistischer VPN-Anbieter aus Gibraltar. Keine Logfiles, Anti-Tracker integriert. Öffentlich auditiert und sehr transparent über Firmenstruktur.</div></li>
+      <li><div class="link-row"><a href="https://www.privacyguides.org/de/vpn/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=privacyguides.org" alt="">Privacy Guides: VPN-Empfehlungen</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Unabhängiger Vergleich der sichersten VPN-Dienste. Bewertet nach Datenschutz-Policy, Protokollierung, Jurisdiktion und unabhängigen Audits.</div></li>
     </ul>
   </div>
 
-  <!-- Sicherheits-Tools -->
-  <div class="card">
-    <div class="card-header"><div class="card-icon">🛡️</div><span class="card-title">Sicherheits-Tools</span></div>
+  <!-- DATENLECK-CHECK -->
+  <div class="card c-orange">
+    <div class="card-header"><div class="card-icon">🔍</div><span class="card-title">Datenleck-Prüfung</span></div>
     <ul>
-      <li>
-        <a href="https://adguard.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu AdGuard" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=adguard.com&sz=32" alt="">
-              <span><span style="font-weight:600">AdGuard</span></span>
-              <span class="url-display">adguard.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Werbe- und Tracker-Blocker. Reduziert Tracking und schließt viele “unerwünschte” Skripte beim Surfen aus.
-                <span class="tiny">Kurz: weniger Tracking.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://clamav.net" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu ClamAV" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=clamav.net&sz=32" alt="">
-              <span><span style="font-weight:600">ClamAV</span></span>
-              <span class="url-display">clamav.net</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Virenscanner/Antimalware-Engine (Open Source). Nutze ihn z.B. für Dateien/Server-Scans.
-                <span class="tiny">Kurz: Malware scannen.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://malwarebytes.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu Malwarebytes" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=malwarebytes.com&sz=32" alt="">
-              <span><span style="font-weight:600">Malwarebytes</span></span>
-              <span class="url-display">malwarebytes.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Sicherheits-Software zum Erkennen/Entfernen von Malware. Gut als zusätzlicher Scanner neben dem Hauptschutz.
-                <span class="tiny">Kurz: zweite Schutzschicht.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://virustotal.com" target="_blank" rel="noopener noreferrer">
-          <div class="link-row">
-            <button type="button" class="info-btn" aria-label="Info zu VirusTotal" data-info="1">ⓘ</button>
-            <div class="link-main">
-              <img class="favicon" src="https://www.google.com/s2/favicons?domain=virustotal.com&sz=32" alt="">
-              <span><span style="font-weight:600">VirusTotal</span></span>
-              <span class="url-display">virustotal.com</span>
-              <div class="link-info" aria-hidden="true">
-                <strong>Info:</strong> Plattform zum Prüfen von Domains/URLs/Dateien mit mehreren Engines. Hilft beim schnellen “Verdachts-Check”.
-                <span class="tiny">Kurz: Mehr-Scanner-Analyse.</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </li>
+      <li><div class="link-row"><a href="https://haveibeenpwned.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=haveibeenpwned.com" alt="">Have I Been Pwned?</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Prüft ob deine E-Mail-Adresse oder dein Passwort in einem Datenleck aufgetaucht ist. Der größte Datenleck-Datenbank der Welt. Passwort-Suche nur mit SHA-1-Hash.</div></li>
+      <li><div class="link-row"><a href="https://breachdirectory.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=breachdirectory.com" alt="">BreachDirectory</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Prüft E-Mail-Adressen und Passwörter gegen geleakte Datenbanken. Bietet auch einen API-Zugang und ein Firefox-Plugin zur automatischen Prüfung.</div></li>
+      <li><div class="link-row"><a href="https://de.avast.com/hackcheck" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=avast.com" alt="">Avast Hack Check</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Avasts kostenloser Dienst zum Prüfen ob E-Mail-Adressen in Datenlecks aufgetaucht sind. Teil von Avasts breiterer Sicherheitsplattform.</div></li>
     </ul>
   </div>
+
+  <!-- CYBER-NOTFALL -->
+  <div class="card c-red">
+    <div class="card-header"><div class="card-icon">🚨</div><span class="card-title">Cyber-Notfall</span></div>
+    <ul>
+      <li><div class="link-row"><a href="https://cybr360.saarland/erste-hilfe" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cybr360.saarland" alt="">Cybr360 Erste Hilfe (Saarland)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Cyberangriff? Erste Schritte: Sofortmaßnahmen bei Erpressungssoftware, Phishing, Identitätsdiebstahl. Speziell für Saarland und Rheinland-Pfalz.</div></li>
+      <li><div class="link-row"><a href="https://www.polizei.saarland.de/praevention/cybercrime" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=polizei.saarland.de" alt="">Polizei Saarland: Cybercrime</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Anzeige erstatten, Präventionstipps und Kontaktstelle Cybercrime beim LKA Saarland. Für Opfer von Ransomware, Betrug, Identitätsdiebstahl.</div></li>
+      <li><div class="link-row"><a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bsi.bund.de" alt="">BSI – Bundesamt für IT-Sicherheit</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Die nationale IT-Sicherheitsbehörde Deutschlands. Warnungen, Alarmmeldungen, Bürgerinformationen und Standards für IT-Sicherheit.</div></li>
+      <li><div class="link-row"><a href="https://www.verbraucherzentrale-saarland.de" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=verbraucherzentrale-saarland.de" alt="">Verbraucherzentrale Saarland</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Beratung bei Online-Betrug, Abo-Fallen, Phishing und Cybercrime. Kostenlose Beratung auch zu IT-Sicherheit im Alltag.</div></li>
+    </ul>
+  </div>
+
+  <!-- BROWSER-TESTS -->
+  <div class="card c-teal">
+    <div class="card-header"><div class="card-icon">🔬</div><span class="card-title">Browser-Tests</span></div>
+    <ul>
+      <li><div class="link-row"><a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=eff.org" alt="">Cover Your Tracks (EFF)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Teste deinen Browser-Fingerprint – wie einzigartig bist du im Netz? Von der Electronic Frontier Foundation. Zeigt ob Tracker dich identifizieren können.</div></li>
+      <li><div class="link-row"><a href="https://browserleaks.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=browserleaks.com" alt="">BrowserLeaks</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Umfassender Leak-Test: IP, DNS, WebRTC, Canvas-Fingerprint, Audio-Fingerprint, Fonts. Zeigt was dein Browser über dich verrät.</div></li>
+      <li><div class="link-row"><a href="https://ipleak.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ipleak.net" alt="">IPLeak.net</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Prüft deine echte IP-Adresse, DNS-Leaks und WebRTC-Verbindungen. Ideal um die Wirksamkeit eines VPN zu testen.</div></li>
+      <li><div class="link-row"><a href="https://dnscheck.tools" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=dnscheck.tools" alt="">DNS Check Tools</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Umfassende DNS-Diagnose: DNS-Leck-Test, IPv6-Check, DNSSEC-Prüfung und DNS-Resolver-Speed-Test. Für fortgeschrittene Nutzer.</div></li>
+      <li><div class="link-row"><a href="https://www.speedtest.net" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=speedtest.net" alt="">Speedtest by Ookla</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Standard-Netzwerkgeschwindigkeitstest. Prüft Download- und Upload-Geschwindigkeit sowie Ping. Ookla liefert den bekanntesten Speedtest.</div></li>
+      <li><div class="link-row"><a href="https://test.libreqos.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=test.libreqos.com" alt="">LibreQoS (Bufferbloat-Test)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Prüft auf Bufferbloat – Verzögerungen bei gleichzeitigem Download/Upload. Zeigt ob dein Router die Verbindung ausbremst.</div></li>
+    </ul>
+  </div>
+
+  <!-- TOOLS & ENTFERNUNG -->
+  <div class="card c-blue">
+    <div class="card-header"><div class="card-icon">🛠️</div><span class="card-title">Tools &amp; Entfernung</span></div>
+    <ul>
+      <li><div class="link-row"><a href="https://malwaretips.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=malwaretips.com" alt="">Malwaretips (Malware-Foren)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Große Community für Malware-Entfernung und IT-Sicherheitsdiskussionen. Hier bekommst du kostenlose Hilfe bei verdächtigen Dateien.</div></li>
+      <li><div class="link-row"><a href="https://www.hybrid-analysis.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=hybrid-analysis.com" alt="">Hybrid Analysis (Malware-Analyse)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Lade eine verdächtige Datei hoch – die Sandbox analysiert sie sicher in einer isolierten Umgebung und zeigt was sie tun würde.</div></li>
+      <li><div class="link-row"><a href="https://www.virustotal.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=virustotal.com" alt="">VirusTotal</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Scannt Dateien und URLs gleichzeitig mit über 70 Antivirus-Engines. Prüft verdächtige Links und Dateien vor dem Öffnen.</div></li>
+      <li><div class="link-row"><a href="https://www.malwarebytes.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=malwarebytes.com" alt="">Malwarebytes</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Bekannter Malware-Entferner. Die kostenlose Version scannt und entfernt Schadsoftware, ist aber kein Ersatz für einen Echtzeit-Schutz.</div></li>
+    </ul>
+  </div>
+
+  <!-- NETWORK SECURITY -->
+  <div class="card c-green">
+    <div class="card-header"><div class="card-icon">📡</div><span class="card-title">Netzwerk-Sicherheit</span></div>
+    <ul>
+      <li><div class="link-row"><a href="https://www.shodan.io" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=shodan.io" alt="">Shodan (Suchmaschine für Geräte)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Die Suchmaschine für das Internet der Dinge (IoT). Zeigt offene Kameras, Router, Server im Internet. Wichtig um zu verstehen, was man selbst absichern muss.</div></li>
+      <li><div class="link-row"><a href="https://www.censys.io" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=censys.io" alt="">Censys</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Ähnlich wie Shodan – durchsucht das gesamte Internet nach angeschlossenen Geräten. Wird auch von Sicherheitsforschern und Behörden genutzt.</div></li>
+      <li><div class="link-row"><a href="https://www.wireshark.org" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=wireshark.org" alt="">Wireshark (Netzwerkanalyse)</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Der Klassiker für Netzwerkanalyse. Zeigt jeden Netzwerkdaten-Paket. Für normale Nutzer eher ein Fortgeschrittenen-Tool, aber zum Verständnis von Netzwerken nützlich.</div></li>
+    </ul>
+  </div>
+
+  <!-- CYBERSECURITY-NEWS -->
+  <div class="card c-blue">
+    <div class="card-header"><div class="card-icon">📰</div><span class="card-title">Cybersicherheit News</span></div>
+    <ul>
+      <li><div class="link-row"><a href="https://www.bleepingcomputer.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=bleepingcomputer.com" alt="">Bleeping Computer</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Tägliche Berichte über neue Schadsoftware, Datenlecks und Cyberangriffe. Einer der besten frei zugänglichen IT-Sicherheits-Newsquellen.</div></li>
+      <li><div class="link-row"><a href="https://thehackernews.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=thehackernews.com" alt="">The Hacker News</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Führt täglich aktuelle Meldungen zu Cyberangriffen, Sicherheitslücken und neuen Bugs. Guter Überblick über die Bedrohungslandschaft.</div></li>
+      <li><div class="link-row"><a href="https://krebsonsecurity.com" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=krebsonsecurity.com" alt="">Krebs on Security</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Blog des investigativen Journalisten Brian Krebs. Tiefgehende Analysen von Cyberkriminalität und Datenlecks. Sehr lesenswert.</div></li>
+      <li><div class="link-row"><a href="https://www.heise.de/security/" target="_blank" rel="noopener noreferrer"><img class="favicon" src="https://www.google.com/s2/favicons?domain=heise.de" alt="">Heise Security</a><button class="info-btn" type="button" aria-label="Info">ⓘ</button></div><div class="link-info">Deutschlands bekanntester IT-Sicherheits-Newsbereich. Tägliche Meldungen auf Deutsch, auch zu Datenschutz und Cybercrime-Gesetzgebung.</div></li>
+    </ul>
+  </div>
+
 </main>
-
-<div class="nav-btn-wrap" id="navBtnWrap">
-  <a href="index.html" class="nav-btn">← Zurück zur Startseite</a>
+<div class="nav-btn-wrap">
+  <a href="index.html" class="nav-btn secondary">🏠 Zurück zur Startseite</a>
 </div>
-
 <div class="version-bar">
-  <span class="v-num">Version 4.1</span> &nbsp;·&nbsp; 19.06.2026 @ 12:08
+  <span class="v-num">Version 4.3</span> &nbsp;·&nbsp; Stand: <span class="v-num">2026-06-19</span>
 </div>
 
 <script>
-  var curPage="cybersec.html";
-  var allLinks=[
-    {l:"1Password",u:"https://1password.com",r:"Passwort-Manager",s:"cybersec.html"},
-    {l:"Bitwarden",u:"https://bitwarden.com",r:"Passwort-Manager",s:"cybersec.html"},
-    {l:"Dashlane",u:"https://dashlane.com",r:"Passwort-Manager",s:"cybersec.html"},
-    {l:"KeePass",u:"https://keepass.info",r:"Passwort-Manager",s:"cybersec.html"},
-    {l:"NordPass",u:"https://nordpass.com",r:"Passwort-Manager",s:"cybersec.html"},
+  var allLinks = [{"l":"Bitwarden (Passwort-Manager)","u":"https://bitwarden.com","r":"Passwörter","s":"cybersec_4.3.html","b":"🛡️"},{"l":"KeePass (Passwort-Tresor)","u":"https://keepass.info","r":"Passwörter","s":"cybersec_4.3.html","b":"🛡️"},{"l":"1Password","u":"https://1password.com","r":"Passwörter","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Dashlane","u":"https://www.dashlane.com","r":"Passwörter","s":"cybersec_4.3.html","b":"🛡️"},{"l":"NYT: Tipps für sichere Passwörter","u":"https://www.nytimes.com/interactive/2021/09/29/opinion/password-tips.html","r":"Passwörter","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Authy (2FA-App)","u":"https://authy.com","r":"2FA – Zwei-Faktor","s":"cybersec_4.3.html","b":"🛡️"},{"l":"FreeOTP+ (2FA-App)","u":"https://freeotpproject.github.io","r":"2FA – Zwei-Faktor","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Aegis Authenticator (2FA-App)","u":"https://github.com/beemdevelopment/Aegis","r":"2FA – Zwei-Faktor","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Privacy Guides: 2FA-Übersicht","u":"https://www.privacyguides.org/de/tools/2fa/","r":"2FA – Zwei-Faktor","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Proton Mail (Verschlüsselung)","u":"https://proton.me","r":"E-Mail & Phishing","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Posteo (Datenschutz-E-Mail)","u":"https://posteo.de","r":"E-Mail & Phishing","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Tuta (ehem. Tutanota)","u":"https://tuta.com","r":"E-Mail & Phishing","s":"cybersec_4.3.html","b":"🛡️"},{"l":"BSI: Phishing erkennen","u":"https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheit/Phishing/Phishing_node.html","r":"E-Mail & Phishing","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Mozilla Firefox","u":"https://www.mozilla.org/de/firefox/","r":"Browser & Datenschutz","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Google Chrome","u":"https://www.google.com/chrome/","r":"Browser & Datenschutz","s":"cybersec_4.3.html","b":"🛡️"},{"l":"LibreWolf","u":"https://librewolf.net","r":"Browser & Datenschutz","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Brave","u":"https://www.brave.com","r":"Browser & Datenschutz","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Mullvad Browser","u":"https://mullvad.net/browser","r":"Browser & Datenschutz","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Mullvad VPN","u":"https://mullvad.net","r":"VPN-Dienste","s":"cybersec_4.3.html","b":"🛡️"},{"l":"ProtonVPN","u":"https://www.protonvpn.com","r":"VPN-Dienste","s":"cybersec_4.3.html","b":"🛡️"},{"l":"IVPN","u":"https://ivpn.net","r":"VPN-Dienste","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Privacy Guides: VPN-Empfehlungen","u":"https://www.privacyguides.org/de/vpn/","r":"VPN-Dienste","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Have I Been Pwned?","u":"https://haveibeenpwned.com","r":"Datenleck-Prüfung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"BreachDirectory","u":"https://breachdirectory.com","r":"Datenleck-Prüfung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Avast Hack Check","u":"https://de.avast.com/hackcheck","r":"Datenleck-Prüfung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Cybr360 Erste Hilfe (Saarland)","u":"https://cybr360.saarland/erste-hilfe","r":"Cyber-Notfall","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Polizei Saarland: Cybercrime","u":"https://www.polizei.saarland.de/praevention/cybercrime","r":"Cyber-Notfall","s":"cybersec_4.3.html","b":"🛡️"},{"l":"BSI – Bundesamt für IT-Sicherheit","u":"https://www.bsi.bund.de","r":"Cyber-Notfall","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Verbraucherzentrale Saarland","u":"https://www.verbraucherzentrale-saarland.de","r":"Cyber-Notfall","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Cover Your Tracks (EFF)","u":"https://coveryourtracks.eff.org","r":"Browser-Tests","s":"cybersec_4.3.html","b":"🛡️"},{"l":"BrowserLeaks","u":"https://browserleaks.com","r":"Browser-Tests","s":"cybersec_4.3.html","b":"🛡️"},{"l":"IPLeak.net","u":"https://ipleak.net","r":"Browser-Tests","s":"cybersec_4.3.html","b":"🛡️"},{"l":"DNS Check Tools","u":"https://dnscheck.tools","r":"Browser-Tests","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Speedtest by Ookla","u":"https://www.speedtest.net","r":"Browser-Tests","s":"cybersec_4.3.html","b":"🛡️"},{"l":"LibreQoS (Bufferbloat-Test)","u":"https://test.libreqos.com","r":"Browser-Tests","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Malwaretips (Malware-Foren)","u":"https://malwaretips.com","r":"Tools & Entfernung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Hybrid Analysis (Malware-Analyse)","u":"https://www.hybrid-analysis.com","r":"Tools & Entfernung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"VirusTotal","u":"https://www.virustotal.com","r":"Tools & Entfernung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Malwarebytes","u":"https://www.malwarebytes.com","r":"Tools & Entfernung","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Shodan (Suchmaschine für Geräte)","u":"https://www.shodan.io","r":"Netzwerk-Sicherheit","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Censys","u":"https://www.censys.io","r":"Netzwerk-Sicherheit","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Wireshark (Netzwerkanalyse)","u":"https://www.wireshark.org","r":"Netzwerk-Sicherheit","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Bleeping Computer","u":"https://www.bleepingcomputer.com","r":"Cybersicherheit News","s":"cybersec_4.3.html","b":"🛡️"},{"l":"The Hacker News","u":"https://thehackernews.com","r":"Cybersicherheit News","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Krebs on Security","u":"https://krebsonsecurity.com","r":"Cybersicherheit News","s":"cybersec_4.3.html","b":"🛡️"},{"l":"Heise Security","u":"https://www.heise.de/security/","r":"Cybersicherheit News","s":"cybersec_4.3.html","b":"🛡️"}];
+  var curPage = "cybersec_4.3.html";
+  var searchInput = document.getElementById('search');
+  var searchCount = document.getElementById('searchCount');
+  var noResults = document.querySelector('.no-results');
 
-    {l:"Mullvad VPN",u:"https://mullvad.net",r:"VPN-Dienste",s:"cybersec.html"},
-    {l:"NordVPN",u:"https://nordvpn.com",r:"VPN-Dienste",s:"cybersec.html"},
-    {l:"ProtonVPN",u:"https://protonvpn.com",r:"VPN-Dienste",s:"cybersec.html"},
-    {l:"Windscribe",u:"https://windscribe.com",r:"VPN-Dienste",s:"cybersec.html"},
+  var _origTexts = new Map();
+  document.querySelectorAll('#main ul li a').forEach(function(a) {
+    _origTexts.set(a, a.textContent.trim());
+  });
 
-    {l:"AdGuard",u:"https://adguard.com",r:"Sicherheits-Tools",s:"cybersec.html"},
-    {l:"ClamAV",u:"https://clamav.net",r:"Sicherheits-Tools",s:"cybersec.html"},
-    {l:"Malwarebytes",u:"https://malwarebytes.com",r:"Sicherheits-Tools",s:"cybersec.html"},
-    {l:"VirusTotal",u:"https://virustotal.com",r:"Sicherheits-Tools",s:"cybersec.html"},
-
-    {l:"DuckDuckGo",u:"https://duckduckgo.com",r:"Datenschutz & Anonymität",s:"cybersec.html"},
-    {l:"Have I Been Pwned",u:"https://haveibeenpwned.com",r:"Datenschutz & Anonymität",s:"cybersec.html"},
-    {l:"Privacy Badger",u:"https://privacybadger.org",r:"Datenschutz & Anonymität",s:"cybersec.html"},
-    {l:"Tor Browser",u:"https://torproject.org",r:"Datenschutz & Anonymität",s:"cybersec.html"},
-
-    {l:"BSI – Bundesamt für IT-Sicherheit",u:"https://www.bsi.bund.de",r:"Informationsquellen",s:"cybersec.html"},
-    {l:"EFF – Electronic Frontier Foundation",u:"https://www.eff.org",r:"Informationsquellen",s:"cybersec.html"},
-    {l:"Heise Security",u:"https://www.heise.de/security",r:"Informationsquellen",s:"cybersec.html"},
-    {l:"Kuketz IT-Security Blog",u:"https://www.kuketz-blog.de",r:"Informationsquellen",s:"cybersec.html"},
-
-    {l:"Briar",u:"https://briarproject.org",r:"Sichere Kommunikation",s:"cybersec.html"},
-    {l:"Element (Matrix)",u:"https://element.io",r:"Sichere Kommunikation",s:"cybersec.html"},
-    {l:"ProtonMail",u:"https://mail.proton.me",r:"Sichere Kommunikation",s:"cybersec.html"},
-    {l:"Signal",u:"https://signal.org",r:"Sichere Kommunikation",s:"cybersec.html"},
-    {l:"Threema",u:"https://threema.ch",r:"Sichere Kommunikation",s:"cybersec.html"},
-    {l:"Wire",u:"https://wire.com",r:"Sichere Kommunikation",s:"cybersec.html"}
-  ];
-
-  // Search
-  (function(){
-    var si=document.getElementById('search'),
-        sc=document.getElementById('searchCount'),
-        nr=document.getElementById('noResults'),
-        cards=document.querySelectorAll('.card');
-
-    var ot=new Map();
-    cards.forEach(function(c){
-      c.querySelectorAll('li a').forEach(function(a){
-        // Nur sichtbaren Link-Text merken (nicht die URL-Span)
-        var t=a.querySelector('.link-main span[style*="font-weight"]') ? a.querySelector('.link-main span[style*="font-weight"]').textContent.trim() : a.textContent.trim();
-        ot.set(a, (t || a.textContent).trim());
+  searchInput.addEventListener('input', function() {
+    var q = searchInput.value.trim().toLowerCase();
+    var totalVisible = 0;
+    document.querySelectorAll('#main .card').forEach(function(card) {
+      var cardHasMatch = false;
+      card.querySelectorAll('li').forEach(function(li) {
+        var a = li.querySelector('a');
+        if (!a) return;
+        var img = a.querySelector('img');
+        var text = _origTexts.get(a) || '';
+        if (!q) {
+          li.classList.remove('hidden');
+          a.innerHTML = '';
+          if (img) a.appendChild(img);
+          a.appendChild(document.createTextNode(text));
+          cardHasMatch = true;
+        } else if (text.toLowerCase().includes(q)) {
+          li.classList.remove('hidden');
+          cardHasMatch = true;
+          totalVisible++;
+          a.innerHTML = '';
+          if (img) a.appendChild(img);
+          var idx = text.toLowerCase().indexOf(q);
+          var before = document.createTextNode(text.substring(0, idx));
+          var mark = document.createElement('mark');
+          mark.appendChild(document.createTextNode(text.substring(idx, idx + q.length)));
+          var after = document.createTextNode(text.substring(idx + q.length));
+          var span = document.createElement('span');
+          span.appendChild(before);
+          span.appendChild(mark);
+          span.appendChild(after);
+          a.appendChild(span);
+        } else {
+          li.classList.add('hidden');
+        }
       });
-    });
-
-    si.addEventListener('input',function(){
-      var q=si.value.trim().toLowerCase(),tv=0;
-
-      cards.forEach(function(card){
-        var ch=false;
-        card.querySelectorAll('li').forEach(function(li){
-          var a=li.querySelector('a'); if(!a) return;
-          if(!q){
-            li.classList.remove('hidden');
-            // Highlight löschen (Info-Box lassen wir)
-            a.querySelectorAll('mark').forEach(function(m){m.outerHTML=m.textContent});
-            ch=true;
-          }else{
-            var t=(ot.get(a)||'').toLowerCase();
-            if(t.indexOf(q)!==-1){
-              li.classList.remove('hidden');
-              // Highlight auf Link-Text (nur der Label-Zeile)
-              var labelNode=a.querySelector('.link-main span[style*="font-weight"]');
-              var plain=(labelNode?labelNode.textContent:ot.get(a)||'');
-              var idx=plain.toLowerCase().indexOf(q);
-              if(labelNode){
-                labelNode.innerHTML='';
-                var bef=plain.slice(0,idx);
-                var m=document.createElement('mark'); m.textContent=plain.slice(idx,idx+q.length);
-                var aft=plain.slice(idx+q.length);
-                labelNode.appendChild(document.createTextNode(bef));
-                labelNode.appendChild(m);
-                labelNode.appendChild(document.createTextNode(aft));
-              }
-              ch=true; tv++;
-            }else{
-              li.classList.add('hidden');
-            }
-          }
-        });
-        card.style.display=ch?'':'none';
-      });
-
-      if(!q){ sc.textContent=''; nr.style.display='none'; }
-      else if(tv===0){ sc.textContent='Kein Treffer'; nr.style.display='block'; }
-      else{ sc.textContent=tv+' Treffer'; nr.style.display='none'; }
-    });
-  })();
-
-  // Cross-results
-  (function(){
-    var inp=document.getElementById('search'),
-        cnt=document.getElementById('searchCount'),
-        crs=document.getElementById('crossResults');
-
-    inp.addEventListener('input',function(){
-      var q=this.value.trim().toLowerCase();
-      if(!q){ crs.innerHTML=''; crs.style.display='none'; cnt.textContent=''; return; }
-
-      var matches=allLinks.filter(function(l){
-        return l.s!==curPage && (l.l.toLowerCase().indexOf(q)!==-1 || l.r.toLowerCase().indexOf(q)!==-1);
-      }).slice(0,8);
-
-      if(matches.length>0){
-        var html='<div class="cross-header">Auch auf anderen Seiten</div>';
-        matches.forEach(function(l){
-          var label=l.l.length>38?l.l.slice(0,38)+'…':l.l;
-          var idx=label.toLowerCase().indexOf(q);
-          if(idx!==-1){
-            label=label.slice(0,idx)+'<mark>'+label.slice(idx,idx+q.length)+'</mark>'+label.slice(idx+q.length);
-          }
-          html+='<a class="cross-item" href="'+l.u+'" target="_blank" rel="noopener">'+
-                  '<span class="cross-badge">'+l.s+'</span>'+
-                  '<span class="cross-label">'+label+'</span>'+
-                  '<span class="cross-rubrik">'+l.r+'</span>'+
-                '</a>';
-        });
-        crs.innerHTML=html;
-        crs.style.display='block';
-      }else{
-        crs.style.display='none';
-      }
-    });
-  })();
-
-  // Info toggle: Klick auf ⓘ öffnet nur die Info-Box
-  (function(){
-    document.querySelectorAll('.info-btn').forEach(function(btn){
-      btn.addEventListener('click',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        var cardLink = btn.closest('li');
-        if(!cardLink) return;
-
-        var info = cardLink.querySelector('.link-info');
-        if(!info) return;
-
-        var willOpen = !info.classList.contains('open');
-
-        // Close others in same card item
-        // (genau so wie du es wolltest: nur dieser (i) toggle)
-        info.classList.toggle('open', willOpen);
-        info.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
-      });
-    });
-  })();
-
-</script>
-
-<script>
-// Personalisierung (wie in sicher.html)
-(function() {
-  var STORAGE_KEY = 'cybersec-hidden';
-  var editMode = false;
-  var hiddenLinks = {};
-  try {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) hiddenLinks = JSON.parse(saved);
-  } catch(e) {}
-
-  function applyHidden() {
-    document.querySelectorAll('ul li').forEach(function(li) {
-      var a = li.querySelector('a');
-      if (!a) return;
-      if (hiddenLinks[a.href]) {
-        li.style.display = editMode ? '' : 'none';
-        li.setAttribute('data-hidden', '1');
+      if (!cardHasMatch) {
+        card.classList.add('hidden');
       } else {
-        li.removeAttribute('data-hidden');
+        card.classList.remove('hidden');
       }
     });
-  }
 
-  function enterEditMode() {
-    editMode = true;
-    document.querySelectorAll('ul li').forEach(function(li) {
-      var a = li.querySelector('a');
-      if (!a) return;
-      li.style.display = '';
-      var cb = li.querySelector('.pz-cb');
-      if (!cb) {
-        cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.className = 'pz-cb';
-        cb.checked = !hiddenLinks[a.href];
-        cb.addEventListener('change', function() {
-          if (cb.checked) { delete hiddenLinks[a.href]; }
-          else { hiddenLinks[a.href] = 1; }
-        });
-        li.insertBefore(cb, li.firstChild);
-        cb.style.marginLeft = '6px';
+    if (!q) {
+      searchCount.textContent = '';
+      if (noResults) noResults.style.display = 'none';
+    } else if (totalVisible === 0) {
+      searchCount.textContent = 'Kein Treffer';
+      if (noResults) noResults.style.display = 'block';
+    } else {
+      searchCount.textContent = totalVisible + ' Treffer';
+      if (noResults) noResults.style.display = 'none';
+    }
+  });
+
+  // ===== 4.3: ⓘ Info-Box Toggle (functioniert! Kein data-* nötig) =====
+  (function() {
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.info-btn');
+      if (!btn) return;
+      var li = btn.closest('li');
+      if (!li) return;
+      var infoBox = li.querySelector('.link-info');
+      if (!infoBox) return;
+
+      // Alle Info-Boxen schließen
+      document.querySelectorAll('.link-info.visible').forEach(function(b) {
+        b.classList.remove('visible');
+      });
+      document.querySelectorAll('.info-btn.active').forEach(function(b) {
+        b.classList.remove('active');
+      });
+
+      // Nur die eigene Box öffnen wenn sie zu war
+      var isVisible = infoBox.classList.contains('visible');
+      if (!isVisible) {
+        infoBox.classList.add('visible');
+        btn.classList.add('active');
       }
-      cb.style.display = 'inline-block';
-    });
-    document.getElementById('pz-btn').textContent = '✓ Fertig';
-  }
 
-  function exitEditMode() {
-    editMode = false;
+      // Link-Navigation verhindern
+      e.stopPropagation();
+    });
+  })();
+
+  // Personalisierung (localStorage)
+  (function() {
+    var STORAGE_KEY = 'cybersec-hidden';
+    var editMode = false;
+    var hiddenLinks = {};
+
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) hiddenLinks = JSON.parse(saved);
+    } catch(e) {}
+
+    function applyHidden() {
+      document.querySelectorAll('#main li').forEach(function(li) {
+        var a = li.querySelector('a');
+        if (!a) return;
+        var key = a.href;
+        if (hiddenLinks[key]) {
+          li.style.display = editMode ? '' : 'none';
+          li.setAttribute('data-hidden', '1');
+        } else {
+          li.removeAttribute('data-hidden');
+          li.style.display = '';
+        }
+      });
+    }
+
+    function enterEditMode() {
+      editMode = true;
+      document.querySelectorAll('#main li').forEach(function(li) {
+        var a = li.querySelector('a');
+        if (!a) return;
+        li.style.display = '';
+        var cb = li.querySelector('.pz-cb');
+        if (!cb) {
+          cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.className = 'pz-cb';
+          cb.checked = !hiddenLinks[a.href];
+          cb.addEventListener('change', function() {
+            if (cb.checked) {
+              delete hiddenLinks[a.href];
+            } else {
+              hiddenLinks[a.href] = 1;
+            }
+          });
+          li.insertBefore(cb, li.firstChild);
+        }
+        cb.style.display = 'inline-block';
+      });
+    }
+
+    function exitEditMode() {
+      editMode = false;
+      applyHidden();
+    }
+
+    var btnWrap = document.querySelector('.nav-btn-wrap');
+    if (btnWrap) {
+      var btn = document.createElement('button');
+      btn.id = 'pz-btn';
+      btn.textContent = '⚙ Anpassen';
+      btn.addEventListener('click', function() {
+        if (!editMode) {
+          enterEditMode();
+          btn.textContent = '✓ Fertig';
+        } else {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(hiddenLinks));
+          } catch(e) {}
+          exitEditMode();
+          btn.textContent = '⚙ Anpassen';
+        }
+      });
+      btnWrap.insertBefore(btn, btnWrap.firstChild);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.id = 'pz-reset';
+      resetBtn.textContent = '↺ Alles anzeigen';
+      resetBtn.addEventListener('click', function() {
+        hiddenLinks = {};
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch(e) {}
+        applyHidden();
+      });
+      btnWrap.insertBefore(resetBtn, btnWrap.firstChild);
+    }
+
     applyHidden();
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(hiddenLinks)); } catch(e) {}
-    document.getElementById('pz-btn').textContent = '⚙ Anpassen';
-  }
-
-  var btnWrap = document.querySelector('.nav-btn-wrap');
-  if (btnWrap) {
-    var btn = document.createElement('button');
-    btn.id = 'pz-btn';
-    btn.className = 'pz-btn';
-    btn.textContent = '⚙ Anpassen';
-    btn.addEventListener('click', function() {
-      if (editMode) { exitEditMode(); } else { enterEditMode(); }
-    });
-    btnWrap.insertBefore(btn, btnWrap.firstChild);
-  }
-
-  applyHidden();
-})();
+  })();
 </script>
-
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
-
