@@ -321,8 +321,8 @@
   <footer>
     <p>
       🛡️ Cyber-Sicherheit ·
-      <span style="color: var(--accent); font-size: 1.1rem; font-weight: bold;">Version 3.10</span>
-      · 18.06.2026 @ 23:40
+      <span style="color: var(--accent); font-size: 1.1rem; font-weight: bold;">Version 3.11</span>
+      · 19.06.2026 @ 11:41
     </p>
   </footer>
 
@@ -394,17 +394,16 @@
     });
   </script>
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WELH4D5T5C"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-WELH4D5T5C');
-  </script>
 
-  <script defer
-          src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447"
-          integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ=="
-          data-cf-beacon='{"version":"2024
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELH4D5T5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-WELH4D5T5C', {
+    anonymize_ip: true,
+    allow_google_signals: false
+  });
+</script>
